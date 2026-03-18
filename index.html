@@ -7,75 +7,67 @@
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* โทนสีจากโค้ดเดิมแต่ปรับใช้กับดีไซน์ใหม่ */
             --main-pink: #ffdae9;
             --soft-purple: #f4eaff;
             --text-main: #5d5151;
             --accent-pink: #ff85b3;
-            --dark-menu: #332d2d; /* สีดำนุ่มนวลสำหรับ Bottom Nav */
-            /* เอฟเฟกต์กระจกฝ้า */
+            --dark-menu: #332d2d;
             --glass: rgba(255, 255, 255, 0.7); 
-            /* สีสำหรับแสงเรือง */
             --glow-color: rgba(255, 133, 179, 0.6);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Prompt', sans-serif; }
 
         body {
-            /* พื้นหลังไล่เฉดชมพู-ม่วงพาสเทลนวลๆ */
             background: linear-gradient(135deg, #fff5f8 0%, #eae0f5 100%);
             background-attachment: fixed;
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            /* เพิ่มพื้นที่ด้านล่างไม่ให้เมนูบังเนื้อหา */
             padding-bottom: 110px; 
             color: var(--text-main);
-            position: relative; /* จำเป็นสำหรับการจัดตำแหน่งองค์ประกอบภายใน */
-            overflow-x: hidden; /* ป้องกันแถบเลื่อนแนวนอนจากรูปพื้นหลังที่ลอยออกนอกจอ */
+            position: relative;
+            overflow-x: hidden;
         }
 
-        /* --- สไตล์สำหรับ Container หลัก --- */
+        /* --- Container หลัก --- */
         .container { 
             width: 100%; 
             max-width: 480px; 
             padding: 20px;
-            position: relative; /* ให้อยู่เหนือพื้นหลัง */
-            z-index: 10; /* ตรวจสอบให้อยู่เหนือรูปพื้นหลังที่ลอยอยู่ */
+            position: relative;
+            z-index: 10;
         }
 
-        /* --- แผงโปรไฟล์หลัก (Glassmorphism Card) --- */
+        /* --- Profile Card --- */
         .profile-card {
             background: var(--glass);
-            backdrop-filter: blur(10px); /* เอฟเฟกต์กระจกฝ้า */
+            backdrop-filter: blur(10px);
             border-radius: 35px;
-            overflow: hidden; /* ให้ Banner โค้งตามการ์ด */
+            overflow: hidden;
             margin-bottom: 25px;
             box-shadow: 0 10px 30px rgba(255, 182, 193, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.4);
         }
 
-        /* 1. ส่วนแบนเนอร์ด้านบน */
         .banner-area {
             width: 100%;
             height: 150px;
-            /* เปลี่ยนเป็น URL ภาพแบนเนอร์ของคุณ เช่น 'banner.jpg' */
             background-image: url('your-banner-image.jpg'); 
             background-size: cover;
             background-position: center;
-            background-color: var(--main-pink); /* สีสำรองระหว่างโหลด */
+            background-color: var(--main-pink);
             position: relative;
         }
 
-        /* 2. ส่วนข้อมูลโปรไฟล์ */
         .profile-info {
             display: flex;
-            flex-direction: column; /* จัดองค์ประกอบแบบแนวตั้ง */
-            align-items: center;    /* จัดให้อยู่ตรงกลางแนวนอน */
+            flex-direction: column;
+            align-items: center;
             text-align: center;
             padding: 0 20px 30px;
             position: relative;
-            margin-top: -60px; /* ให้รูปโปรไฟล์ลอยทับแบนเนอร์ */
+            margin-top: -60px;
             z-index: 10;
         }
 
@@ -83,85 +75,65 @@
             width: 120px;
             height: 120px;
             border-radius: 50%;
-            border: 6px solid white; /* ขอบขาวหนา */
+            border: 6px solid white;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             object-fit: cover;
             background-color: white;
         }
 
-        /* --- สไตล์ใหม่สำหรับชื่อร้าน (เรืองแสง + ดุ๊กดิ๊ก) --- */
         .profile-name {
             font-size: 26px;
             font-weight: 500;
             color: var(--accent-pink);
-            margin-top: 15px; /* เว้นระยะห่างจากรูปภาพด้านบน */
+            margin-top: 15px;
             margin-bottom: 5px;
-            
-            /* 1. เอฟเฟกต์เรืองแสง (Glow) */
-            text-shadow: 0 0 10px var(--glow-color), 
-                         0 0 20px var(--glow-color), 
-                         0 0 30px #fff;
-            
-            /* 2. เรียกใช้งานแอนิเมชันดุ๊กดิ๊ก */
-            display: inline-block; /* จำเป็นสำหรับการทำแอนิเมชัน x,y */
+            text-shadow: 0 0 10px var(--glow-color), 0 0 20px var(--glow-color);
+            display: inline-block;
             animation: dookDik 2.5s ease-in-out infinite;
         }
 
-        /* --- กำหนดขั้นตอนแอนิเมชันดุ๊กดิ๊ก --- */
         @keyframes dookDik {
-            0%, 100% {
-                transform: translate(0, 0) rotate(0deg);
-            }
-            20% {
-                transform: translate(-1px, -2px) rotate(-1deg);
-            }
-            40% {
-                transform: translate(1px, -1px) rotate(1deg);
-            }
-            60% {
-                transform: translate(-1px, 1px) rotate(-0.5deg);
-            }
-            80% {
-                transform: translate(1px, 2px) rotate(0.5deg);
-            }
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            20% { transform: translate(-1px, -2px) rotate(-1deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            60% { transform: translate(-1px, 1px) rotate(-0.5deg); }
+            80% { transform: translate(1px, 2px) rotate(0.5deg); }
         }
 
         .profile-desc {
             font-size: 14px;
             line-height: 1.6;
-            color: var(--text-main);
             margin-bottom: 20px;
             padding: 0 10px;
-            margin-top: 5px;
         }
 
-        /* 3. ปุ่มสถานะการให้บริการ */
         .status-badge {
             background: #fff9e6;
-            color: #d4a017; /* สีส้มทองอ่อนๆ */
+            color: #d4a017;
             padding: 8px 25px;
             border-radius: 50px;
             font-size: 13px;
             font-weight: 500;
-            display: inline-block;
             border: 1px solid #ffeeba;
         }
 
-        /* --- ส่วนบริการของทางร้าน (หัวข้อ) --- */
+        /* --- หัวข้อ Section --- */
         .section-title {
             font-size: 18px;
             font-weight: 500;
-            color: var(--text-main);
-            margin-bottom: 15px;
-            padding-left: 10px;
+            margin: 20px 0 15px 10px;
             opacity: 0.8;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        /* --- Layout เมนู Grid 2x2 (4 ช่อง) ตามภาพ --- */
+        /* --- Service Grid --- */
         .service-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
+            margin-bottom: 20px;
         }
 
         .service-card {
@@ -176,35 +148,18 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
         }
 
         .service-card:hover {
             transform: translateY(-5px);
             background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 8px 25px rgba(255, 182, 193, 0.3);
         }
 
-        /* ไอคอนเมนู */
-        .service-icon {
-            font-size: 28px;
-            margin-bottom: 10px;
-            color: var(--accent-pink); /* สีไอคอนหวานๆ */
-        }
+        .service-icon { font-size: 28px; margin-bottom: 10px; }
+        .service-text { font-size: 15px; font-weight: 500; }
 
-        .service-text {
-            font-size: 15px;
-            font-weight: 500;
-        }
-
-        /* --- Contact / Other Links (ปุ่มด้านล่าง Grid) --- */
-        .other-links {
-            margin-top: 20px;
-        }
-
-        /* ปรับปุ่มเดิมเป็นแคปซูลใสๆ เข้าธีม */
+        /* --- Buttons --- */
         .btn-pastel {
             display: block;
             background: var(--glass);
@@ -213,11 +168,11 @@
             text-decoration: none;
             padding: 12px;
             border-radius: 50px;
-            margin-bottom: 10px;
+            margin-bottom: 25px;
             text-align: center;
             font-weight: 500;
             transition: 0.3s;
-            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
         }
         
         .btn-pastel:hover {
@@ -225,7 +180,46 @@
             border-color: var(--accent-pink);
         }
 
-        /* --- Bottom Nav สไตล์ ChiiSANa (สีดำไอคอนหัวใจ) --- */
+        /* --- Gallery สเกล 1:1 (เลื่อนซ้ายขวา) --- */
+        .gallery-container {
+            width: 100%;
+            overflow-x: auto;
+            display: flex;
+            gap: 15px;
+            padding: 10px 5px 15px 5px;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none; /* สำหรับ Firefox */
+        }
+
+        .gallery-container::-webkit-scrollbar {
+            display: none; /* สำหรับ Chrome/Safari */
+        }
+
+        .gallery-item {
+            min-width: 250px; /* ขนาดความกว้างของรูปบนมือถือ */
+            aspect-ratio: 1 / 1;
+            background: var(--glass);
+            border-radius: 25px;
+            overflow: hidden;
+            scroll-snap-align: center;
+            border: 3px solid white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-hint {
+            text-align: center;
+            font-size: 12px;
+            opacity: 0.5;
+            margin-bottom: 30px;
+        }
+
+        /* --- Bottom Nav --- */
         .bottom-nav {
             position: fixed;
             bottom: 20px;
@@ -240,51 +234,28 @@
             z-index: 1000;
         }
 
-        .nav-item { 
-            text-decoration: none; 
-            color: white; 
-            font-size: 10px; 
-            text-align: center;
-            opacity: 0.7;
-            transition: 0.3s;
-        }
-
+        .nav-item { text-decoration: none; color: white; font-size: 10px; text-align: center; opacity: 0.7; transition: 0.3s; }
         .nav-item.active { opacity: 1; color: var(--main-pink); }
-        .nav-item i { 
-            font-size: 18px; 
-            display: block; 
-            margin-bottom: 3px;
-            color: var(--main-pink); /* สีหัวใจชมพู */
-        }
+        .nav-item i { font-size: 18px; display: block; margin-bottom: 3px; color: var(--main-pink); font-style: normal; }
 
-        /* --- สไตล์สำหรับรูปตัวห้อย (Floating Chiikawa) --- */
+        /* --- Stickers & Background Effects --- */
         .floating-sticker {
-            position: fixed; /* ทำให้ลอยค้างอยู่ที่เดิมของหน้าจอ */
-            bottom: 90px;    /* ระยะห่างจากด้านล่าง (ปรับให้ลอยเหนือ Bottom Nav นิดหน่อย) */
-            right: 20px;     /* ระยะห่างจากด้านขวา */
-            width: 80px;     /* กำหนดความกว้างของรูป (ปรับได้ตามต้องการ) */
-            height: auto;    /* ปรับความสูงอัตโนมัติ */
-            z-index: 999;    /* ทำให้อยู่ชั้นบนสุด */
-            pointer-events: none; /* เพื่อไม่ให้รูปบังการคลิกปุ่มด้านหลัง */
-            /* เพิ่มเงาเล็กน้อยให้ดูมีมิติ */
+            position: fixed;
+            bottom: 95px;
+            right: 25px;
+            width: 85px;
+            z-index: 999;
+            pointer-events: none;
             filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
         }
 
-        /* --- สไตล์สำหรับ Chiikawa พื้นหลังลอยแบบแรนดอม --- */
         .bg-chiikawa {
-            position: fixed; /* ใช้ fixed เพื่อให้ลอยตามหน้าจอเวลากลิ้ง */
-            pointer-events: none; /* ป้องกันการคลิกโดนรูป */
-            z-index: 1; /* ให้อยู่ชั้นต่ำสุดของเนื้อหา */
-            opacity: 0.3; /* ทำให้จางลงเพื่อไม่ให้รบกวนสายตา (ปรับได้ 0-1) */
-            animation: floatRandom linear infinite; /* เรียกใช้แอนิเมชันลอย */
+            position: fixed;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.25; /* ความจางของรูปพื้นหลัง */
+            animation: floatRandom linear infinite;
         }
-
-        /* กำหนดแอนิเมชันลอยตัวแบบพื้นฐาน (เดี๋ยว JavaScript จะกำหนดค่าละเอียดให้) */
-        @keyframes floatRandom {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            100% { transform: translate(0, 0) rotate(0deg); } /* จะถูกแทนที่ด้วย JS */
-        }
-
     </style>
 </head>
 <body>
@@ -296,23 +267,19 @@
 <div class="container">
     <div class="profile-card">
         <div class="banner-area"></div>
-        
         <div class="profile-info">
             <img src="หัว.jpg" class="profile-img" alt="Avatar">
             <h1 class="profile-name">ChiiSAnA ♡ 花</h1>
-            
             <div class="profile-desc">
                 ♡ ยินดีต้อนรับสู่ร้านของเค้าค่า ♡<br>
                 มีกลุ่มงานป้ายมากกว่า 30 กลุ่มให้เลือกเลย<br>
                 สอบถามได้เสมอนะคะ (˶˃ᆺ˂˶)
             </div>
-            
             <div class="status-badge">เปิดให้บริการ 09:00 - 00:00</div>
         </div>
     </div>
 
-    <h2 class="section-title">บริการของทางร้าน</h2>
-    
+    <h2 class="section-title"><span>🌸</span> บริการของทางร้าน</h2>
     <div class="service-grid">
         <a href="https://www.facebook.com/share/p/174dQzj6zt/" class="service-card">
             <div class="service-icon">🤝</div>
@@ -332,9 +299,18 @@
         </a>
     </div>
 
-    <div class="other-links">
-        <a href="https://docs.google.com/spreadsheets/d/1JApKZ3mbzG4qEdyYD_CAhoOfNA3R7UD5PvgXo1_ko7I/edit?gid=1963409705#gid=1963409705" class="btn-pastel">♡ check w♡rk q ♡</a>
+    <a href="https://docs.google.com/spreadsheets/d/1JApKZ3mbzG4qEdyYD_CAhoOfNA3R7UD5PvgXo1_ko7I/edit?gid=1963409705#gid=1963409705" class="btn-pastel">♡ check w♡rk q ♡</a>
+
+    <h2 class="section-title"><span>✨</span> ตัวอย่างงานล่าสุด</h2>
+    <div class="gallery-container">
+        <div class="gallery-item"><img src="ตัวอย่าง 1.jpg" alt="งาน 1"></div>
+        <div class="gallery-item"><img src="ตัวอย่าง 2.png" alt="งาน 2"></div>
+        <div class="gallery-item"><img src="ตัวอย่าง 3.jpg" alt="งาน 3"></div>
+        <div class="gallery-item"><img src="ตัวอย่าง 4.jpg" alt="งาน 4"></div>
+        <div class="gallery-item"><img src="ตัวอย่าง 5.jpg" alt="งาน 5"></div>
+        <div class="gallery-item"><img src="ตัวอย่าง 6.jpg" alt="งาน 6"></div>
     </div>
+    <p class="gallery-hint">เเกลเลอรี่สไลด์ได้นะค้าบ ⇠ ⇢</p>
 </div>
 
 <nav class="bottom-nav">
@@ -346,61 +322,46 @@
 </nav>
 
 <script>
-    // กำหนดจำนวนรูป Chiikawa ที่ต้องการให้ลอยที่พื้นหลัง
-    const numberOfBackgroundChiikawas = 12; 
-    const container = document.getElementById('bg-chiikawa-container');
+    /* --- ระบบสุ่ม Chiikawa 3.gif ลอยในพื้นหลัง --- */
+    const numberOfBackgroundChiikawas = 12; // จำนวนรูปที่จะสุ่ม
+    const bgContainer = document.getElementById('bg-chiikawa-container');
 
     for (let i = 0; i < numberOfBackgroundChiikawas; i++) {
-        // สร้างแท็ก <img>
         const img = document.createElement('img');
-        img.src = 'chiikawa 3.gif'; // ไฟล์ภาพที่ต้องการ
-        img.classList.add('bg-chiikawa'); // ใส่ class เพื่อกำหนดสไตล์ CSS
+        img.src = 'chiikawa 3.gif';
+        img.classList.add('bg-chiikawa');
 
-        // --- สุ่มค่าต่างๆ ---
-
-        // 1. สุ่มขนาด (ระหว่าง 40px ถึง 100px)
-        const size = Math.random() * (100 - 40) + 40; 
+        // สุ่มขนาด
+        const size = Math.random() * (90 - 45) + 45; 
         img.style.width = `${size}px`;
-        img.style.height = 'auto';
 
-        // 2. สุ่มตำแหน่งเริ่มต้น (X, Y) ทั่วหน้าจอ
-        img.style.left = `${Math.random() * 100}vw`; // ตามความกว้างหน้าจอ (0-100vw)
-        img.style.top = `${Math.random() * 100}vh`;  // ตามความสูงหน้าจอ (0-100vh)
+        // สุ่มตำแหน่ง
+        img.style.left = `${Math.random() * 100}vw`;
+        img.style.top = `${Math.random() * 100}vh`;
 
-        // 3. สุ่มระยะเวลาการแอนิเมชัน (ความเร็วในการลอย ระหว่าง 15s ถึง 35s)
-        const duration = Math.random() * (35 - 15) + 15;
+        // สุ่มความเร็ว
+        const duration = Math.random() * (30 - 15) + 15;
         img.style.animationDuration = `${duration}s`;
+        img.style.animationDelay = `${Math.random() * -duration}s`;
 
-        // 4. สุ่มเวลาเริ่มต้นแอนิเมชัน (เพื่อให้แต่ละตัวลอยไม่พร้อมกัน)
-        const delay = Math.random() * -duration; // ค่าลบเพื่อให้แอนิเมชันเริ่มไปแล้วบางส่วน
-        img.style.animationDelay = `${delay}s`;
+        // สุ่มทิศทางแอนิเมชันเฉพาะตัว
+        const moveX = (Math.random() - 0.5) * 250;
+        const moveY = (Math.random() - 0.5) * 250;
+        const rotate = (Math.random() - 0.5) * 120;
+        const animName = `float-${i}`;
 
-        // 5. สุ่มค่าการเคลื่อนที่ภายในแอนิเมชัน (X, Y, Rotation) เพื่อให้มีทิศทางต่างกัน
-        const moveX = (Math.random() - 0.5) * 200; // ลอยซ้ายขวา +- 100px
-        const moveY = (Math.random() - 0.5) * 200; // ลอยขึ้นลง +- 100px
-        const rotate = (Math.random() - 0.5) * 90;   // หมุน +- 45 องศา
-
-        // สร้าง Inline Style สำหรับ Keyframes โดยเฉพาะของตัวนี้
-        const animationName = `floatRandom-${i}`;
-        const keyframes = `
-            @keyframes ${animationName} {
+        const styleSheet = document.createElement("style");
+        styleSheet.innerText = `
+            @keyframes ${animName} {
                 0% { transform: translate(0, 0) rotate(0deg); }
-                50% { transform: translate(${moveX / 2}px, ${moveY / 2}px) rotate(${rotate / 2}deg); }
+                50% { transform: translate(${moveX/2}px, ${moveY/2}px) rotate(${rotate/2}deg); }
                 100% { transform: translate(${moveX}px, ${moveY}px) rotate(${rotate}deg); }
             }
         `;
-        
-        // สร้างแท็ก <style> เพื่อใส่ Keyframes ลงไปใน Document
-        const styleSheet = document.createElement("style");
-        styleSheet.type = "text/css";
-        styleSheet.innerText = keyframes;
         document.head.appendChild(styleSheet);
+        img.style.animationName = animName;
 
-        // เรียกใช้แอนิเมชันที่สร้างใหม่
-        img.style.animationName = animationName;
-
-        // นำรูปภาพใส่เข้าไปใน Container
-        container.appendChild(img);
+        bgContainer.appendChild(img);
     }
 </script>
 
