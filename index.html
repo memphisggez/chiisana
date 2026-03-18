@@ -146,7 +146,7 @@
             background: var(--glass);
             backdrop-filter: blur(5px);
             border-radius: 20px;
-            padding: 20px 10px;
+            padding: 15px 10px; /* ลด padding ลงนิดหน่อยเพื่อให้รูปเด่นขึ้น */
             text-align: center;
             text-decoration: none;
             color: var(--text-main);
@@ -154,7 +154,9 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             border: 1px solid rgba(255, 255, 255, 0.3);
+            min-height: 140px; /* กำหนดความสูงขั้นต่ำเพื่อให้ทุกช่องเท่ากัน */
         }
 
         .service-card:hover {
@@ -162,12 +164,13 @@
             background: rgba(255, 255, 255, 0.95);
         }
 
-        /* ปรับสไตล์รูปไอคอนในเมนู */
+        /* ปรับขนาดรูปภาพในเมนูให้ใหญ่ขึ้นและเหมาะสม */
         .service-card img {
-            width: 45px;
-            height: 45px;
-            margin-bottom: 10px;
+            width: 65px;  /* ขยายขนาดรูปจากเดิม 45px */
+            height: 65px;
+            margin-bottom: 8px;
             object-fit: contain;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05)); /* เพิ่มมิตินิดหน่อย */
         }
 
         .service-text { font-size: 14px; font-weight: 500; }
@@ -193,7 +196,7 @@
             border-color: var(--accent-pink);
         }
 
-        /* --- Gallery สเกล 1:1 --- */
+        /* --- Gallery --- */
         .gallery-container {
             width: 100%;
             overflow-x: auto;
@@ -272,7 +275,6 @@
 <body>
 
     <img src="chiikawa 1.gif" alt="Chiikawa Sticker" class="floating-sticker">
-
     <div id="bg-chiikawa-container"></div>
 
 <div class="container">
@@ -339,7 +341,6 @@
 </nav>
 
 <script>
-    /* --- สคริปต์สุ่ม Chiikawa ลอยหลังพื้นหลัง --- */
     const numberOfBackgroundChiikawas = 12;
     const bgContainer = document.getElementById('bg-chiikawa-container');
 
@@ -347,21 +348,17 @@
         const img = document.createElement('img');
         img.src = 'chiikawa 3.gif';
         img.classList.add('bg-chiikawa');
-
         const size = Math.random() * (90 - 45) + 45; 
         img.style.width = `${size}px`;
         img.style.left = `${Math.random() * 100}vw`;
         img.style.top = `${Math.random() * 100}vh`;
-
         const duration = Math.random() * (30 - 15) + 15;
         img.style.animationDuration = `${duration}s`;
         img.style.animationDelay = `${Math.random() * -duration}s`;
-
         const moveX = (Math.random() - 0.5) * 250;
         const moveY = (Math.random() - 0.5) * 250;
         const rotate = (Math.random() - 0.5) * 120;
         const animName = `float-${i}`;
-
         const styleSheet = document.createElement("style");
         styleSheet.innerText = `@keyframes ${animName} {
             0% { transform: translate(0, 0) rotate(0deg); }
@@ -370,7 +367,6 @@
         }`;
         document.head.appendChild(styleSheet);
         img.style.animationName = animName;
-
         bgContainer.appendChild(img);
     }
 </script>
