@@ -31,14 +31,17 @@
             /* เพิ่มพื้นที่ด้านล่างไม่ให้เมนูบังเนื้อหา */
             padding-bottom: 110px; 
             color: var(--text-main);
-            position: relative; /* จำเป็นสำหรับ z-index ของตัวห้อย */
+            position: relative; /* จำเป็นสำหรับการจัดตำแหน่งองค์ประกอบภายใน */
+            overflow-x: hidden; /* ป้องกันแถบเลื่อนแนวนอนจากรูปพื้นหลังที่ลอยออกนอกจอ */
         }
 
-        /* --- Container หลัก --- */
+        /* --- สไตล์สำหรับ Container หลัก --- */
         .container { 
             width: 100%; 
             max-width: 480px; 
             padding: 20px;
+            position: relative; /* ให้อยู่เหนือพื้นหลัง */
+            z-index: 10; /* ตรวจสอบให้อยู่เหนือรูปพื้นหลังที่ลอยอยู่ */
         }
 
         /* --- แผงโปรไฟล์หลัก (Glassmorphism Card) --- */
@@ -84,7 +87,6 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             object-fit: cover;
             background-color: white;
-            /* ลบ margin-top ลบออกเพื่อให้ align-items: center จัดการ */
         }
 
         /* --- สไตล์ใหม่สำหรับชื่อร้าน (เรืองแสง + ดุ๊กดิ๊ก) --- */
@@ -130,7 +132,7 @@
             color: var(--text-main);
             margin-bottom: 20px;
             padding: 0 10px;
-            margin-top: 5px; /* เพิ่มระยะห่างจากชื่อร้านนิดหน่อย */
+            margin-top: 5px;
         }
 
         /* 3. ปุ่มสถานะการให้บริการ */
@@ -262,10 +264,25 @@
             right: 20px;     /* ระยะห่างจากด้านขวา */
             width: 80px;     /* กำหนดความกว้างของรูป (ปรับได้ตามต้องการ) */
             height: auto;    /* ปรับความสูงอัตโนมัติ */
-            z-index: 999;    /* ทำให้อยู่ชั้นบนสุด (แต่ต่ำกว่าเมนูเผื่อกรณีฉุกเฉิน) */
+            z-index: 999;    /* ทำให้อยู่ชั้นบนสุด */
             pointer-events: none; /* เพื่อไม่ให้รูปบังการคลิกปุ่มด้านหลัง */
             /* เพิ่มเงาเล็กน้อยให้ดูมีมิติ */
             filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+        }
+
+        /* --- สไตล์สำหรับ Chiikawa พื้นหลังลอยแบบแรนดอม --- */
+        .bg-chiikawa {
+            position: fixed; /* ใช้ fixed เพื่อให้ลอยตามหน้าจอเวลากลิ้ง */
+            pointer-events: none; /* ป้องกันการคลิกโดนรูป */
+            z-index: 1; /* ให้อยู่ชั้นต่ำสุดของเนื้อหา */
+            opacity: 0.3; /* ทำให้จางลงเพื่อไม่ให้รบกวนสายตา (ปรับได้ 0-1) */
+            animation: floatRandom linear infinite; /* เรียกใช้แอนิเมชันลอย */
+        }
+
+        /* กำหนดแอนิเมชันลอยตัวแบบพื้นฐาน (เดี๋ยว JavaScript จะกำหนดค่าละเอียดให้) */
+        @keyframes floatRandom {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(0, 0) rotate(0deg); } /* จะถูกแทนที่ด้วย JS */
         }
 
     </style>
@@ -273,6 +290,8 @@
 <body>
 
     <img src="chiikawa 1.gif" alt="Chiikawa Sticker" class="floating-sticker">
+
+    <div id="bg-chiikawa-container"></div>
 
 <div class="container">
     <div class="profile-card">
@@ -325,6 +344,65 @@
     <a href="#" class="nav-item"><i>♥</i>Deco ♡</a>
     <a href="#" class="nav-item"><i>♥</i>Toon ♡</a>
 </nav>
+
+<script>
+    // กำหนดจำนวนรูป Chiikawa ที่ต้องการให้ลอยที่พื้นหลัง
+    const numberOfBackgroundChiikawas = 12; 
+    const container = document.getElementById('bg-chiikawa-container');
+
+    for (let i = 0; i < numberOfBackgroundChiikawas; i++) {
+        // สร้างแท็ก <img>
+        const img = document.createElement('img');
+        img.src = 'chiikawa 3.gif'; // ไฟล์ภาพที่ต้องการ
+        img.classList.add('bg-chiikawa'); // ใส่ class เพื่อกำหนดสไตล์ CSS
+
+        // --- สุ่มค่าต่างๆ ---
+
+        // 1. สุ่มขนาด (ระหว่าง 40px ถึง 100px)
+        const size = Math.random() * (100 - 40) + 40; 
+        img.style.width = `${size}px`;
+        img.style.height = 'auto';
+
+        // 2. สุ่มตำแหน่งเริ่มต้น (X, Y) ทั่วหน้าจอ
+        img.style.left = `${Math.random() * 100}vw`; // ตามความกว้างหน้าจอ (0-100vw)
+        img.style.top = `${Math.random() * 100}vh`;  // ตามความสูงหน้าจอ (0-100vh)
+
+        // 3. สุ่มระยะเวลาการแอนิเมชัน (ความเร็วในการลอย ระหว่าง 15s ถึง 35s)
+        const duration = Math.random() * (35 - 15) + 15;
+        img.style.animationDuration = `${duration}s`;
+
+        // 4. สุ่มเวลาเริ่มต้นแอนิเมชัน (เพื่อให้แต่ละตัวลอยไม่พร้อมกัน)
+        const delay = Math.random() * -duration; // ค่าลบเพื่อให้แอนิเมชันเริ่มไปแล้วบางส่วน
+        img.style.animationDelay = `${delay}s`;
+
+        // 5. สุ่มค่าการเคลื่อนที่ภายในแอนิเมชัน (X, Y, Rotation) เพื่อให้มีทิศทางต่างกัน
+        const moveX = (Math.random() - 0.5) * 200; // ลอยซ้ายขวา +- 100px
+        const moveY = (Math.random() - 0.5) * 200; // ลอยขึ้นลง +- 100px
+        const rotate = (Math.random() - 0.5) * 90;   // หมุน +- 45 องศา
+
+        // สร้าง Inline Style สำหรับ Keyframes โดยเฉพาะของตัวนี้
+        const animationName = `floatRandom-${i}`;
+        const keyframes = `
+            @keyframes ${animationName} {
+                0% { transform: translate(0, 0) rotate(0deg); }
+                50% { transform: translate(${moveX / 2}px, ${moveY / 2}px) rotate(${rotate / 2}deg); }
+                100% { transform: translate(${moveX}px, ${moveY}px) rotate(${rotate}deg); }
+            }
+        `;
+        
+        // สร้างแท็ก <style> เพื่อใส่ Keyframes ลงไปใน Document
+        const styleSheet = document.createElement("style");
+        styleSheet.type = "text/css";
+        styleSheet.innerText = keyframes;
+        document.head.appendChild(styleSheet);
+
+        // เรียกใช้แอนิเมชันที่สร้างใหม่
+        img.style.animationName = animationName;
+
+        // นำรูปภาพใส่เข้าไปใน Container
+        container.appendChild(img);
+    }
+</script>
 
 </body>
 </html>
