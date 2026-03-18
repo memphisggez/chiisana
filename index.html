@@ -64,8 +64,11 @@
             position: relative;
         }
 
-        /* 2. ส่วนข้อมูลโปรไฟล์ (รูปวงกลมและข้อความ) */
+        /* 2. ส่วนข้อมูลโปรไฟล์ */
         .profile-info {
+            display: flex;
+            flex-direction: column; /* จัดองค์ประกอบแบบแนวตั้ง */
+            align-items: center;    /* จัดให้อยู่ตรงกลางแนวนอน */
             text-align: center;
             padding: 0 20px 30px;
             position: relative;
@@ -81,6 +84,7 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             object-fit: cover;
             background-color: white;
+            /* ลบ margin-top ลบออกเพื่อให้ align-items: center จัดการ */
         }
 
         /* --- สไตล์ใหม่สำหรับชื่อร้าน (เรืองแสง + ดุ๊กดิ๊ก) --- */
@@ -88,7 +92,7 @@
             font-size: 26px;
             font-weight: 500;
             color: var(--accent-pink);
-            margin-top: 15px;
+            margin-top: 15px; /* เว้นระยะห่างจากรูปภาพด้านบน */
             margin-bottom: 5px;
             
             /* 1. เอฟเฟกต์เรืองแสง (Glow) */
@@ -126,6 +130,7 @@
             color: var(--text-main);
             margin-bottom: 20px;
             padding: 0 10px;
+            margin-top: 5px; /* เพิ่มระยะห่างจากชื่อร้านนิดหน่อย */
         }
 
         /* 3. ปุ่มสถานะการให้บริการ */
