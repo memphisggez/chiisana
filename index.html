@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memphis Studio | Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --glass: rgba(255, 255, 255, 0.8);
+            --main-text: #4a4a4a;
+            --accent: #ffaf40;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Mitr', sans-serif; }
+
+        body {
+            background-image: url('BG 1.gif');
+            background-attachment: fixed;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding-bottom: 80px;
+        }
+
+        .container { width: 100%; max-width: 480px; padding: 20px; }
+
+        /* Header Profile สไตล์ Julylyn */
+        .profile-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 30px 20px;
+            text-align: center;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255,255,255,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .profile-img {
+            width: 100px; height: 100px;
+            border-radius: 50%;
+            border: 4px solid white;
+            margin-bottom: 15px;
+            object-fit: cover;
+        }
+
+        .status-badge {
+            background: #fff9e6;
+            color: #d4a017;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        /* Grid บริการ 4 ช่อง */
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .service-card {
+            background: var(--glass);
+            backdrop-filter: blur(5px);
+            padding: 25px 15px;
+            border-radius: 20px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--main-text);
+            transition: 0.3s;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .service-card:hover { transform: translateY(-5px); background: #fff; }
+        .service-card i { font-size: 24px; margin-bottom: 10px; display: block; }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed; bottom: 15px;
+            width: 90%; max-width: 400px;
+            background: white;
+            display: flex; justify-content: space-around;
+            padding: 12px; border-radius: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .nav-item { text-decoration: none; color: #999; font-size: 12px; text-align: center; }
+        .nav-item.active { color: var(--accent); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="profile-card">
+        <img src="your-profile.jpg" class="profile-img" alt="Logo">
+        <h2>Memphis Studio ✨</h2>
+        <p style="font-size: 14px; color: #777;">Welcome to my store!</p>
+        <div class="status-badge">เปิดให้บริการ 09:00 - 00:00</div>
+    </div>
+
+    <h3 style="margin-bottom: 15px; color: #555; padding-left: 5px;">บริการของเรา</h3>
+    <div class="service-grid">
+        <a href="genshin.html" class="service-card">
+            <i>⚔️</i>
+            <span>Sell ID</span>
+        </a>
+        <a href="labels.html" class="service-card">
+            <i>📁</i>
+            <span>กลุ่มงานป้าย</span>
+        </a>
+        <a href="#" class="service-card">
+            <i>💎</i>
+            <span>Top Up</span>
+        </a>
+        <a href="#" class="service-card">
+            <i>☁️</i>
+            <span>App Premium</span>
+        </a>
+    </div>
+</div>
+
+<nav class="bottom-nav">
+    <a href="index.html" class="nav-item active">🏠<br>Home</a>
+    <a href="genshin.html" class="nav-item">⚔️<br>Rent</a>
+    <a href="labels.html" class="nav-item">📁<br>Labels</a>
+    <a href="https://facebook.com/..." class="nav-item">💬<br>Contact</a>
+</nav>
+
+</body>
+</html>
