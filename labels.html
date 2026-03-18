@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>กลุ่มงานป้ายอื่นๆ - Memphis Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-glass: rgba(255, 255, 255, 0.85);
+            --main-color: #333333;
+            --accent-color: #ffaf40;
+            --text-sub: #777777;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Mitr', sans-serif; }
+
+        body {
+            background-image: url('BG 1.gif');
+            background-attachment: fixed;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding-bottom: 90px; /* เผื่อพื้นที่ให้ Bottom Nav */
+        }
+
+        .container { width: 100%; max-width: 480px; padding: 20px; }
+
+        /* Header Section */
+        .header-section {
+            background: var(--bg-glass);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        /* Grid รายการกลุ่ม */
+        .labels-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .label-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(5px);
+            border-radius: 20px;
+            padding: 12px;
+            text-decoration: none;
+            color: var(--main-color);
+            transition: 0.3s;
+            border: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .label-card:hover { transform: translateY(-5px); background: white; }
+
+        .label-card img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 10px;
+        }
+
+        .label-card span {
+            font-size: 13px;
+            font-weight: 500;
+            height: 40px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            line-height: 1.4;
+        }
+
+        .tag-container {
+            display: flex;
+            gap: 5px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 9px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: #fff;
+            border: 1px solid #eee;
+            color: var(--text-sub);
+        }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed; bottom: 15px;
+            width: 90%; max-width: 400px;
+            background: white;
+            display: flex; justify-content: space-around;
+            padding: 12px; border-radius: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .nav-item { text-decoration: none; color: #999; font-size: 11px; text-align: center; }
+        .nav-item.active { color: var(--accent-color); font-weight: 500; }
+
+        /* แมวกวักลอยตัว */
+        .floating-cat {
+            position: fixed;
+            bottom: 85px;
+            right: 20px;
+            width: 70px;
+            z-index: 999;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+<img src="กวัก.png" class="floating-cat" alt="Cat">
+
+<div class="container">
+    <div class="header-section">
+        <h2 style="font-size: 20px;">📁 กลุ่มงานป้ายอื่นๆ</h2>
+        <p style="font-size: 13px; color: var(--text-sub);">รวม 35 กลุ่มงานคุณภาพที่คุณไม่ควรพลาด</p>
+    </div>
+
+    <div class="labels-grid">
+        <a href="https://drive.google.com/drive/folders/18wz_Hx9Iik7YGXZK4nOi8i2z1IdcZOg6" target="_blank" class="label-card">
+            <img src="Serabies box.jpg"><span>Serabies box A</span>
+            <div class="tag-container"><div class="tag">⭐ ยอดฮิต</div><div class="tag">💪 งานเยอะ</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1FMjGXbx2tMbiM6bqelrqYAmvV13Wb4J_" target="_blank" class="label-card">
+            <img src="Marshall box.jpg"><span>Marshall box</span>
+            <div class="tag-container"><div class="tag">📁 กลุ่มรวม</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1Fx9Dvo1map2Ko1wNwH_llaf4qJmy8Mdb" target="_blank" class="label-card">
+            <img src="Neennaloo’s Little Cafe.jpeg"><span>Little Cafe</span>
+            <div class="tag-container"><div class="tag">🧸 ตกแต่ง</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1lxoiIqlaY6HUuTiDIMA_qnNunLUuVAVA" target="_blank" class="label-card">
+            <img src="Neennaloo’s Little Museum.jpg"><span>Little Museum</span>
+            <div class="tag-container"><div class="tag">🧸 ตกแต่ง</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1mnMlL62RciZzNc9ixBl12Qw65yyy-asy" target="_blank" class="label-card">
+            <img src="Cynthia.jpg"><span>Cynthia</span>
+            <div class="tag-container"><div class="tag">🆕 คุณนิว</div></div>
+        </a>
+
+        <a href="https://drive.google.com/drive/folders/1MJ9SuXIzyz3_alVFNA_HQ3oMULjRpQdQ" target="_blank" class="label-card">
+            <img src="Kellynoir V.2.jpg"><span>Kellynoir V.2</span>
+            <div class="tag-container"><div class="tag">👫 ตูน</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1EIQtGiGAFV0Z8Fi-xNprnQspOmaHj-KA" target="_blank" class="label-card">
+            <img src="Brownies pop.jpg"><span>Brownies pop</span>
+            <div class="tag-container"><div class="tag">👫 ตูน</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/134iFsHtgWDI72VZvF0Q8SsEfpMalzLr1" target="_blank" class="label-card">
+            <img src="Jida mosay.jpg"><span>Jida mosay</span>
+            <div class="tag-container"><div class="tag">👫 ตูน</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/115i-i_ZdD_bR06y1tNf-sppXyLK2WRRr" target="_blank" class="label-card">
+            <img src="MidoriToon.jpg"><span>MidoriToon</span>
+            <div class="tag-container"><div class="tag">👫 ตูน</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1c3lhDCNVqs7WsFXbiu1K4e4V4Ih9ibnE" target="_blank" class="label-card">
+            <img src="Harunasakura.jpg"><span>Harunasakura</span>
+            <div class="tag-container"><div class="tag">👫 ตูน</div></div>
+        </a>
+
+        <a href="https://drive.google.com/drive/folders/1giDK3JefZor5yjlEAAZVsEcFGxIiy6WG" target="_blank" class="label-card">
+            <img src="Ocean breeze.jpg"><span>Ocean breeze</span>
+            <div class="tag-container"><div class="tag">👫 ตูน</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1kzpPhRfEgqW_D4VPk1Ewy3d5a8JA6p0M" target="_blank" class="label-card">
+            <img src="Font verse.jpg"><span>Font verse</span>
+            <div class="tag-container"><div class="tag">📁 กลุ่มรวม</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/11Pq2C3rt8CIBbhV7Pn-IXYmahdmjRR7n" target="_blank" class="label-card">
+            <img src="Miracle Effect SS2 BY NANNIE.jpg"><span>Miracle Effect SS2</span>
+            <div class="tag-container"><div class="tag">🎨 เอฟเฟค</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/143kSXFhJ9ymd5Wayxt0XPryHHP5fK6W4" target="_blank" class="label-card">
+            <img src="Tiny stuff by NANNIE.jpg"><span>Tiny stuff by NANNIE</span>
+            <div class="tag-container"><div class="tag">🧸 ตกแต่ง</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1lMWHYQV5rG0_QqPPJd3LDZ8JGfbvgsnt" target="_blank" class="label-card">
+            <img src="Somi bloom.jpg"><span>Somi bloom</span>
+            <div class="tag-container"><div class="tag">🧸 ตกแต่ง</div></div>
+        </a>
+
+        <a href="https://drive.google.com/drive/folders/18WCrigbiFYcs5lipfa4CHYK3VXmNdka_" target="_blank" class="label-card">
+            <img src="Sunshine pink.jpg"><span>Sunshine pink</span>
+            <div class="tag-container"><div class="tag">🎨 เอฟเฟค</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1eGvE9PwODJgNGxb7qNRQL_QkVCCezd1w" target="_blank" class="label-card">
+            <img src="Ayane deko.jpg"><span>Ayane deko</span>
+            <div class="tag-container"><div class="tag">📝 สอน</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1URM1a3q9jhzicpHLgUVn1PdTCVJ_sWJj" target="_blank" class="label-card">
+            <img src="Plaque course.jpg"><span>Plaque course</span>
+            <div class="tag-container"><div class="tag">📝 สอน</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1al32yYiZHCTYWObHus-z_oao-6L6AwKA" target="_blank" class="label-card">
+            <img src="Chocolate.jpg"><span>Chocolate</span>
+            <div class="tag-container"><div class="tag">🧸 ตกแต่ง</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/10Lh1XIGGWEKLfuBYJzwDfpskvgAbGSQK" target="_blank" class="label-card">
+            <img src="Blueberry charm.jpg"><span>Blueberry charm</span>
+            <div class="tag-container"><div class="tag">🧸 ตกแต่ง</div></div>
+        </a>
+
+        <a href="https://drive.google.com/drive/folders/1-LcZE242nq1BFuDonlbTXCt7PP5_guPy" target="_blank" class="label-card">
+            <img src="Chummy group.jpg"><span>Chummy group</span>
+            <div class="tag-container"><div class="tag">🧸 ตกแต่ง</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1nF6wBIBv6Qk2Re2NwIHT6AlCRNF_05KY" target="_blank" class="label-card">
+            <img src="Jaofurpuffin.jpg"><span>Jaofurpuffin</span>
+            <div class="tag-container"><div class="tag">🧸 ตกแต่ง</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1rZQXFSRQ46toz8QrCAd7LAfOZB5alnWv" target="_blank" class="label-card">
+            <img src="Pompoko.jpg"><span>Pompoko</span>
+            <div class="tag-container"><div class="tag">🧸 ตกแต่ง</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1gepviEPGU1lzS-x1PtOML7RwdjIOs5Ap" target="_blank" class="label-card">
+            <img src="ครีมชีสเชอรี่.jpg"><span>ครีมชีสเชอรี่</span>
+            <div class="tag-container"><div class="tag">🧸 ตกแต่ง</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1KTNrXGfKZzyolIcNwAhXNx52BTG3gUr5" target="_blank" class="label-card">
+            <img src="Rosemary.jpg"><span>Rosemary</span>
+            <div class="tag-container"><div class="tag">💮 แนวเฮด</div></div>
+        </a>
+
+        <a href="https://drive.google.com/drive/folders/1WMNZHCfbV34LWRK6gwFHOb6GJrkLwtv-" target="_blank" class="label-card">
+            <img src="Hatari.jpg"><span>Hatari</span>
+            <div class="tag-container"><div class="tag">🌸 น่ารัก</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1JkF5VozpMvFeK40sjqJ5FFM6Hyplb3A8" target="_blank" class="label-card">
+            <img src="Cinjia lover.jpg"><span>Cinjia lover</span>
+            <div class="tag-container"><div class="tag">🌸 น่ารัก</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/12JIIOYabFK3ABXZ0pCJ5zHd6u44VmIOo" target="_blank" class="label-card">
+            <img src="Jaifu mini group box.jpg"><span>Jaifu mini group</span>
+            <div class="tag-container"><div class="tag">🌸 น่ารัก</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1WoyDSuaH6Uqm9BfptO4DlXrmI0VUuUgZ" target="_blank" class="label-card">
+            <img src="Mitarashi.jpg"><span>Mitarashi</span>
+            <div class="tag-container"><div class="tag">🌸 น่ารัก</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1d6IxpNl4zajE7XP-W2KJ17wkGPkG11uj" target="_blank" class="label-card">
+            <img src="Little duck.jpg"><span>Little duck</span>
+            <div class="tag-container"><div class="tag">🌸 น่ารัก</div></div>
+        </a>
+
+        <a href="https://drive.google.com/drive/folders/1096Zo6vNkrANGEgDTOmYBfzH-OxSwvGv" target="_blank" class="label-card">
+            <img src="Nighty luxury.jpg"><span>Nighty luxury</span>
+            <div class="tag-container"><div class="tag">💜 แนวมืด</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/16sr1jsr6GGBYo3dBO2tP6eGxZbhFAVk9" target="_blank" class="label-card">
+            <img src="Sinna matic.jpg"><span>Sinna matic</span>
+            <div class="tag-container"><div class="tag">🎮 เกม</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1mbfMg_l5vsZih9D2n_9R-10Nv8Y0SujP" target="_blank" class="label-card">
+            <img src="Poppy part.jpg"><span>Poppy part</span>
+            <div class="tag-container"><div class="tag">🧩 ชิ้นส่วน</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1VSLgkp-xbjKNC-CJOPYFKAKUQZ8hgdr-" target="_blank" class="label-card">
+            <img src="Moji milk.jpg"><span>Moji milk</span>
+            <div class="tag-container"><div class="tag">🧩 ชิ้นส่วน</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/19z9OlOdYD-6WiekisGv2pfjuToGT0uQ1" target="_blank" class="label-card">
+            <img src="Clover parts.jpg"><span>Clover parts</span>
+            <div class="tag-container"><div class="tag">🧩 ชิ้นส่วน</div></div>
+        </a>
+    </div>
+</div>
+
+<nav class="bottom-nav">
+    <a href="index.html" class="nav-item">🏠<br>Home</a>
+    <a href="genshin.html" class="nav-item">⚔️<br>Rent</a>
+    <a href="labels.html" class="nav-item active">📁<br>Labels</a>
+    <a href="https://facebook.com/hani.37341/" class="nav-item">💬<br>Contact</a>
+</nav>
+
+</body>
+</html>
