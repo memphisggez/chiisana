@@ -117,7 +117,7 @@
             border: 1px solid #ffeeba;
         }
 
-        /* --- หัวข้อ Section พร้อมรูปไอคอน icon-1.png --- */
+        /* --- หัวข้อ Section --- */
         .section-title {
             font-size: 18px;
             font-weight: 500;
@@ -146,7 +146,7 @@
             background: var(--glass);
             backdrop-filter: blur(5px);
             border-radius: 20px;
-            padding: 25px 15px;
+            padding: 20px 10px;
             text-align: center;
             text-decoration: none;
             color: var(--text-main);
@@ -162,8 +162,15 @@
             background: rgba(255, 255, 255, 0.95);
         }
 
-        .service-icon { font-size: 28px; margin-bottom: 10px; }
-        .service-text { font-size: 15px; font-weight: 500; }
+        /* ปรับสไตล์รูปไอคอนในเมนู */
+        .service-card img {
+            width: 45px;
+            height: 45px;
+            margin-bottom: 10px;
+            object-fit: contain;
+        }
+
+        .service-text { font-size: 14px; font-weight: 500; }
 
         /* --- Buttons --- */
         .btn-pastel {
@@ -279,7 +286,7 @@
                 มีกลุ่มงานป้ายมากกว่า 30 กลุ่มให้เลือกเลย<br>
                 สอบถามได้เสมอนะคะ (˶˃ᆺ˂˶)
             </div>
-            <div class="status-badge">เปิดให้บริการ 09:00 - 00:00</div>
+            <div class="status-badge">ปิดรับคิว</div>
         </div>
     </div>
 
@@ -290,19 +297,19 @@
 
     <div class="service-grid">
         <a href="https://www.facebook.com/share/p/174dQzj6zt/" class="service-card">
-            <div class="service-icon">🤝</div>
+            <img src="Ex.png" alt="Check Credit">
             <div class="service-text">Check Credit</div>
         </a>
         <a href="https://drive.google.com/drive/folders/1wexcwQzuEBLOmnjQ2BTh6aHRbtc1T-2j" class="service-card">
-            <div class="service-icon">📁</div>
+            <img src="Ex 1.png" alt="Example Work">
             <div class="service-text">Example Work</div>
         </a>
         <a href="rov.html" class="service-card">
-            <div class="service-icon">⚔️</div>
+            <img src="rentid.png" alt="Rent ID ROV">
             <div class="service-text">Rent ID ROV</div>
         </a>
         <a href="#" class="service-card">
-            <div class="service-icon">💎</div>
+            <img src="topup.png" alt="Top Up Game">
             <div class="service-text">Top Up Game</div>
         </a>
     </div>
