@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>กลุ่มงานป้าย - Memphis Studio</title>
+    <title>กลุ่มงานป้าย - ChiiSAnA ♡ 花</title>
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -18,13 +18,15 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Prompt', sans-serif; }
 
         body {
+            /* พื้นหลังไล่เฉดชมพู-ม่วงพาสเทลเหมือนหน้าหลัก */
             background: linear-gradient(180deg, #fff5f8 0%, #f4eaff 100%);
             background-attachment: fixed;
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            padding-bottom: 110px;
+            padding-bottom: 110px; /* เว้นที่ให้ Bottom Nav */
             color: var(--text-gray);
+            position: relative;
         }
 
         .container { width: 100%; max-width: 500px; padding: 20px; }
@@ -44,14 +46,14 @@
         .header-section h2 { color: var(--accent-pink); font-size: 24px; margin-bottom: 8px; }
         .header-section p { font-size: 13px; opacity: 0.8; }
 
-        /* Grid Layout (2 คอลัมน์แบบโปรเจคแรก) */
+        /* Grid Layout (2 คอลัมน์) */
         .labels-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
         }
 
-        /* การ์ดแสดงผลสไตล์ผสมผสาน */
+        /* การ์ดแสดงผล */
         .portfolio-card {
             background: var(--glass-white);
             backdrop-filter: blur(10px);
@@ -72,7 +74,6 @@
             box-shadow: 0 12px 25px rgba(255, 182, 193, 0.4);
         }
 
-        /* ภาพสี่เหลี่ยมจัตุรัสตามโปรเจคแรก */
         .portfolio-card img {
             width: 100%;
             aspect-ratio: 1/1;
@@ -92,7 +93,7 @@
             overflow: hidden;
         }
 
-        /* Badge สไตล์มินิมอลพาสเทล */
+        /* Badge สไตล์มินิมอล */
         .badges {
             display: flex;
             flex-wrap: wrap;
@@ -110,36 +111,50 @@
             white-space: nowrap;
         }
 
-        /* Bottom Nav สีดำตาม ChiiSANa */
+        /* Bottom Nav สีดำ */
         .bottom-nav {
-            position: fixed; bottom: 20px;
-            width: 92%; max-width: 420px;
+            position: fixed; 
+            bottom: 20px;
+            width: 92%; 
+            max-width: 420px;
             background: var(--dark-accent);
-            display: flex; justify-content: space-around;
-            padding: 12px 5px; border-radius: 20px;
+            display: flex; 
+            justify-content: space-around;
+            padding: 12px 5px; 
+            border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             z-index: 1000;
         }
 
-        .nav-item { text-decoration: none; color: white; font-size: 10px; text-align: center; opacity: 0.6; transition: 0.3s; }
+        .nav-item { 
+            text-decoration: none; 
+            color: white; 
+            font-size: 10px; 
+            text-align: center; 
+            opacity: 0.6; 
+            transition: 0.3s; 
+        }
+
         .nav-item.active { opacity: 1; color: var(--main-pink); }
         .nav-item i { font-size: 18px; display: block; margin-bottom: 3px; color: var(--main-pink); }
 
-        /* แมวกวักลอยตัว */
-        .floating-cat {
+        /* --- สไตล์สำหรับรูปตัวห้อย Chiikawa --- */
+        .floating-sticker {
             position: fixed;
-            bottom: 95px;
-            right: 20px;
-            width: 75px;
+            bottom: 90px;    /* ลอยเหนือเมนู Bottom Nav */
+            right: 20px;     /* มุมขวาล่าง */
+            width: 80px;     /* ขนาดรูป */
+            height: auto;
             z-index: 999;
-            pointer-events: none;
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
+            pointer-events: none; /* เพื่อไม่ให้บังการกดลิงก์ด้านหลัง */
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
         }
+
     </style>
 </head>
 <body>
 
-<img src="กวัก.png" class="floating-cat" alt="Cat">
+<img src="chiikawa 1.gif" alt="Chiikawa" class="floating-sticker">
 
 <div class="container">
     <div class="header-section">
