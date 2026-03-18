@@ -117,7 +117,7 @@
             border: 1px solid #ffeeba;
         }
 
-        /* --- หัวข้อ Section --- */
+        /* --- หัวข้อ Section พร้อมรูปไอคอน icon-1.png --- */
         .section-title {
             font-size: 18px;
             font-weight: 500;
@@ -125,7 +125,13 @@
             opacity: 0.8;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+        }
+
+        .section-title img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
         }
 
         /* --- Service Grid --- */
@@ -180,7 +186,7 @@
             border-color: var(--accent-pink);
         }
 
-        /* --- Gallery สเกล 1:1 (เลื่อนซ้ายขวา) --- */
+        /* --- Gallery สเกล 1:1 --- */
         .gallery-container {
             width: 100%;
             overflow-x: auto;
@@ -188,15 +194,13 @@
             gap: 15px;
             padding: 10px 5px 15px 5px;
             scroll-snap-type: x mandatory;
-            scrollbar-width: none; /* สำหรับ Firefox */
+            scrollbar-width: none;
         }
 
-        .gallery-container::-webkit-scrollbar {
-            display: none; /* สำหรับ Chrome/Safari */
-        }
+        .gallery-container::-webkit-scrollbar { display: none; }
 
         .gallery-item {
-            min-width: 250px; /* ขนาดความกว้างของรูปบนมือถือ */
+            min-width: 250px;
             aspect-ratio: 1 / 1;
             background: var(--glass);
             border-radius: 25px;
@@ -238,7 +242,7 @@
         .nav-item.active { opacity: 1; color: var(--main-pink); }
         .nav-item i { font-size: 18px; display: block; margin-bottom: 3px; color: var(--main-pink); font-style: normal; }
 
-        /* --- Stickers & Background Effects --- */
+        /* --- Background Effects --- */
         .floating-sticker {
             position: fixed;
             bottom: 95px;
@@ -253,7 +257,7 @@
             position: fixed;
             pointer-events: none;
             z-index: 1;
-            opacity: 0.25; /* ความจางของรูปพื้นหลัง */
+            opacity: 0.25;
             animation: floatRandom linear infinite;
         }
     </style>
@@ -279,7 +283,11 @@
         </div>
     </div>
 
-    <h2 class="section-title"><span>🌸</span> บริการของทางร้าน</h2>
+    <h2 class="section-title">
+        <img src="icon-1.png" alt="icon"> 
+        บริการของทางร้าน
+    </h2>
+
     <div class="service-grid">
         <a href="https://www.facebook.com/share/p/174dQzj6zt/" class="service-card">
             <div class="service-icon">🤝</div>
@@ -301,14 +309,16 @@
 
     <a href="https://docs.google.com/spreadsheets/d/1JApKZ3mbzG4qEdyYD_CAhoOfNA3R7UD5PvgXo1_ko7I/edit?gid=1963409705#gid=1963409705" class="btn-pastel">♡ check w♡rk q ♡</a>
 
-    <h2 class="section-title"><span>✨</span> ตัวอย่างงานล่าสุด</h2>
+    <h2 class="section-title">
+        <img src="icon-1.png" alt="icon">
+        ตัวอย่างงานล่าสุด
+    </h2>
     <div class="gallery-container">
         <div class="gallery-item"><img src="ตัวอย่าง 1.jpg" alt="งาน 1"></div>
         <div class="gallery-item"><img src="ตัวอย่าง 2.png" alt="งาน 2"></div>
         <div class="gallery-item"><img src="ตัวอย่าง 3.jpg" alt="งาน 3"></div>
         <div class="gallery-item"><img src="ตัวอย่าง 4.jpg" alt="งาน 4"></div>
         <div class="gallery-item"><img src="ตัวอย่าง 5.jpg" alt="งาน 5"></div>
-        <div class="gallery-item"><img src="ตัวอย่าง 6.jpg" alt="งาน 6"></div>
     </div>
     <p class="gallery-hint">เเกลเลอรี่สไลด์ได้นะค้าบ ⇠ ⇢</p>
 </div>
@@ -322,8 +332,8 @@
 </nav>
 
 <script>
-    /* --- ระบบสุ่ม Chiikawa 3.gif ลอยในพื้นหลัง --- */
-    const numberOfBackgroundChiikawas = 12; // จำนวนรูปที่จะสุ่ม
+    /* --- สคริปต์สุ่ม Chiikawa ลอยหลังพื้นหลัง --- */
+    const numberOfBackgroundChiikawas = 12;
     const bgContainer = document.getElementById('bg-chiikawa-container');
 
     for (let i = 0; i < numberOfBackgroundChiikawas; i++) {
@@ -331,33 +341,26 @@
         img.src = 'chiikawa 3.gif';
         img.classList.add('bg-chiikawa');
 
-        // สุ่มขนาด
         const size = Math.random() * (90 - 45) + 45; 
         img.style.width = `${size}px`;
-
-        // สุ่มตำแหน่ง
         img.style.left = `${Math.random() * 100}vw`;
         img.style.top = `${Math.random() * 100}vh`;
 
-        // สุ่มความเร็ว
         const duration = Math.random() * (30 - 15) + 15;
         img.style.animationDuration = `${duration}s`;
         img.style.animationDelay = `${Math.random() * -duration}s`;
 
-        // สุ่มทิศทางแอนิเมชันเฉพาะตัว
         const moveX = (Math.random() - 0.5) * 250;
         const moveY = (Math.random() - 0.5) * 250;
         const rotate = (Math.random() - 0.5) * 120;
         const animName = `float-${i}`;
 
         const styleSheet = document.createElement("style");
-        styleSheet.innerText = `
-            @keyframes ${animName} {
-                0% { transform: translate(0, 0) rotate(0deg); }
-                50% { transform: translate(${moveX/2}px, ${moveY/2}px) rotate(${rotate/2}deg); }
-                100% { transform: translate(${moveX}px, ${moveY}px) rotate(${rotate}deg); }
-            }
-        `;
+        styleSheet.innerText = `@keyframes ${animName} {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(${moveX/2}px, ${moveY/2}px) rotate(${rotate/2}deg); }
+            100% { transform: translate(${moveX}px, ${moveY}px) rotate(${rotate}deg); }
+        }`;
         document.head.appendChild(styleSheet);
         img.style.animationName = animName;
 
