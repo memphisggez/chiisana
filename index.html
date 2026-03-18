@@ -3,132 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Memphis Studio | Home</title>
-    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>ChiiSAnA ♡ 花 | Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            --glass: rgba(255, 255, 255, 0.8);
-            --main-text: #4a4a4a;
-            --accent: #ffaf40;
+            /* โทนสีจากสไตล์ ChiiSANa */
+            --bg-soft: #fdf6ff; 
+            --main-pink: #ffdae9;
+            --dark-accent: #332d2d; /* สีดำนุ่มนวลสำหรับเมนู */
+            --text-color: #5d5151;
+            --white-glass: rgba(255, 255, 255, 0.9);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Mitr', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Prompt', sans-serif; }
 
         body {
-            background-image: url('BG 1.gif');
+            /* พื้นหลังไล่เฉดชมพู-ขาวนวล */
+            background: linear-gradient(180deg, #fff5f8 0%, #f4eaff 100%);
             background-attachment: fixed;
-            background-size: cover;
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            padding-bottom: 80px;
+            padding-bottom: 100px;
+            color: var(--text-color);
         }
 
-        .container { width: 100%; max-width: 480px; padding: 20px; }
+        .container { width: 100%; max-width: 450px; padding: 25px; }
 
-        /* Header Profile สไตล์ Julylyn */
-        .profile-card {
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
-            padding: 30px 20px;
+        /* ส่วนโปรไฟล์สไตล์ใหม่ */
+        .profile-section {
             text-align: center;
-            margin-bottom: 25px;
-            border: 1px solid rgba(255,255,255,0.3);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-bottom: 35px;
+            padding-top: 20px;
         }
 
         .profile-img {
-            width: 100px; height: 100px;
+            width: 120px; height: 120px;
             border-radius: 50%;
-            border: 4px solid white;
+            border: 5px solid white;
+            box-shadow: 0 8px 20px rgba(255, 182, 193, 0.4);
             margin-bottom: 15px;
             object-fit: cover;
         }
 
-        .status-badge {
-            background: #fff9e6;
-            color: #d4a017;
-            padding: 5px 15px;
+        .profile-name {
+            font-size: 24px;
+            font-weight: 500;
+            color: #ff85b3; /* สีชมพูหวาน */
+            margin-bottom: 5px;
+        }
+
+        .profile-desc {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--white-glass);
+            padding: 15px;
             border-radius: 20px;
-            font-size: 12px;
-            display: inline-block;
-            margin-top: 10px;
+            margin: 10px 0;
+            border: 1px dashed #ffc0cb;
         }
 
-        /* Grid บริการ 4 ช่อง */
-        .service-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-
-        .service-card {
-            background: var(--glass);
-            backdrop-filter: blur(5px);
-            padding: 25px 15px;
-            border-radius: 20px;
-            text-align: center;
-            text-decoration: none;
-            color: var(--main-text);
-            transition: 0.3s;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .service-card:hover { transform: translateY(-5px); background: #fff; }
-        .service-card i { font-size: 24px; margin-bottom: 10px; display: block; }
-
-        /* Bottom Nav */
-        .bottom-nav {
-            position: fixed; bottom: 15px;
-            width: 90%; max-width: 400px;
+        /* ปุ่มบริการแบบโค้ด ChiiSANa (แคปซูล) */
+        .btn-link {
+            display: block;
             background: white;
-            display: flex; justify-content: space-around;
-            padding: 12px; border-radius: 25px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border: 2px solid var(--dark-accent);
+            color: var(--dark-accent);
+            text-decoration: none;
+            padding: 15px;
+            border-radius: 50px; /* ทรงแคปซูล */
+            margin-bottom: 12px;
+            text-align: center;
+            font-weight: 500;
+            transition: 0.3s;
+            font-size: 15px;
         }
 
-        .nav-item { text-decoration: none; color: #999; font-size: 12px; text-align: center; }
-        .nav-item.active { color: var(--accent); }
+        .btn-link:hover {
+            background: var(--main-pink);
+            transform: scale(1.02);
+        }
+
+        /* ปุ่มเน้นสีดำแบบต้นฉบับ */
+        .btn-dark {
+            background: var(--dark-accent);
+            color: white;
+        }
+
+        /* Bottom Nav สไตล์ ChiiSANa */
+        .bottom-nav {
+            position: fixed; bottom: 20px;
+            width: 90%; max-width: 400px;
+            background: var(--dark-accent);
+            display: flex; justify-content: space-around;
+            padding: 10px 5px; border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .nav-item { 
+            text-decoration: none; 
+            color: white; 
+            font-size: 10px; 
+            text-align: center;
+            opacity: 0.8;
+        }
+
+        .nav-item.active { opacity: 1; color: #ffdae9; }
+        .nav-item i { 
+            font-size: 18px; 
+            display: block; 
+            margin-bottom: 2px;
+            color: #ffdae9; /* สีหัวใจชมพู */
+        }
+
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="profile-card">
-        <img src="your-profile.jpg" class="profile-img" alt="Logo">
-        <h2>Memphis Studio ✨</h2>
-        <p style="font-size: 14px; color: #777;">Welcome to my store!</p>
-        <div class="status-badge">เปิดให้บริการ 09:00 - 00:00</div>
+    <div class="profile-section">
+        <img src="your-logo.jpg" class="profile-img" alt="Logo">
+        <h1 class="profile-name">Memphis Studio ♡</h1>
+        
+        <div class="profile-desc">
+            ♡ ยินดีต้อนรับสู่ร้านของเค้าค่า ♡<br>
+            มีกลุ่มงานป้ายมากกว่า 30 กลุ่มให้เลือกเลย<br>
+            (เลื่อนดูเมนูที่แถบด้านล่างได้นะคะ ૮˃ ꒳ ˂ა)
+        </div>
     </div>
 
-    <h3 style="margin-bottom: 15px; color: #555; padding-left: 5px;">บริการของเรา</h3>
-    <div class="service-grid">
-        <a href="genshin.html" class="service-card">
-            <i>⚔️</i>
-            <span>Sell ID</span>
-        </a>
-        <a href="labels.html" class="service-card">
-            <i>📁</i>
-            <span>กลุ่มงานป้าย</span>
-        </a>
-        <a href="#" class="service-card">
-            <i>💎</i>
-            <span>Top Up</span>
-        </a>
-        <a href="#" class="service-card">
-            <i>☁️</i>
-            <span>App Premium</span>
-        </a>
+    <a href="check-credit.html" class="btn-link">♡ check credit ♡</a>
+    <a href="check-work.html" class="btn-link">♡ check w♡rk q ♡</a>
+    <a href="labels.html" class="btn-link btn-dark">example w♡rk</a>
+    
+    <div style="margin-top: 25px;">
+        <a href="genshin.html" class="btn-link">⚔️ Sell ID Genshin</a>
+        <a href="#" class="btn-link">💎 Top Up Game</a>
     </div>
 </div>
 
 <nav class="bottom-nav">
-    <a href="index.html" class="nav-item active">🏠<br>Home</a>
-    <a href="genshin.html" class="nav-item">⚔️<br>Rent</a>
-    <a href="labels.html" class="nav-item">📁<br>Labels</a>
-    <a href="https://facebook.com/..." class="nav-item">💬<br>Contact</a>
+    <a href="index.html" class="nav-item active"><i>♥</i>Home ♡</a>
+    <a href="labels.html" class="nav-item"><i>♥</i>เค้าดึงเมลเอง ♡</a>
+    <a href="#" class="nav-item"><i>♥</i>Block ♡</a>
+    <a href="#" class="nav-item"><i>♥</i>Deco ♡</a>
+    <a href="#" class="nav-item"><i>♥</i>Toon ♡</a>
 </nav>
 
 </body>
