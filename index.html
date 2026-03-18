@@ -3,102 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChiiSAnA ♡ 花 | Home</title>
+    <title>ChiiSAnA ♡ 花 | Home - Pastel Glass</title>
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* โทนสีจากสไตล์ ChiiSANa */
-            --bg-soft: #fdf6ff; 
+            /* โทนสีจากโค้ดเดิมแต่ปรับใช้กับดีไซน์ใหม่ */
             --main-pink: #ffdae9;
-            --dark-accent: #332d2d; /* สีดำนุ่มนวลสำหรับเมนู */
-            --text-color: #5d5151;
-            --white-glass: rgba(255, 255, 255, 0.9);
+            --soft-purple: #f4eaff;
+            --text-main: #5d5151;
+            --accent-pink: #ff85b3;
+            --dark-menu: #332d2d; /* สีดำนุ่มนวลสำหรับ Bottom Nav */
+            /* เอฟเฟกต์กระจกฝ้า */
+            --glass: rgba(255, 255, 255, 0.7); 
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Prompt', sans-serif; }
 
         body {
-            /* พื้นหลังไล่เฉดชมพู-ขาวนวล */
-            background: linear-gradient(180deg, #fff5f8 0%, #f4eaff 100%);
+            /* พื้นหลังไล่เฉดชมพู-ม่วงพาสเทลนวลๆ */
+            background: linear-gradient(135deg, #fff5f8 0%, #eae0f5 100%);
             background-attachment: fixed;
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            padding-bottom: 100px;
-            color: var(--text-color);
+            /* เพิ่มพื้นที่ด้านล่างไม่ให้เมนูบังเนื้อหา */
+            padding-bottom: 110px; 
+            color: var(--text-main);
         }
 
-        .container { width: 100%; max-width: 450px; padding: 25px; }
+        /* --- Container หลัก --- */
+        .container { 
+            width: 100%; 
+            max-width: 480px; 
+            padding: 20px;
+        }
 
-        /* ส่วนโปรไฟล์สไตล์ใหม่ */
-        .profile-section {
+        /* --- แผงโปรไฟล์หลัก (Glassmorphism Card) --- */
+        .profile-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px); /* เอฟเฟกต์กระจกฝ้า */
+            border-radius: 35px;
+            overflow: hidden; /* ให้ Banner โค้งตามการ์ด */
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        /* 1. ส่วนแบนเนอร์ด้านบน */
+        .banner-area {
+            width: 100%;
+            height: 150px;
+            /* เปลี่ยนเป็น URL ภาพแบนเนอร์ของคุณ เช่น 'banner.jpg' */
+            background-image: url('your-banner-image.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-color: var(--main-pink); /* สีสำรองระหว่างโหลด */
+            position: relative;
+        }
+
+        /* 2. ส่วนข้อมูลโปรไฟล์ (รูปวงกลมและข้อความ) */
+        .profile-info {
             text-align: center;
-            margin-bottom: 35px;
-            padding-top: 20px;
+            padding: 0 20px 30px;
+            position: relative;
+            margin-top: -60px; /* ให้รูปโปรไฟล์ลอยทับแบนเนอร์ */
+            z-index: 10;
         }
 
         .profile-img {
-            width: 120px; height: 120px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            border: 5px solid white;
-            box-shadow: 0 8px 20px rgba(255, 182, 193, 0.4);
-            margin-bottom: 15px;
+            border: 6px solid white; /* ขอบขาวหนา */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             object-fit: cover;
+            background-color: white;
         }
 
         .profile-name {
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 500;
-            color: #ff85b3; /* สีชมพูหวาน */
+            color: var(--accent-pink);
+            margin-top: 15px;
             margin-bottom: 5px;
         }
 
         .profile-desc {
             font-size: 14px;
             line-height: 1.6;
-            color: var(--text-color);
-            background: var(--white-glass);
-            padding: 15px;
-            border-radius: 20px;
-            margin: 10px 0;
-            border: 1px dashed #ffc0cb;
+            color: var(--text-main);
+            margin-bottom: 20px;
+            padding: 0 10px;
         }
 
-        /* ปุ่มบริการแบบโค้ด ChiiSANa (แคปซูล) */
-        .btn-link {
-            display: block;
-            background: white;
-            border: 2px solid var(--dark-accent);
-            color: var(--dark-accent);
+        /* 3. ปุ่มสถานะการให้บริการ */
+        .status-badge {
+            background: #fff9e6;
+            color: #d4a017; /* สีส้มทองอ่อนๆ */
+            padding: 8px 25px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 500;
+            display: inline-block;
+            border: 1px solid #ffeeba;
+        }
+
+        /* --- ส่วนบริการของทางร้าน (หัวข้อ) --- */
+        .section-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            padding-left: 10px;
+            opacity: 0.8;
+        }
+
+        /* --- Layout เมนู Grid 2x2 (4 ช่อง) ตามภาพ --- */
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .service-card {
+            background: var(--glass);
+            backdrop-filter: blur(5px);
+            border-radius: 20px;
+            padding: 25px 15px;
+            text-align: center;
             text-decoration: none;
-            padding: 15px;
-            border-radius: 50px; /* ทรงแคปซูล */
-            margin-bottom: 12px;
+            color: var(--text-main);
+            transition: 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 8px 25px rgba(255, 182, 193, 0.3);
+        }
+
+        /* ไอคอนเมนู */
+        .service-icon {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: var(--accent-pink); /* สีไอคอนหวานๆ */
+        }
+
+        .service-text {
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        /* --- Contact / Other Links (ปุ่มด้านล่าง Grid) --- */
+        .other-links {
+            margin-top: 20px;
+        }
+
+        /* ปรับปุ่มเดิมเป็นแคปซูลใสๆ เข้าธีม */
+        .btn-pastel {
+            display: block;
+            background: var(--glass);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            color: var(--text-main);
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 50px;
+            margin-bottom: 10px;
             text-align: center;
             font-weight: 500;
             transition: 0.3s;
-            font-size: 15px;
+            font-size: 14px;
         }
-
-        .btn-link:hover {
+        
+        .btn-pastel:hover {
             background: var(--main-pink);
-            transform: scale(1.02);
+            border-color: var(--accent-pink);
         }
 
-        /* ปุ่มเน้นสีดำแบบต้นฉบับ */
-        .btn-dark {
-            background: var(--dark-accent);
-            color: white;
-        }
-
-        /* Bottom Nav สไตล์ ChiiSANa */
+        /* --- Bottom Nav สไตล์ ChiiSANa (สีดำไอคอนหัวใจ) --- */
         .bottom-nav {
-            position: fixed; bottom: 20px;
-            width: 90%; max-width: 400px;
-            background: var(--dark-accent);
-            display: flex; justify-content: space-around;
-            padding: 10px 5px; border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: fixed;
+            bottom: 20px;
+            width: 90%;
+            max-width: 420px;
+            background: var(--dark-menu);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 5px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            z-index: 1000;
         }
 
         .nav-item { 
@@ -106,15 +206,16 @@
             color: white; 
             font-size: 10px; 
             text-align: center;
-            opacity: 0.8;
+            opacity: 0.7;
+            transition: 0.3s;
         }
 
-        .nav-item.active { opacity: 1; color: #ffdae9; }
+        .nav-item.active { opacity: 1; color: var(--main-pink); }
         .nav-item i { 
             font-size: 18px; 
             display: block; 
-            margin-bottom: 2px;
-            color: #ffdae9; /* สีหัวใจชมพู */
+            margin-bottom: 3px;
+            color: var(--main-pink); /* สีหัวใจชมพู */
         }
 
     </style>
@@ -122,24 +223,46 @@
 <body>
 
 <div class="container">
-    <div class="profile-section">
-        <img src="หัว.jpg" class="profile-img" alt="Logo">
-        <h1 class="profile-name">ChiiSAnA ♡ 花</h1>
+    <div class="profile-card">
+        <div class="banner-area"></div>
         
-        <div class="profile-desc">
-            ♡ ยินดีต้อนรับสู่ร้านของเค้าค่า ♡<br>
-            มีกลุ่มงานป้ายมากกว่า 30 กลุ่มให้เลือกเลย<br>
-            (เลื่อนดูเมนูที่แถบด้านล่างได้นะคะ ૮˃ ꒳ ˂ა)
+        <div class="profile-info">
+            <img src="your-avatar.jpg" class="profile-img" alt="Avatar">
+            <h1 class="profile-name">ChiiSAnA ♡ 花</h1>
+            
+            <div class="profile-desc">
+                ♡ ยินดีต้อนรับสู่ร้านของเค้าค่า ♡<br>
+                มีกลุ่มงานป้ายมากกว่า 30 กลุ่มให้เลือกเลย<br>
+                สอบถามได้เสมอนะคะ ૮˃ ꒳ ˂า)
+            </div>
+            
+            <div class="status-badge">เปิดให้บริการ 09:00 - 00:00</div>
         </div>
     </div>
 
-    <a href="check-credit.html" class="btn-link">♡ check credit ♡</a>
-    <a href="check-work.html" class="btn-link">♡ check w♡rk q ♡</a>
-    <a href="labels.html" class="btn-link btn-dark">example w♡rk</a>
+    <h2 class="section-title">บริการของทางร้าน</h2>
     
-    <div style="margin-top: 25px;">
-        <a href="genshin.html" class="btn-link">⚔️ Sell ID Genshin</a>
-        <a href="#" class="btn-link">💎 Top Up Game</a>
+    <div class="service-grid">
+        <a href="check-credit.html" class="service-card">
+            <div class="service-icon">🤝</div>
+            <div class="service-text">Check Credit</div>
+        </a>
+        <a href="labels.html" class="service-card">
+            <div class="service-icon">📁</div>
+            <div class="service-text">Example Work</div>
+        </a>
+        <a href="genshin.html" class="service-card">
+            <div class="service-icon">⚔️</div>
+            <div class="service-text">Sell ID Genshin</div>
+        </a>
+        <a href="#" class="service-card">
+            <div class="service-icon">💎</div>
+            <div class="service-text">Top Up Game</div>
+        </a>
+    </div>
+
+    <div class="other-links">
+        <a href="check-work.html" class="btn-pastel">♡ check w♡rk q ♡</a>
     </div>
 </div>
 
