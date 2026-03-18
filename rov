@@ -1,0 +1,16 @@
+<div class="container">
+    <a href="index.html" style="text-decoration:none; color:#666;">← กลับหน้าหลัก</a>
+    <h2 style="margin: 20px 0; color: #444;">⚔️ รายการไอดีพร้อมส่ง</h2>
+
+    <div class="id-list">
+        <div class="id-card" style="background:white; border-radius:20px; padding:15px; margin-bottom:15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+            <img src="ลอง.jpg" style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:15px; margin-bottom:12px;">
+            <h4 style="font-weight:500;">Alhaitham C3R1 + Clorinde R1</h4>
+            <div style="display:flex; gap:10px; margin-top:10px;">
+                <span style="background:#e8f5e9; color:#2e7d32; padding:3px 10px; border-radius:10px; font-size:11px;">✅ พร้อมส่ง</span>
+                <span style="font-weight:bold; color:#ff4757;">400฿</span>
+            </div>
+            <a href="https://facebook.com/..." class="buy-btn" style="display:block; text-align:center; background:#333; color:white; padding:10px; border-radius:15px; margin-top:10px; text-decoration:none;">สั่งซื้อไอดีนี้</a>
+        </div>
+    </div>
+</div>
