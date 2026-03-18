@@ -29,6 +29,7 @@
             /* เพิ่มพื้นที่ด้านล่างไม่ให้เมนูบังเนื้อหา */
             padding-bottom: 110px; 
             color: var(--text-main);
+            position: relative; /* จำเป็นสำหรับ z-index ของตัวห้อย */
         }
 
         /* --- Container หลัก --- */
@@ -218,9 +219,24 @@
             color: var(--main-pink); /* สีหัวใจชมพู */
         }
 
+        /* --- สไตล์สำหรับรูปตัวห้อย (Floating Chiikawa) --- */
+        .floating-sticker {
+            position: fixed; /* ทำให้ลอยค้างอยู่ที่เดิมของหน้าจอ */
+            bottom: 90px;    /* ระยะห่างจากด้านล่าง (ปรับให้ลอยเหนือ Bottom Nav นิดหน่อย) */
+            right: 20px;     /* ระยะห่างจากด้านขวา */
+            width: 80px;     /* กำหนดความกว้างของรูป (ปรับได้ตามต้องการ) */
+            height: auto;    /* ปรับความสูงอัตโนมัติ */
+            z-index: 999;    /* ทำให้อยู่ชั้นบนสุด (แต่ต่ำกว่าเมนูเผื่อกรณีฉุกเฉิน) */
+            pointer-events: none; /* เพื่อไม่ให้รูปบังการคลิกปุ่มด้านหลัง */
+            /* เพิ่มเงาเล็กน้อยให้ดูมีมิติ */
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+        }
+
     </style>
 </head>
 <body>
+
+    <img src="chiikawa 1.gif" alt="Chiikawa Sticker" class="floating-sticker">
 
 <div class="container">
     <div class="profile-card">
