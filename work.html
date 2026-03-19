@@ -187,7 +187,9 @@
                 <p>ยินดีต้อนรับ ♡</p>
                 <p>ChiiSAnA Customer</p>
             </div>
-            <div class="noti-btn">🔔</div>
+                <div class="noti-btn" id="yamete-btn" onclick="playYamete()" style="cursor: pointer; overflow: hidden;">
+                <span id="noti-icon">🔔</span>
+                </div>
         </div>
 
         <div class="search-container">
@@ -265,6 +267,23 @@
             document.head.appendChild(styleSheet);
             img.style.animationName = animName;
             bgContainer.appendChild(img);
+        }
+            function playYamete() {
+            const btn = document.getElementById('yamete-btn');
+            const icon = document.getElementById('noti-icon');
+    
+            // 1. สร้าง Audio Object และเล่นเสียง
+            const audio = new Audio('yamete kudasai sound.mp3');
+            audio.play();
+
+            // 2. เปลี่ยนกระดิ่งเป็น GIF
+            // ปรับขนาดให้พอดีกับปุ่ม (45px)
+            icon.innerHTML = `<img src="cat yamete.gif" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">`;
+
+            // 3. เมื่อเสียงจบ ให้กลับเป็นกระดิ่ง 🔔 เหมือนเดิม
+            audio.onended = function() {
+                icon.innerHTML = "🔔";
+            };
         }
     </script>
 </body>
