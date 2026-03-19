@@ -235,21 +235,21 @@
                 // ฟังก์ชันล้างเครื่องหมายคำพูดและช่องว่าง
                 const clean = (val) => val ? val.replace(/^"|"$/g, '').trim() : '';
 
-                // ดึงข้อมูลตามคอลัมน์ที่คุณระบุ
+                // ดึงข้อมูลตามตำแหน่งที่คุณระบุ
                 const customer = clean(col[6]);  // คอลัมน์ G (Index 6)
-                const status = clean(col[12]);  // คอลัมน์ M (Index 12)
-                const qNumber = (i - 5);        // ลำดับคิว (คำนวณจากบรรทัด)
+                const qty = clean(col[7]);       // คอลัมน์ H (Index 7) ** แก้ไขตรงนี้ **
+                const status = clean(col[12]);   // คอลัมน์ M (Index 12)
 
                 // ถ้ามีชื่อลูกค้า ให้แสดงผล
                 if (customer && customer !== "" && count < 8) {
-                    let sStyle = 'background: #f0f0f0; color: #888;'; // สีเทา (Pending)
+                    let sStyle = 'background: #f0f0f0; color: #888;'; 
                     const lowStatus = status.toLowerCase();
                     
-                    // กำหนดสีตามสถานะ (ปรับข้อความภาษาไทย/อังกฤษได้ที่นี่)
+                    // จัดการสี Status
                     if (lowStatus.includes('สำเร็จ') || lowStatus.includes('เสร็จ') || lowStatus.includes('comp')) {
-                        sStyle = 'background: #e7f9ee; color: #27ae60;'; // สีเขียว
+                        sStyle = 'background: #e7f9ee; color: #27ae60;';
                     } else if (lowStatus.includes('กำลัง') || lowStatus.includes('รอ') || lowStatus.includes('proc') || lowStatus.includes('draft')) {
-                        sStyle = 'background: #fff5e6; color: #f39c12;'; // สีส้ม
+                        sStyle = 'background: #fff5e6; color: #f39c12;';
                     }
 
                     container.innerHTML += `
@@ -257,7 +257,7 @@
                             <img src="ตัวอย่าง 1.jpg" class="list-thumb" onerror="this.src='https://via.placeholder.com/50?text=Job'">
                             <div class="list-info">
                                 <p>${customer}</p>
-                                <p>Queue No: ${qNumber}</p>
+                                <p>Qty: ${qty || '-'}</p> 
                             </div>
                             <span class="badge-status" style="${sStyle}">${status || 'Pending'}</span>
                         </div>
@@ -266,9 +266,8 @@
                 }
             }
 
-            // ถ้าวนลูปจนจบแล้วไม่เจอชื่อลูกค้าเลย
             if (count === 0) {
-                container.innerHTML = '<p style="text-align:center; font-size:12px; opacity:0.5; padding:20px;">ไม่พบรายชื่อลูกค้าในแถวที่ 7 คอลัมน์ G ♡</p>';
+                container.innerHTML = '<p style="text-align:center; font-size:12px; opacity:0.5; padding:20px;">ไม่พบรายชื่อลูกค้าในขณะนี้ ♡</p>';
             }
 
         } catch (error) {
@@ -277,7 +276,7 @@
         }
     }
 
-    // ฟังก์ชันเล่นเสียงและเปลี่ยนไอคอน (คงเดิม)
+    // ฟังก์ชันเล่นเสียงและตกแต่งพื้นหลังคงเดิม
     function playYamete() {
         const icon = document.getElementById('noti-icon');
         const audio = new Audio('yamete kudasai sound.mp3');
@@ -286,7 +285,6 @@
         audio.onended = () => { icon.innerHTML = "🔔"; };
     }
 
-    // ตกแต่งพื้นหลัง (คงเดิม)
     const bgContainer = document.getElementById('bg-chiikawa-container');
     for (let i = 0; i < 8; i++) {
         const img = document.createElement('img');
