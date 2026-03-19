@@ -1,16 +1,322 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>กลุ่มงานป้าย - ChiiSAnA ♡ 花</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-pastel: #fdf6ff;
+            --main-pink: #ffdae9;
+            --dark-accent: #332d2d;
+            --glass-white: rgba(255, 255, 255, 0.7);
+            --text-gray: #5d5151;
+            --accent-pink: #ff85b3;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Prompt', sans-serif; }
+
+        body {
+            /* พื้นหลังไล่เฉดชมพู-ม่วงพาสเทลเหมือนหน้าหลัก */
+            background: linear-gradient(180deg, #fff5f8 0%, #f4eaff 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding-bottom: 110px; /* เว้นที่ให้ Bottom Nav */
+            color: var(--text-gray);
+            position: relative;
+        }
+
+        .container { width: 100%; max-width: 500px; padding: 20px; }
+
+        /* Header Glassmorphism */
+        .header-section {
+            background: var(--glass-white);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 30px 15px;
+            text-align: center;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px rgba(255, 182, 193, 0.2);
+        }
+
+        .header-section h2 { color: var(--accent-pink); font-size: 24px; margin-bottom: 8px; }
+        .header-section p { font-size: 13px; opacity: 0.8; }
+
+        /* Grid Layout (2 คอลัมน์) */
+        .labels-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        /* การ์ดแสดงผล */
+        .portfolio-card {
+            background: var(--glass-white);
+            backdrop-filter: blur(10px);
+            border-radius: 22px;
+            padding: 12px;
+            text-decoration: none;
+            color: var(--dark-accent);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 12px 25px rgba(255, 182, 193, 0.4);
+        }
+
+        .portfolio-card img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            border-radius: 18px;
+            margin-bottom: 12px;
+        }
+
+        .portfolio-card span {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            padding: 0 4px;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Badge สไตล์มินิมอล */
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            padding: 0 2px;
+        }
+
+        .badge {
+            font-size: 9px;
+            padding: 2px 7px;
+            border-radius: 8px;
+            background: white;
+            color: var(--accent-pink);
+            border: 1px solid #ffeef2;
+            white-space: nowrap;
+        }
+
+        /* Bottom Nav สีดำ */
+        .bottom-nav {
+            position: fixed; 
+            bottom: 20px;
+            width: 92%; 
+            max-width: 420px;
+            background: var(--dark-accent);
+            display: flex; 
+            justify-content: space-around;
+            padding: 12px 5px; 
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            z-index: 1000;
+        }
+
+        .nav-item { 
+            text-decoration: none; 
+            color: white; 
+            font-size: 10px; 
+            text-align: center; 
+            opacity: 0.6; 
+            transition: 0.3s; 
+        }
+
+        .nav-item.active { opacity: 1; color: var(--main-pink); }
+        .nav-item i { font-size: 18px; display: block; margin-bottom: 3px; color: var(--main-pink); }
+
+        /* --- สไตล์สำหรับรูปตัวห้อย Chiikawa --- */
+        .floating-sticker {
+            position: fixed;
+            bottom: 90px;    /* ลอยเหนือเมนู Bottom Nav */
+            right: 20px;     /* มุมขวาล่าง */
+            width: 80px;     /* ขนาดรูป */
+            height: auto;
+            z-index: 999;
+            pointer-events: none; /* เพื่อไม่ให้บังการกดลิงก์ด้านหลัง */
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+        }
+
+    </style>
+</head>
+<body>
+
+<img src="chiikawa 1.gif" alt="Chiikawa" class="floating-sticker">
+
 <div class="container">
-    <h2 class="section-title"><img src="icon-1.png"> กลุ่มที่ดึงเมลเอง ♡</h2>
-    
-    <div class="service-grid">
-        <div class="service-card">
-            <img src="group-icon.png" style="width:60px;">
-            <div class="service-text">กลุ่มงานป้าย A</div>
-        </div>
-        <div class="service-card">
-            <img src="group-icon.png" style="width:60px;">
-            <div class="service-text">กลุ่มงานป้าย B</div>
-        </div>
+    <div class="header-section">
+        <h2>📁 กลุ่มงานป้ายอื่นๆ ♡</h2>
+        <p>รวม 36 กลุ่มงานพรีเมียมให้เลือกสรรค่า ૮˃ ꒳ ˂ა</p>
     </div>
 
-    <a href="index.html" class="btn-pastel">กลับหน้าหลัก</a>
+    <div class="labels-grid">
+        <a href="https://drive.google.com/drive/folders/15KyBKrndGn770bvpvRLSC-6HXGse4lNo" target="_blank" class="portfolio-card">
+            <img src="Baby heading.jpg"><span>Baby heading</span>
+            <div class="badges"><div class="badge">⭐ ยอดฮิต</div><div class="badge">📝 สอน</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1p6glllZ-mVtNFLdFlEyVS5R4aXw_D8cl" target="_blank" class="portfolio-card">
+            <img src="Locker ตู้เก็บของ.jpg"><span>Locker ตู้เก็บของ</span>
+            <div class="badges"><div class="badge">📁 รวม</div><div class="badge">✅ อัพครบ</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1EEx9iIpJFX-UTKKku_f_6VIhLGVZ6zDf" target="_blank" class="portfolio-card">
+            <img src="のび太 โนบิตะ.jpg"><span>のび太 โนบิตะ</span>
+            <div class="badges"><div class="badge">🤏 แต่งง่าย</div><div class="badge">⭐ ยอดฮิต</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1D5bpH0UzxePfMuahehVpR3yN2Vfml7Eq" target="_blank" class="portfolio-card">
+            <img src="Choux bloom.jpg"><span>Choux bloom</span>
+            <div class="badges"><div class="badge">🆕 บล็อกคุณนิว</div><div class="badge">✅ อัพครบ</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1-E90fTGxxEnvAhkOH6_6JEKeRGzxj87z" target="_blank" class="portfolio-card">
+            <img src="Salee gaming.jpg"><span>Salee gaming</span>
+            <div class="badges"><div class="badge">👾 ADS</div><div class="badge">🎨 เอฟเฟค</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1D5bpH0UzxePfMuahehVpR3yN2Vfml7Eq" target="_blank" class="portfolio-card">
+            <img src="White rose Box.jpg"><span>White rose Box</span>
+            <div class="badges"><div class="badge">💮 แนวเฮด</div><div class="badge">💪 งานเยอะ</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1kfcugVrAJepP34WpeR1YdJLWYS7BGWC0" target="_blank" class="portfolio-card">
+            <img src="Mochi cookie group.jpg"><span>Mochi cookie</span>
+            <div class="badges"><div class="badge">🆕 นิว</div><div class="badge">🧸 ของตกแต่ง</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1Mae6ZQte9ueOIjEyQBrtacd0nWOOP4wK" target="_blank" class="portfolio-card">
+            <img src="Katoi group.jpg"><span>Katoi group</span>
+            <div class="badges"><div class="badge">📝 สอน</div><div class="badge">✅ อัพครบ</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/13PBWF5YAvjk2LpOxWXOH8b4XmwzZSAYe" target="_blank" class="portfolio-card">
+            <img src="Game dog.jpg"><span>Game dog</span>
+            <div class="badges"><div class="badge">🎮 เกม</div><div class="badge">⭐ ยอดฮิต</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1k_gobew-Rxmvk_KG7c_laNWUWegrp4_L" target="_blank" class="portfolio-card">
+            <img src="Nocturne Circle.jpg"><span>Nocturne Circle</span>
+            <div class="badges"><div class="badge">🤏 แต่งง่าย</div><div class="badge">⏩️ มีแพลนอัพ</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1PSzgDuAE5urwtd9FtK-A6f9S64xWAz-h" target="_blank" class="portfolio-card">
+            <img src="Muffin gimeow.jpg"><span>Muffin gimeow</span>
+            <div class="badges"><div class="badge">📝 สอน</div><div class="badge">✅ อัพครบ</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1nselQfmYt8Kp6KWXEjl8EHEgSpLOJIXA" target="_blank" class="portfolio-card">
+            <img src="Little Mabel.jpg"><span>Little Mabel</span>
+            <div class="badges"><div class="badge">💪 งานเยอะ</div><div class="badge">⏩️ แพลนอัพ</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1mmo68fjY_XuSSmNbaap8HHLPavcX9X2w" target="_blank" class="portfolio-card">
+            <img src="Baker's secret.jpg"><span>Baker's secret</span>
+            <div class="badges"><div class="badge">⏩️ มีแพลนอัพ</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1WLDP3XrvKSyes23R8PDk9Sr6lAt2vd2D" target="_blank" class="portfolio-card">
+            <img src="Pinkpersona box.jpg"><span>Pinkpersona box</span>
+            <div class="badges"><div class="badge">✅ อัพครบ</div><div class="badge">⏩️ แพลนอัพ</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1-3GbKSVoXrLjO2OFt_Kx_kjAXPkUytpl" target="_blank" class="portfolio-card">
+            <img src="Ohhhhh~ LunLa Box.jpg"><span>Ohhhhh~ LunLa</span>
+            <div class="badges"><div class="badge">💮 แนวเฮด</div><div class="badge">💪 งานเยอะ</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/101C0F-rq5H6qvNWbPi9DtdlnTLz9PAdp" target="_blank" class="portfolio-card">
+            <img src="Sorrel box.jpg"><span>Sorrel box</span>
+            <div class="badges"><div class="badge">✅ อัพครบ</div><div class="badge">👾 ADS</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1jzDtR1YSkps8qb3dt1SkVqVO51BU4TPY" target="_blank" class="portfolio-card">
+            <img src="Sovier rainy.jpg"><span>Sovier rainy</span>
+            <div class="badges"><div class="badge">💮 แนวเฮด</div><div class="badge">💪 งานเยอะ</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/13PIIlxos9e5CedxI6SeTICm73ecIUHaN" target="_blank" class="portfolio-card">
+            <img src="Memphis game box.jpg"><span>Memphis game box</span>
+            <div class="badges"><div class="badge">✅ อัพครบ</div><div class="badge">🤏 แต่งง่าย</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1PlavwgBcf9R27tprM2TQEL8TDwZ5xH3t" target="_blank" class="portfolio-card">
+            <img src="Sugar candy box.jpg"><span>Sugar candy box</span>
+            <div class="badges"><div class="badge">📁 รวม</div><div class="badge">✅ อัพครบ</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1gCrMIpwCTShCzhynqmdLmcO_scCnR05y" target="_blank" class="portfolio-card">
+            <img src="KookkookKai Ep.1.jpg"><span>KookkookKai Ep.1</span>
+            <div class="badges"><div class="badge">💮 แนวเฮด</div><div class="badge">✅ อัพครบ</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1mzmGBfb6gXqKlaeYj2ZJ9515RziUilnf" target="_blank" class="portfolio-card">
+            <img src="Cracker blam night box.jpg"><span>Cracker blam night</span>
+            <div class="badges"><div class="badge">🌸 น่ารัก</div><div class="badge">✅ อัพครบ</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1QPN3lQyYF-UmksAb-vfG3vg_RGFUKIWM" target="_blank" class="portfolio-card">
+            <img src="Minoki group.jpg"><span>Minoki group</span>
+            <div class="badges"><div class="badge">📝 สอน</div><div class="badge">✅ อัพครบ</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/10kHGkci9GSWygIj08t63mfz6iv5gjX4Q" target="_blank" class="portfolio-card">
+            <img src="Retroblix box.jpg"><span>Retroblix box</span>
+            <div class="badges"><div class="badge">📝 สอน</div><div class="badge">🤠 เรโทร</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/11DHEzy_hizpvezRTj0zGxoB5Cwm_Q_3R" target="_blank" class="portfolio-card">
+            <img src="Butter cup.jpg"><span>Butter cup</span>
+            <div class="badges"><div class="badge">📝 สอน</div><div class="badge">💮 แนวเฮด</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/101z3Zz9nn7LPPQZlvqheCPwJnMC_LjJ6" target="_blank" class="portfolio-card">
+            <img src="Dark pink rose.jpg"><span>Dark pink rose</span>
+            <div class="badges"><div class="badge">📝 สอน</div><div class="badge">✅ อัพครบ</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1-74SxJ6YsQbD7E_gpgYe3VKWzRYUpGvN" target="_blank" class="portfolio-card">
+            <img src="Sofia Princess.jpg"><span>Sofia Princess</span>
+            <div class="badges"><div class="badge">📝 สอน</div><div class="badge">✅ อัพครบ</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/11WjMNCvbaVU7C5Tz-zm4LzLRW3GcGaIe" target="_blank" class="portfolio-card">
+            <img src="Salee teaching.jpg"><span>Salee teaching</span>
+            <div class="badges"><div class="badge">📝 สอน</div><div class="badge">✅ อัพครบ</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1O0CmhEf3mtw0mrezpT-m_1enG492FeHM" target="_blank" class="portfolio-card">
+            <img src="Whan course.jpg"><span>Whan course</span>
+            <div class="badges"><div class="badge">📝 สอน</div><div class="badge">🧩 ชิ้นส่วน</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1Lw7O5YLnocbu9i8DLVI9VSgJgHfsZ_bQ" target="_blank" class="portfolio-card">
+            <img src="เจ้าก้อนกลม.jpg"><span>เจ้าก้อนกลม</span>
+            <div class="badges"><div class="badge">🧸 ของตกแต่ง</div><div class="badge">✅ อัพครบ</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/11dqsZMVEOpZqMwmd2ww2dElHmmerJzGf" target="_blank" class="portfolio-card">
+            <img src="White rosebud.jpg"><span>White rosebud</span>
+            <div class="badges"><div class="badge">🧸 ของตกแต่ง</div><div class="badge">✅ อัพครบ</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/12jkpFv3uNnxTqKHOv1ZT8x_B-UUFzswn" target="_blank" class="portfolio-card">
+            <img src="Creamy gaming.jpg"><span>Creamy gaming</span>
+            <div class="badges"><div class="badge">🧸 ของตกแต่ง</div><div class="badge">⏩️ แพลนอัพ</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1P0WsOd4NMDIIUCpI7Eh-7S7BT8tNEbIy" target="_blank" class="portfolio-card">
+            <img src="Filter cream.jpg"><span>Filter cream</span>
+            <div class="badges"><div class="badge">🧸 ของตกแต่ง</div><div class="badge">🎨 เอฟเฟค</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1NyJeocKtom-PQomVvGpy58g6IKzdQge1" target="_blank" class="portfolio-card">
+            <img src="Sweet whink.jpg"><span>Sweet whink</span>
+            <div class="badges"><div class="badge">👫 ตูน</div><div class="badge">⏩️ แพลนอัพ</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/10qx4CLJ03Gev7QTH3iqVT7DvAbeXLxVn" target="_blank" class="portfolio-card">
+            <img src="Magic Painter.jpg"><span>Magic Painter</span>
+            <div class="badges"><div class="badge">🎨 ศิลปะ</div><div class="badge">✅ อัพครบ</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1ye23VwvxFEANgXGN7NARQN4Qm1sd77xR" target="_blank" class="portfolio-card">
+            <img src="Tea party.jpg"><span>Tea party</span>
+            <div class="badges"><div class="badge">👫 ตูน</div><div class="badge">⚠️ ปรับปรุง</div></div>
+        </a>
+        <a href="https://drive.google.com/drive/folders/1sL4z-1cojXlktU6YC7vOHH-p3d_0vEK4" target="_blank" class="portfolio-card">
+            <img src="Box store JDG.jpg"><span>Box store JDG</span>
+            <div class="badges"><div class="badge">🎮 เกม</div><div class="badge">⚠️ ปรับปรุง</div></div>
+        </a>
+    </div>
 </div>
+
+<nav class="bottom-nav">
+    <a href="index.html" class="nav-item"><i>♥</i>Home ♡</a>
+    <a href="labels.html" class="nav-item active"><i>♥</i>Labels ♡</a>
+    <a href="#" class="nav-item"><i>♥</i>Block ♡</a>
+    <a href="#" class="nav-item"><i>♥</i>Deco ♡</a>
+    <a href="https://facebook.com/hani.37341/" class="nav-item"><i>♥</i>Contact ♡</a>
+</nav>
+
+</body>
+</html>
