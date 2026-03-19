@@ -38,7 +38,7 @@
             z-index: 10;
         }
 
-        /* --- UI ส่วนหัวแบบ App --- */
+        /* --- UI ส่วนหัว --- */
         .top-header {
             display: flex;
             justify-content: space-between;
@@ -62,9 +62,13 @@
             border: 1px solid white;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             font-size: 20px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: 0.2s;
         }
+        .noti-btn:active { transform: scale(0.9); }
 
-        /* --- Search Bar สไตล์พาสเทล --- */
+        /* --- Search Bar --- */
         .search-container {
             background: var(--glass);
             border-radius: 20px;
@@ -77,9 +81,8 @@
             box-shadow: 0 8px 20px rgba(255, 182, 193, 0.1);
         }
         .search-container input { border:none; background:none; outline:none; width:100%; font-size:14px; color: var(--text-main); }
-        .search-container input::placeholder { color: #b7a9a9; }
 
-        /* --- Promotion Card ปรับสีให้เข้ากับธีมหลัก --- */
+        /* --- Promotion Card --- */
         .main-promo-card {
             background: linear-gradient(135deg, #ffdae9 0%, #f4eaff 100%);
             border-radius: 30px;
@@ -93,7 +96,6 @@
         }
         .promo-content { position: relative; z-index: 2; }
         .promo-content h2 { font-size: 26px; color: var(--accent-pink); margin-bottom: 5px; }
-        .promo-content p { font-size: 14px; opacity: 0.8; }
         .promo-btn {
             margin-top: 15px;
             background: white;
@@ -147,8 +149,8 @@
         .list-item {
             background: var(--glass);
             backdrop-filter: blur(5px);
-            margin-bottom: 15px;
-            padding: 15px;
+            margin-bottom: 12px;
+            padding: 12px 15px;
             border-radius: 25px;
             display: flex;
             align-items: center;
@@ -156,25 +158,26 @@
             border: 1px solid rgba(255,255,255,0.6);
             transition: 0.3s;
         }
-        .list-item:hover { transform: translateY(-3px); background: rgba(255,255,255,0.9); }
-        .list-thumb { width: 55px; height: 55px; border-radius: 15px; object-fit: cover; border: 2px solid white; }
-        .list-info p:first-child { font-size: 15px; font-weight: 500; }
+        .list-thumb { width: 50px; height: 50px; border-radius: 12px; object-fit: cover; border: 2px solid white; }
+        .list-info p:first-child { font-size: 14px; font-weight: 500; }
         .list-info p:last-child { font-size: 11px; opacity: 0.5; }
         
         .badge-status {
             margin-left: auto;
-            font-size: 11px;
-            padding: 6px 12px;
+            font-size: 10px;
+            padding: 5px 10px;
             border-radius: 50px;
             font-weight: 500;
         }
 
-        /* --- Bottom Nav & BG (เหมือนชุดแรก) --- */
+        /* --- Bottom Nav --- */
         .bottom-nav { position: fixed; bottom: 20px; width: 90%; max-width: 420px; background: var(--dark-menu); display: flex; justify-content: space-around; padding: 12px 5px; border-radius: 20px; z-index: 1000; left: 50%; transform: translateX(-50%); }
         .nav-item { text-decoration: none; color: white; font-size: 10px; text-align: center; opacity: 0.7; transition: 0.3s; }
         .nav-item.active { opacity: 1; color: var(--main-pink); }
         .nav-item i { font-size: 18px; display: block; margin-bottom: 3px; color: var(--main-pink); font-style: normal; }
-        .bg-chiikawa { position: fixed; pointer-events: none; z-index: 1; opacity: 0.25; animation: floatRandom linear infinite; }
+        
+        /* --- BG Animation --- */
+        .bg-chiikawa { position: fixed; pointer-events: none; z-index: 1; opacity: 0.2; }
     </style>
 </head>
 <body>
@@ -187,9 +190,9 @@
                 <p>ยินดีต้อนรับ ♡</p>
                 <p>ChiiSAnA Customer</p>
             </div>
-                <div class="noti-btn" id="yamete-btn" onclick="playYamete()" style="cursor: pointer; overflow: hidden;">
+            <div class="noti-btn" id="yamete-btn" onclick="playYamete()">
                 <span id="noti-icon">🔔</span>
-                </div>
+            </div>
         </div>
 
         <div class="search-container">
@@ -208,31 +211,17 @@
 
         <div class="stats-grid">
             <div class="stat-item"><b>30+</b>กลุ่มงาน</div>
-            <div class="stat-item"><b>150+</b>รีวิวลูกค้า</div>
-            <div class="stat-item"><b>Fast</b>ส่งงานไว</div>
+            <div class="stat-item"><b>230+</b>รีวิวลูกค้า</div>
+            <div class="stat-item"><b>Fast</b>ส่งตามกำหนด</div>
         </div>
 
         <div class="section-header">
-            <p>รายการล่าสุด</p>
+            <p>รายการล่าสุด (Auto Update)</p>
             <a href="#">ดูทั้งหมด</a>
         </div>
 
-        <div class="list-item">
-            <img src="ตัวอย่าง 1.jpg" class="list-thumb">
-            <div class="list-info">
-                <p>ป้ายกลุ่มงาน A</p>
-                <p>Order ID: CH-8892</p>
-            </div>
-            <span class="badge-status" style="background: #e7f9ee; color: #27ae60;">สำเร็จแล้ว</span>
-        </div>
-
-        <div class="list-item">
-            <img src="ตัวอย่าง 2.png" class="list-thumb">
-            <div class="list-info">
-                <p>เช่าไอดี ROV</p>
-                <p>Order ID: RT-1024</p>
-            </div>
-            <span class="badge-status" style="background: #fff5e6; color: #f39c12;">กำลังทำ..</span>
+        <div id="sheet-data-container">
+            <p style="text-align: center; font-size: 12px; opacity: 0.5; padding: 20px;">กำลังโหลดคิวงาน... (˶˃ᆺ˂˶)</p>
         </div>
     </div>
 
@@ -245,46 +234,85 @@
     </nav>
 
     <script>
-        const numberOfBackgroundChiikawas = 12;
+        /* 1. ระบบดึงข้อมูลจาก Google Sheet */
+        const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTJxmzz6K0iG0J2FgxQQg9TAkRzyOm6RLEtfc9AIdT36GuoF5Y9jescVZr6fYGNOe3H8AB_EmTp8lD4/pub?output=csv';
+
+        async function updateRecentWork() {
+            try {
+                const response = await fetch(SHEET_URL);
+                const csvText = await response.text();
+                const rows = csvText.split('\n').map(row => row.split(',')).slice(1);
+                
+                const container = document.getElementById('sheet-data-container');
+                container.innerHTML = ''; 
+
+                let count = 0;
+                rows.forEach(col => {
+                    if (col[1] && count < 5) {
+                        const orderId = col[0] ? col[0].trim() : '-';
+                        const jobName = col[1] ? col[1].trim() : '-';
+                        const status = col[2] ? col[2].trim() : 'รอคิว';
+                        
+                        let statusColor = 'background: #f0f0f0; color: #888;';
+                        if (status.includes('เสร็จ') || status.includes('สำเร็จ')) {
+                            statusColor = 'background: #e7f9ee; color: #27ae60;';
+                        } else if (status.includes('กำลัง') || status.includes('แก้')) {
+                            statusColor = 'background: #fff5e6; color: #f39c12;';
+                        }
+
+                        const itemHTML = `
+                            <div class="list-item">
+                                <img src="ตัวอย่าง 1.jpg" class="list-thumb" onerror="this.src='https://via.placeholder.com/50?text=Chii'">
+                                <div class="list-info">
+                                    <p>${jobName}</p>
+                                    <p>No: ${orderId}</p>
+                                </div>
+                                <span class="badge-status" style="${statusColor}">${status}</span>
+                            </div>
+                        `;
+                        container.insertAdjacentHTML('beforeend', itemHTML);
+                        count++;
+                    }
+                });
+            } catch (e) {
+                document.getElementById('sheet-data-container').innerHTML = '<p style="text-align:center; font-size:12px;">โหลดข้อมูลไม่สำเร็จ</p>';
+            }
+        }
+
+        /* 2. ระบบปุ่ม Yamete */
+        function playYamete() {
+            const icon = document.getElementById('noti-icon');
+            const audio = new Audio('yamete kudasai sound.mp3');
+            audio.play();
+            icon.innerHTML = `<img src="cat yamete.gif" style="width: 35px; height: 35px; object-fit: cover; border-radius: 8px;">`;
+            audio.onended = () => { icon.innerHTML = "🔔"; };
+        }
+
+        /* 3. พื้นหลัง Chiikawa ลอยไปมา */
         const bgContainer = document.getElementById('bg-chiikawa-container');
-        for (let i = 0; i < numberOfBackgroundChiikawas; i++) {
+        for (let i = 0; i < 12; i++) {
             const img = document.createElement('img');
             img.src = 'chiikawa 3.gif';
             img.classList.add('bg-chiikawa');
-            const size = Math.random() * (90 - 45) + 45; 
+            const size = Math.random() * 40 + 40; 
             img.style.width = `${size}px`;
             img.style.left = `${Math.random() * 100}vw`;
             img.style.top = `${Math.random() * 100}vh`;
-            const duration = Math.random() * (30 - 15) + 15;
-            img.style.animationDuration = `${duration}s`;
+            
             const animName = `float-${i}`;
-            const styleSheet = document.createElement("style");
-            styleSheet.innerText = `@keyframes ${animName} {
-                0% { transform: translate(0, 0) rotate(0deg); }
-                50% { transform: translate(50px, 50px) rotate(30deg); }
-                100% { transform: translate(0, 0) rotate(0deg); }
+            const duration = Math.random() * 15 + 15;
+            const style = document.createElement("style");
+            style.innerText = `@keyframes ${animName} {
+                0%, 100% { transform: translate(0, 0) rotate(0deg); }
+                50% { transform: translate(${Math.random()*60}px, ${Math.random()*60}px) rotate(20deg); }
             }`;
-            document.head.appendChild(styleSheet);
-            img.style.animationName = animName;
+            document.head.appendChild(style);
+            img.style.animation = `${animName} ${duration}s linear infinite`;
             bgContainer.appendChild(img);
         }
-            function playYamete() {
-            const btn = document.getElementById('yamete-btn');
-            const icon = document.getElementById('noti-icon');
-    
-            // 1. สร้าง Audio Object และเล่นเสียง
-            const audio = new Audio('yamete kudasai sound.mp3');
-            audio.play();
 
-            // 2. เปลี่ยนกระดิ่งเป็น GIF
-            // ปรับขนาดให้พอดีกับปุ่ม (45px)
-            icon.innerHTML = `<img src="cat yamete.gif" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">`;
-
-            // 3. เมื่อเสียงจบ ให้กลับเป็นกระดิ่ง 🔔 เหมือนเดิม
-            audio.onended = function() {
-                icon.innerHTML = "🔔";
-            };
-        }
+        // เริ่มโหลดข้อมูล
+        updateRecentWork();
     </script>
 </body>
 </html>
