@@ -205,84 +205,95 @@
         <a href="#" class="nav-item"><i>♥</i>Contact</a>
     </nav>
 
-    <script>
-        // ใช้ลิงก์ CSV ที่ได้จากการ Publish to web
-        const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTJxmzz6K0iG0J2FgxQQg9TAkRzyOm6RLEtfc9AIdT36GuoF5Y9jescVZr6fYGNOe3H8AB_EmTp8lD4/pub?output=csv';
+<script>
+    // 1. ตรวจสอบว่า URL นี้เมื่อเปิดใน Browser ต้องดาวน์โหลดไฟล์ .csv ทันที
+    const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTJxmzz6K0iG0J2FgxQQg9TAkRzyOm6RLEtfc9AIdT36GuoF5Y9jescVZr6fYGNOe3H8AB_EmTp8lD4/pub?output=csv';
 
-        async function updateRecentWork() {
-            const container = document.getElementById('sheet-data-container');
-            try {
-                // เพิ่ม timestamp เพื่อป้องกัน cache
-                const response = await fetch(`${SHEET_CSV_URL}&t=${new Date().getTime()}`);
-                if (!response.ok) throw new Error('Network response was not ok');
-                
-                const data = await response.text();
-                const rows = data.split('\n').map(row => row.split(','));
+    async function updateRecentWork() {
+        const container = document.getElementById('sheet-data-container');
+        try {
+            const response = await fetch(`${SHEET_CSV_URL}&t=${new Date().getTime()}`);
+            if (!response.ok) throw new Error('Network error');
+            
+            const rawData = await response.text();
+            
+            // ฟังก์ชันช่วยแกะ CSV ที่มีเครื่องหมายคำพูด (") ครอบ
+            const rows = rawData.split(/\r?\n/).map(row => {
+                // Regex นี้จะช่วยแยกคอมม่าที่อยู่ข้างนอกเครื่องหมายคำพูดเท่านั้น
+                return row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+            });
 
-                container.innerHTML = ''; 
-                let count = 0;
+            container.innerHTML = ''; 
+            let count = 0;
 
-                // วนลูปเริ่มจากแถวที่ 2 (index 1) เพื่อข้ามหัวตาราง
-                for (let i = 1; i < rows.length; i++) {
-                    const col = rows[i];
-                    if (!col || col.length < 9) continue;
+            // วนลูปเริ่มแถวที่ 1 (ข้ามหัวตาราง)
+            for (let i = 1; i < rows.length; i++) {
+                const col = rows[i];
+                if (!col || col.length < 5) continue; // ถ้าแถวว่างให้ข้าม
 
-                    // กำหนดคอลัมน์ (A=0, E=4, I=8)
-                    const qNumber = col[0]?.replace(/"/g, '').trim();
-                    const customer = col[4]?.replace(/"/g, '').trim();
-                    const status = col[8]?.replace(/"/g, '').trim();
+                // ล้างเครื่องหมาย " ออกจากข้อมูล
+                const clean = (val) => val ? val.replace(/^"|"$/g, '').trim() : '';
 
-                    // เช็คว่ามีข้อมูลสำคัญครบไหม
-                    if (qNumber && customer && count < 8) {
-                        let sStyle = 'background: #f0f0f0; color: #888;';
-                        const lowStatus = status.toLowerCase();
-                        
-                        if (lowStatus.includes('comp')) sStyle = 'background: #e7f9ee; color: #27ae60;';
-                        else if (lowStatus.includes('proc') || lowStatus.includes('draft')) sStyle = 'background: #fff5e6; color: #f39c12;';
+                const qNumber = clean(col[0]); // คอลัมน์ A
+                const customer = clean(col[4]); // คอลัมน์ E
+                const status = clean(col[8]);   // คอลัมน์ I
 
-                        container.innerHTML += `
-                            <div class="list-item">
-                                <img src="ตัวอย่าง 1.jpg" class="list-thumb" onerror="this.src='https://via.placeholder.com/50?text=Job'">
-                                <div class="list-info">
-                                    <p>${customer}</p>
-                                    <p>Queue No: ${qNumber}</p>
-                                </div>
-                                <span class="badge-status" style="${sStyle}">${status || 'Pending'}</span>
-                            </div>
-                        `;
-                        count++;
+                // เงื่อนไข: ต้องมีเลขคิว และ มีชื่อลูกค้า
+                if (qNumber && customer && count < 8) {
+                    let sStyle = 'background: #f0f0f0; color: #888;';
+                    const lowStatus = status.toLowerCase();
+                    
+                    if (lowStatus.includes('สำเร็จ') || lowStatus.includes('comp')) {
+                        sStyle = 'background: #e7f9ee; color: #27ae60;';
+                    } else if (lowStatus.includes('รอ') || lowStatus.includes('proc') || lowStatus.includes('draft')) {
+                        sStyle = 'background: #fff5e6; color: #f39c12;';
                     }
+
+                    container.innerHTML += `
+                        <div class="list-item">
+                            <img src="ตัวอย่าง 1.jpg" class="list-thumb" onerror="this.src='https://via.placeholder.com/50?text=Job'">
+                            <div class="list-info">
+                                <p>${customer}</p>
+                                <p>Queue No: ${qNumber}</p>
+                            </div>
+                            <span class="badge-status" style="${sStyle}">${status || 'Pending'}</span>
+                        </div>
+                    `;
+                    count++;
                 }
-
-                if (count === 0) container.innerHTML = '<p style="text-align:center; font-size:12px; opacity:0.5; padding:20px;">ไม่พบรายการคิวงานในขณะนี้ ♡</p>';
-
-            } catch (error) {
-                console.error('Fetch error:', error);
-                container.innerHTML = '<p style="text-align:center; font-size:12px; color:red; padding:20px;">ขออภัย ดึงข้อมูลไม่สำเร็จ กรุณาตรวจสอบการตั้งค่า Publish ของชีทนะคะ</p>';
             }
-        }
 
-        function playYamete() {
-            const icon = document.getElementById('noti-icon');
-            const audio = new Audio('yamete kudasai sound.mp3');
-            audio.play().catch(() => {});
-            icon.innerHTML = `<img src="cat yamete.gif" style="width:35px; border-radius:8px;">`;
-            audio.onended = () => { icon.innerHTML = "🔔"; };
-        }
+            if (count === 0) {
+                container.innerHTML = '<p style="text-align:center; font-size:12px; opacity:0.5; padding:20px;">ไม่พบรายการคิวงาน (ตรวจสอบเลขคิวในคอลัมน์ A และชื่อในคอลัมน์ E)</p>';
+            }
 
-        // พื้นหลังดุ๊กดิ๊ก
-        const bgContainer = document.getElementById('bg-chiikawa-container');
-        for (let i = 0; i < 8; i++) {
-            const img = document.createElement('img');
-            img.src = 'chiikawa 3.gif';
-            img.className = 'bg-chiikawa';
-            img.style.width = '50px';
-            img.style.left = Math.random() * 100 + 'vw';
-            img.style.top = Math.random() * 100 + 'vh';
-            bgContainer.appendChild(img);
+        } catch (error) {
+            console.error(error);
+            container.innerHTML = '<p style="text-align:center; font-size:12px; color:red; padding:20px;">เชื่อมต่อข้อมูลไม่ได้ (เช็คเน็ตหรือการตั้งค่า Publish)</p>';
         }
+    }
 
-        window.onload = updateRecentWork;
-    </script>
+    // ส่วนอื่นๆ (Yamete, BG) คงเดิม...
+    function playYamete() {
+        const icon = document.getElementById('noti-icon');
+        const audio = new Audio('yamete kudasai sound.mp3');
+        audio.play().catch(() => {});
+        icon.innerHTML = `<img src="cat yamete.gif" style="width:35px; border-radius:8px;">`;
+        audio.onended = () => { icon.innerHTML = "🔔"; };
+    }
+
+    const bgContainer = document.getElementById('bg-chiikawa-container');
+    for (let i = 0; i < 8; i++) {
+        const img = document.createElement('img');
+        img.src = 'chiikawa 3.gif';
+        img.className = 'bg-chiikawa';
+        img.style.width = '50px';
+        img.style.left = Math.random() * 100 + 'vw';
+        img.style.top = Math.random() * 100 + 'vh';
+        bgContainer.appendChild(img);
+    }
+
+    window.onload = updateRecentWork;
+</script>
 </body>
 </html>
