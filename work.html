@@ -1,8 +1,126 @@
+<style>
+    /* --- เพิ่มเติมจาก CSS เดิม --- */
+    .top-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    
+    .search-container {
+        background: var(--glass);
+        border-radius: 15px;
+        padding: 10px 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
+        border: 1px solid rgba(255,255,255,0.5);
+    }
+
+    .main-promo-card {
+        background: linear-gradient(135deg, #e0c3fc 0%, #fbc2eb 100%);
+        border-radius: 30px;
+        padding: 20px;
+        color: white;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 20px;
+        box-shadow: 0 10px 20px rgba(224, 195, 252, 0.4);
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-bottom: 25px;
+    }
+
+    .stat-item {
+        background: var(--glass);
+        padding: 15px 10px;
+        border-radius: 20px;
+        text-align: center;
+        font-size: 12px;
+        border: 1px solid white;
+    }
+
+    .list-item {
+        background: var(--glass);
+        margin-bottom: 12px;
+        padding: 12px;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        border: 1px solid rgba(255,255,255,0.4);
+    }
+
+    .list-thumb {
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        object-fit: cover;
+    }
+
+    .badge-status {
+        margin-left: auto;
+        font-size: 10px;
+        padding: 4px 10px;
+        border-radius: 10px;
+        background: #f0f0f0;
+    }
+</style>
+
 <div class="container">
-    <h2 class="section-title"><img src="icon-1.png"> สั่งป้ายกับเค้า ♡</h2>
-    <div class="profile-card" style="padding: 20px;">
-        <h3 style="color: var(--accent-pink); margin-bottom: 10px;">ขั้นตอนการสั่ง</h3>
-        <p style="font-size: 14px;">1. เลือกแบบที่ชอบ<br>2. ทักแชทแจ้งรายละเอียด<br>3. รอรับความน่ารักได้เลย!</p>
+    <div class="top-header">
+        <div>
+            <p style="font-size: 12px; opacity: 0.6;">Welcome</p>
+            <p style="font-weight: 500;">ChiiSAnA Customer ♡</p>
+        </div>
+        <div style="background: white; padding: 10px; border-radius: 15px;">🔔</div>
     </div>
-    <a href="https://line.me/ti/p/YOUR_ID" class="btn-pastel">ทักไลน์สั่งงาน ♡</a>
+
+    <div class="search-container">
+        <span>🔍</span>
+        <input type="text" placeholder="ค้นหาบริการหรือกลุ่ม..." style="border:none; background:none; outline:none; width:100%; font-size:14px;">
+    </div>
+
+    <div class="main-promo-card">
+        <div style="z-index: 2; position: relative;">
+            <h2 style="font-size: 24px;">Promotion!</h2>
+            <p style="font-size: 14px; opacity: 0.9;">สั่งป้ายวันนี้ ลดทันที 10% ♡</p>
+            <button style="margin-top: 15px; background: white; border: none; padding: 8px 20px; border-radius: 50px; font-size: 12px; color: #ff85b3; font-weight: 600;">Check Now</button>
+        </div>
+        <img src="chiikawa 1.gif" style="position: absolute; right: -10px; bottom: -10px; width: 100px; opacity: 0.8;">
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-item"><b>30+</b><br>Groups</div>
+        <div class="stat-item"><b>150+</b><br>Reviews</div>
+        <div class="stat-item"><b>24h</b><br>Support</div>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+        <p style="font-weight: 500;">รายการล่าสุด</p>
+        <a href="#" style="font-size: 12px; color: var(--accent-pink); text-decoration: none;">ดูทั้งหมด</a>
+    </div>
+
+    <div class="list-item">
+        <img src="ตัวอย่าง 1.jpg" class="list-thumb">
+        <div>
+            <p style="font-size: 14px; font-weight: 500;">ป้ายกลุ่มงาน A</p>
+            <p style="font-size: 11px; opacity: 0.5;">ID: CH-8892</p>
+        </div>
+        <span class="badge-status" style="background: #eaffea; color: #2ecc71;">สำเร็จแล้ว</span>
+    </div>
+
+    <div class="list-item">
+        <img src="ตัวอย่าง 2.png" class="list-thumb">
+        <div>
+            <p style="font-size: 14px; font-weight: 500;">เช่าไอดี ROV</p>
+            <p style="font-size: 11px; opacity: 0.5;">ID: RT-1024</p>
+        </div>
+        <span class="badge-status" style="background: #fff4e5; color: #f39c12;">กำลังดำเนินการ</span>
+    </div>
 </div>
