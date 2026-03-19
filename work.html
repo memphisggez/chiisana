@@ -123,4 +123,39 @@
         </div>
         <span class="badge-status" style="background: #fff4e5; color: #f39c12;">กำลังดำเนินการ</span>
     </div>
+
+    <nav class="bottom-nav">
+    <a href="index.html" class="nav-item active"><i>♥</i>Home ♡</a>
+    <a href="group.html" class="nav-item"><i>♥</i>เค้าดึงเมลเอง ♡</a>
+    <a href="anothergroup.html" class="nav-item"><i>♥</i>กลุ่มอื่นๆ ♡</a>
+    <a href="work.html" class="nav-item"><i>♥</i>สั่งป้าย ♡</a>
+    <a href="contact.html" class="nav-item"><i>♥</i>Contact ♡</a>
+</nav>
+
+<script>
+    // สคริปต์ Chiikawa พื้นหลังเหมือนเดิม
+    const numberOfBackgroundChiikawas = 12;
+    const bgContainer = document.getElementById('bg-chiikawa-container');
+    for (let i = 0; i < numberOfBackgroundChiikawas; i++) {
+        const img = document.createElement('img');
+        img.src = 'chiikawa 3.gif';
+        img.classList.add('bg-chiikawa');
+        const size = Math.random() * (90 - 45) + 45; 
+        img.style.width = `${size}px`;
+        img.style.left = `${Math.random() * 100}vw`;
+        img.style.top = `${Math.random() * 100}vh`;
+        const duration = Math.random() * (30 - 15) + 15;
+        img.style.animationDuration = `${duration}s`;
+        const animName = `float-${i}`;
+        const styleSheet = document.createElement("style");
+        styleSheet.innerText = `@keyframes ${animName} {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(50px, 50px) rotate(30deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }`;
+        document.head.appendChild(styleSheet);
+        img.style.animationName = animName;
+        bgContainer.appendChild(img);
+    }
+</script>
 </div>
