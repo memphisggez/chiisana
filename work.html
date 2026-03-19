@@ -205,48 +205,51 @@
         <a href="#" class="nav-item"><i>♥</i>Contact</a>
     </nav>
 
-<script>
-    // 1. ตรวจสอบว่า URL นี้เมื่อเปิดใน Browser ต้องดาวน์โหลดไฟล์ .csv ทันที
+        <script>
+    // URL สำหรับดึงไฟล์ CSV จาก Google Sheets
     const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTJxmzz6K0iG0J2FgxQQg9TAkRzyOm6RLEtfc9AIdT36GuoF5Y9jescVZr6fYGNOe3H8AB_EmTp8lD4/pub?output=csv';
 
     async function updateRecentWork() {
         const container = document.getElementById('sheet-data-container');
         try {
             const response = await fetch(`${SHEET_CSV_URL}&t=${new Date().getTime()}`);
-            if (!response.ok) throw new Error('Network error');
+            if (!response.ok) throw new Error('Network response was not ok');
             
             const rawData = await response.text();
             
-            // ฟังก์ชันช่วยแกะ CSV ที่มีเครื่องหมายคำพูด (") ครอบ
+            // แยกแถวข้อมูล
             const rows = rawData.split(/\r?\n/).map(row => {
-                // Regex นี้จะช่วยแยกคอมม่าที่อยู่ข้างนอกเครื่องหมายคำพูดเท่านั้น
                 return row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
             });
 
             container.innerHTML = ''; 
             let count = 0;
 
-            // วนลูปเริ่มแถวที่ 1 (ข้ามหัวตาราง)
-            for (let i = 1; i < rows.length; i++) {
+            // เริ่มวนลูปที่แถวที่ 7 (Index คือ 6)
+            for (let i = 6; i < rows.length; i++) {
                 const col = rows[i];
-                if (!col || col.length < 5) continue; // ถ้าแถวว่างให้ข้าม
+                
+                // ตรวจสอบว่ามีคอลัมน์เพียงพอ (อย่างน้อยถึงคอลัมน์ M หรือ Index 12)
+                if (!col || col.length < 13) continue;
 
-                // ล้างเครื่องหมาย " ออกจากข้อมูล
+                // ฟังก์ชันล้างเครื่องหมายคำพูดและช่องว่าง
                 const clean = (val) => val ? val.replace(/^"|"$/g, '').trim() : '';
 
-                const qNumber = clean(col[0]); // คอลัมน์ A
-                const customer = clean(col[4]); // คอลัมน์ E
-                const status = clean(col[8]);   // คอลัมน์ I
+                // ดึงข้อมูลตามคอลัมน์ที่คุณระบุ
+                const customer = clean(col[6]);  // คอลัมน์ G (Index 6)
+                const status = clean(col[12]);  // คอลัมน์ M (Index 12)
+                const qNumber = (i - 5);        // ลำดับคิว (คำนวณจากบรรทัด)
 
-                // เงื่อนไข: ต้องมีเลขคิว และ มีชื่อลูกค้า
-                if (qNumber && customer && count < 8) {
-                    let sStyle = 'background: #f0f0f0; color: #888;';
+                // ถ้ามีชื่อลูกค้า ให้แสดงผล
+                if (customer && customer !== "" && count < 8) {
+                    let sStyle = 'background: #f0f0f0; color: #888;'; // สีเทา (Pending)
                     const lowStatus = status.toLowerCase();
                     
-                    if (lowStatus.includes('สำเร็จ') || lowStatus.includes('comp')) {
-                        sStyle = 'background: #e7f9ee; color: #27ae60;';
-                    } else if (lowStatus.includes('รอ') || lowStatus.includes('proc') || lowStatus.includes('draft')) {
-                        sStyle = 'background: #fff5e6; color: #f39c12;';
+                    // กำหนดสีตามสถานะ (ปรับข้อความภาษาไทย/อังกฤษได้ที่นี่)
+                    if (lowStatus.includes('สำเร็จ') || lowStatus.includes('เสร็จ') || lowStatus.includes('comp')) {
+                        sStyle = 'background: #e7f9ee; color: #27ae60;'; // สีเขียว
+                    } else if (lowStatus.includes('กำลัง') || lowStatus.includes('รอ') || lowStatus.includes('proc') || lowStatus.includes('draft')) {
+                        sStyle = 'background: #fff5e6; color: #f39c12;'; // สีส้ม
                     }
 
                     container.innerHTML += `
@@ -263,17 +266,18 @@
                 }
             }
 
+            // ถ้าวนลูปจนจบแล้วไม่เจอชื่อลูกค้าเลย
             if (count === 0) {
-                container.innerHTML = '<p style="text-align:center; font-size:12px; opacity:0.5; padding:20px;">ไม่พบรายการคิวงาน (ตรวจสอบเลขคิวในคอลัมน์ A และชื่อในคอลัมน์ E)</p>';
+                container.innerHTML = '<p style="text-align:center; font-size:12px; opacity:0.5; padding:20px;">ไม่พบรายชื่อลูกค้าในแถวที่ 7 คอลัมน์ G ♡</p>';
             }
 
         } catch (error) {
-            console.error(error);
-            container.innerHTML = '<p style="text-align:center; font-size:12px; color:red; padding:20px;">เชื่อมต่อข้อมูลไม่ได้ (เช็คเน็ตหรือการตั้งค่า Publish)</p>';
+            console.error('Error fetching data:', error);
+            container.innerHTML = '<p style="text-align:center; font-size:12px; color:red; padding:20px;">เชื่อมต่อ Google Sheets ไม่สำเร็จ</p>';
         }
     }
 
-    // ส่วนอื่นๆ (Yamete, BG) คงเดิม...
+    // ฟังก์ชันเล่นเสียงและเปลี่ยนไอคอน (คงเดิม)
     function playYamete() {
         const icon = document.getElementById('noti-icon');
         const audio = new Audio('yamete kudasai sound.mp3');
@@ -282,6 +286,7 @@
         audio.onended = () => { icon.innerHTML = "🔔"; };
     }
 
+    // ตกแต่งพื้นหลัง (คงเดิม)
     const bgContainer = document.getElementById('bg-chiikawa-container');
     for (let i = 0; i < 8; i++) {
         const img = document.createElement('img');
