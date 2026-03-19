@@ -43,7 +43,6 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 25px;
-            padding: 0 5px;
         }
         .welcome-text p:first-child { font-size: 13px; opacity: 0.7; }
         .welcome-text p:last-child { font-size: 18px; font-weight: 500; color: var(--accent-pink); }
@@ -68,7 +67,6 @@
             background: linear-gradient(135deg, #ffdae9 0%, #f4eaff 100%);
             border-radius: 30px;
             padding: 25px;
-            color: var(--text-main);
             position: relative;
             overflow: hidden;
             margin-bottom: 25px;
@@ -85,7 +83,6 @@
             font-size: 13px;
             color: var(--accent-pink);
             font-weight: 600;
-            cursor: pointer;
         }
         .promo-img { position: absolute; right: -5px; bottom: -5px; width: 110px; }
 
@@ -106,26 +103,25 @@
         }
         .stat-item b { color: var(--accent-pink); font-size: 16px; display: block; }
 
-        /* --- Recent List Section Header (Fixed) --- */
+        /* --- Section Header --- */
         .section-header {
             display: flex; 
             justify-content: space-between; 
             align-items: center;
             margin-bottom: 15px;
-            padding: 0 5px;
         }
         .section-header p { font-weight: 500; font-size: 16px; }
         .section-header a { 
-            font-size: 13px; 
+            font-size: 12px; 
             color: var(--accent-pink); 
             text-decoration: none; 
-            font-weight: 400;
             background: white;
             padding: 4px 12px;
             border-radius: 12px;
             border: 1px solid var(--main-pink);
         }
 
+        /* --- List Items --- */
         .list-item {
             background: var(--glass);
             backdrop-filter: blur(5px);
@@ -136,7 +132,10 @@
             align-items: center;
             gap: 15px;
             border: 1px solid rgba(255,255,255,0.6);
+            animation: fadeIn 0.5s ease;
         }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
         .list-thumb { width: 50px; height: 50px; border-radius: 12px; object-fit: cover; border: 2px solid white; }
         .list-info p:first-child { font-size: 14px; font-weight: 500; }
         .list-info p:last-child { font-size: 11px; opacity: 0.5; }
@@ -194,7 +193,7 @@
         </div>
 
         <div id="sheet-data-container">
-            <p style="text-align: center; font-size: 12px; opacity: 0.5; padding: 20px;">กำลังดึงคิวงานจาก Google Sheets... ♡</p>
+            <p style="text-align: center; font-size: 12px; opacity: 0.5; padding: 20px;">กำลังโหลดคิวงาน... ♡</p>
         </div>
     </div>
 
@@ -207,52 +206,59 @@
     </nav>
 
     <script>
-        const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTJxmzz6K0iG0J2FgxQQg9TAkRzyOm6RLEtfc9AIdT36GuoF5Y9jescVZr6fYGNOe3H8AB_EmTp8lD4/pub?output=csv';
+        // ใช้ลิงก์ CSV ที่ได้จากการ Publish to web
+        const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTJxmzz6K0iG0J2FgxQQg9TAkRzyOm6RLEtfc9AIdT36GuoF5Y9jescVZr6fYGNOe3H8AB_EmTp8lD4/pub?output=csv';
 
         async function updateRecentWork() {
+            const container = document.getElementById('sheet-data-container');
             try {
-                const response = await fetch(SHEET_URL + '&t=' + new Date().getTime());
-                const csvText = await response.text();
+                // เพิ่ม timestamp เพื่อป้องกัน cache
+                const response = await fetch(`${SHEET_CSV_URL}&t=${new Date().getTime()}`);
+                if (!response.ok) throw new Error('Network response was not ok');
                 
-                const rows = csvText.trim().split('\n').map(row => {
-                    return row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
-                });
+                const data = await response.text();
+                const rows = data.split('\n').map(row => row.split(','));
 
-                const container = document.getElementById('sheet-data-container');
                 container.innerHTML = ''; 
+                let count = 0;
 
-                let displayCount = 0;
+                // วนลูปเริ่มจากแถวที่ 2 (index 1) เพื่อข้ามหัวตาราง
+                for (let i = 1; i < rows.length; i++) {
+                    const col = rows[i];
+                    if (!col || col.length < 9) continue;
 
-                rows.forEach((col) => {
-                    const qNumber = col[0] ? col[0].replace(/"/g, '').trim() : '';
-                    const customer = col[4] ? col[4].replace(/"/g, '').trim() : '';
-                    const status = col[8] ? col[8].replace(/"/g, '').trim() : '';
+                    // กำหนดคอลัมน์ (A=0, E=4, I=8)
+                    const qNumber = col[0]?.replace(/"/g, '').trim();
+                    const customer = col[4]?.replace(/"/g, '').trim();
+                    const status = col[8]?.replace(/"/g, '').trim();
 
-                    if (qNumber !== "" && !isNaN(qNumber) && customer !== "" && displayCount < 8) {
+                    // เช็คว่ามีข้อมูลสำคัญครบไหม
+                    if (qNumber && customer && count < 8) {
+                        let sStyle = 'background: #f0f0f0; color: #888;';
+                        const lowStatus = status.toLowerCase();
                         
-                        let sColor = 'background: #f0f0f0; color: #888;'; 
-                        if (status.toLowerCase().includes('completed')) sColor = 'background: #e7f9ee; color: #27ae60;';
-                        if (status.toLowerCase().includes('process') || status.toLowerCase().includes('draft')) sColor = 'background: #fff5e6; color: #f39c12;';
+                        if (lowStatus.includes('comp')) sStyle = 'background: #e7f9ee; color: #27ae60;';
+                        else if (lowStatus.includes('proc') || lowStatus.includes('draft')) sStyle = 'background: #fff5e6; color: #f39c12;';
 
-                        const itemHTML = `
+                        container.innerHTML += `
                             <div class="list-item">
                                 <img src="ตัวอย่าง 1.jpg" class="list-thumb" onerror="this.src='https://via.placeholder.com/50?text=Job'">
                                 <div class="list-info">
                                     <p>${customer}</p>
                                     <p>Queue No: ${qNumber}</p>
                                 </div>
-                                <span class="badge-status" style="${sColor}">${status || 'Pending'}</span>
+                                <span class="badge-status" style="${sStyle}">${status || 'Pending'}</span>
                             </div>
                         `;
-                        container.insertAdjacentHTML('beforeend', itemHTML);
-                        displayCount++;
+                        count++;
                     }
-                });
+                }
 
-                if(displayCount === 0) container.innerHTML = '<p style="text-align:center; font-size:12px; opacity:0.5;">ไม่พบข้อมูลคิวงานในขณะนี้ ♡</p>';
+                if (count === 0) container.innerHTML = '<p style="text-align:center; font-size:12px; opacity:0.5; padding:20px;">ไม่พบรายการคิวงานในขณะนี้ ♡</p>';
 
-            } catch (e) {
-                document.getElementById('sheet-data-container').innerHTML = '<p style="text-align:center; font-size:12px; color:red;">เชื่อมต่อชีทไม่สำเร็จ</p>';
+            } catch (error) {
+                console.error('Fetch error:', error);
+                container.innerHTML = '<p style="text-align:center; font-size:12px; color:red; padding:20px;">ขออภัย ดึงข้อมูลไม่สำเร็จ กรุณาตรวจสอบการตั้งค่า Publish ของชีทนะคะ</p>';
             }
         }
 
@@ -264,7 +270,8 @@
             audio.onended = () => { icon.innerHTML = "🔔"; };
         }
 
-        const bg = document.getElementById('bg-chiikawa-container');
+        // พื้นหลังดุ๊กดิ๊ก
+        const bgContainer = document.getElementById('bg-chiikawa-container');
         for (let i = 0; i < 8; i++) {
             const img = document.createElement('img');
             img.src = 'chiikawa 3.gif';
@@ -272,7 +279,7 @@
             img.style.width = '50px';
             img.style.left = Math.random() * 100 + 'vw';
             img.style.top = Math.random() * 100 + 'vh';
-            bg.appendChild(img);
+            bgContainer.appendChild(img);
         }
 
         window.onload = updateRecentWork;
