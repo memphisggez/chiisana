@@ -38,7 +38,7 @@
             z-index: 10;
         }
 
-        /* --- UI ส่วนหัว --- */
+        /* --- Header --- */
         .top-header {
             display: flex;
             justify-content: space-between;
@@ -46,7 +46,6 @@
             margin-bottom: 25px;
             padding: 0 5px;
         }
-        
         .welcome-text p:first-child { font-size: 13px; opacity: 0.7; }
         .welcome-text p:last-child { font-size: 18px; font-weight: 500; color: var(--accent-pink); }
 
@@ -66,7 +65,6 @@
             overflow: hidden;
             transition: 0.2s;
         }
-        .noti-btn:active { transform: scale(0.9); }
 
         /* --- Search Bar --- */
         .search-container {
@@ -82,7 +80,7 @@
         }
         .search-container input { border:none; background:none; outline:none; width:100%; font-size:14px; color: var(--text-main); }
 
-        /* --- Promotion Card --- */
+        /* --- Promo Card --- */
         .main-promo-card {
             background: linear-gradient(135deg, #ffdae9 0%, #f4eaff 100%);
             border-radius: 30px;
@@ -105,7 +103,6 @@
             font-size: 13px;
             color: var(--accent-pink);
             font-weight: 600;
-            box-shadow: 0 5px 10px rgba(255,133,179,0.2);
             cursor: pointer;
         }
         .promo-img {
@@ -113,7 +110,6 @@
             right: -5px;
             bottom: -5px;
             width: 110px;
-            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
         }
 
         /* --- Stats Grid --- */
@@ -125,17 +121,15 @@
         }
         .stat-item {
             background: var(--glass);
-            backdrop-filter: blur(5px);
             padding: 15px 5px;
             border-radius: 20px;
             text-align: center;
             font-size: 12px;
             border: 1px solid white;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
         }
-        .stat-item b { color: var(--accent-pink); font-size: 16px; display: block; margin-bottom: 2px; }
+        .stat-item b { color: var(--accent-pink); font-size: 16px; display: block; }
 
-        /* --- Recent List --- */
+        /* --- Section Header --- */
         .section-header {
             display: flex; 
             justify-content: space-between; 
@@ -146,6 +140,7 @@
         .section-header p { font-weight: 500; font-size: 16px; }
         .section-header a { font-size: 13px; color: var(--accent-pink); text-decoration: none; }
 
+        /* --- List Items (Dynamic) --- */
         .list-item {
             background: var(--glass);
             backdrop-filter: blur(5px);
@@ -157,6 +152,11 @@
             gap: 15px;
             border: 1px solid rgba(255,255,255,0.6);
             transition: 0.3s;
+            animation: fadeIn 0.5s ease forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .list-thumb { width: 50px; height: 50px; border-radius: 12px; object-fit: cover; border: 2px solid white; }
         .list-info p:first-child { font-size: 14px; font-weight: 500; }
@@ -172,11 +172,11 @@
 
         /* --- Bottom Nav --- */
         .bottom-nav { position: fixed; bottom: 20px; width: 90%; max-width: 420px; background: var(--dark-menu); display: flex; justify-content: space-around; padding: 12px 5px; border-radius: 20px; z-index: 1000; left: 50%; transform: translateX(-50%); }
-        .nav-item { text-decoration: none; color: white; font-size: 10px; text-align: center; opacity: 0.7; transition: 0.3s; }
+        .nav-item { text-decoration: none; color: white; font-size: 10px; text-align: center; opacity: 0.7; }
         .nav-item.active { opacity: 1; color: var(--main-pink); }
         .nav-item i { font-size: 18px; display: block; margin-bottom: 3px; color: var(--main-pink); font-style: normal; }
         
-        /* --- BG Animation --- */
+        /* --- BG Animations --- */
         .bg-chiikawa { position: fixed; pointer-events: none; z-index: 1; opacity: 0.2; }
     </style>
 </head>
@@ -221,7 +221,7 @@
         </div>
 
         <div id="sheet-data-container">
-            <p style="text-align: center; font-size: 12px; opacity: 0.5; padding: 20px;">กำลังโหลดคิวงาน... (˶˃ᆺ˂˶)</p>
+            <p style="text-align: center; font-size: 12px; opacity: 0.5; padding: 20px;">กำลังดึงข้อมูลคิวงาน... (˶˃ᆺ˂˶)</p>
         </div>
     </div>
 
@@ -234,35 +234,45 @@
     </nav>
 
     <script>
-        /* 1. ระบบดึงข้อมูลจาก Google Sheet */
+        /* --- 1. ฟังก์ชันดึงข้อมูลจาก Google Sheets --- */
         const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTJxmzz6K0iG0J2FgxQQg9TAkRzyOm6RLEtfc9AIdT36GuoF5Y9jescVZr6fYGNOe3H8AB_EmTp8lD4/pub?output=csv';
 
         async function updateRecentWork() {
             try {
-                const response = await fetch(SHEET_URL);
+                // เพิ่ม Timestamp เพื่อป้องกันบราวเซอร์จำค่าเก่า (Cache)
+                const response = await fetch(SHEET_URL + '&t=' + new Date().getTime());
                 const csvText = await response.text();
-                const rows = csvText.split('\n').map(row => row.split(',')).slice(1);
                 
+                // แยกบรรทัดและล้างค่าว่าง
+                const rows = csvText.trim().split('\n').map(row => {
+                    // แยกคอลัมน์ด้วยคอมม่า (Regex ตัวนี้ช่วยให้แยกได้แม่นยำแม้ในช่องจะมีคอมม่า)
+                    return row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+                }).slice(1); // ตัดหัวตารางออก
+
                 const container = document.getElementById('sheet-data-container');
                 container.innerHTML = ''; 
 
-                let count = 0;
+                let displayCount = 0;
                 rows.forEach(col => {
-                    if (col[1] && count < 5) {
-                        const orderId = col[0] ? col[0].trim() : '-';
-                        const jobName = col[1] ? col[1].trim() : '-';
-                        const status = col[2] ? col[2].trim() : 'รอคิว';
+                    // กำหนดคอลัมน์: A=0(No), B=1(รายการ), C=2(สถานะ)
+                    const orderId = col[0] ? col[0].replace(/"/g, '').trim() : '-';
+                    const jobName = col[1] ? col[1].replace(/"/g, '').trim() : '';
+                    const status = col[2] ? col[2].replace(/"/g, '').trim() : 'รอคิว';
+
+                    // ตรวจสอบว่ามีชื่อรายการ และโชว์ไม่เกิน 5 อัน
+                    if (jobName !== "" && displayCount < 5) {
                         
-                        let statusColor = 'background: #f0f0f0; color: #888;';
+                        // เช็คสีสถานะ
+                        let statusColor = 'background: #f0f0f0; color: #888;'; // ปกติ
                         if (status.includes('เสร็จ') || status.includes('สำเร็จ')) {
-                            statusColor = 'background: #e7f9ee; color: #27ae60;';
-                        } else if (status.includes('กำลัง') || status.includes('แก้')) {
-                            statusColor = 'background: #fff5e6; color: #f39c12;';
+                            statusColor = 'background: #e7f9ee; color: #27ae60;'; // เขียว
+                        } else if (status.includes('กำลัง') || status.includes('แก้') || status.includes('ทำ')) {
+                            statusColor = 'background: #fff5e6; color: #f39c12;'; // ส้ม
                         }
 
                         const itemHTML = `
                             <div class="list-item">
-                                <img src="ตัวอย่าง 1.jpg" class="list-thumb" onerror="this.src='https://via.placeholder.com/50?text=Chii'">
+                                <img src="ตัวอย่าง 1.jpg" class="list-thumb" onerror="this.src='https://via.placeholder.com/50?text=Job'">
                                 <div class="list-info">
                                     <p>${jobName}</p>
                                     <p>No: ${orderId}</p>
@@ -271,48 +281,60 @@
                             </div>
                         `;
                         container.insertAdjacentHTML('beforeend', itemHTML);
-                        count++;
+                        displayCount++;
                     }
                 });
-            } catch (e) {
-                document.getElementById('sheet-data-container').innerHTML = '<p style="text-align:center; font-size:12px;">โหลดข้อมูลไม่สำเร็จ</p>';
+
+                if(displayCount === 0) {
+                    container.innerHTML = '<p style="text-align:center; font-size:12px; opacity:0.5; padding:20px;">ยังไม่มีรายการคิวงานในขณะนี้ ♡</p>';
+                }
+
+            } catch (error) {
+                console.error("Error loading sheet:", error);
+                document.getElementById('sheet-data-container').innerHTML = 
+                    '<p style="text-align:center; font-size:12px; color:red; padding:20px;">โหลดข้อมูลไม่สำเร็จ กรุณาลองใหม่อีกครั้ง</p>';
             }
         }
 
-        /* 2. ระบบปุ่ม Yamete */
+        /* --- 2. ปุ่มกระดิ่ง Yamete --- */
         function playYamete() {
             const icon = document.getElementById('noti-icon');
             const audio = new Audio('yamete kudasai sound.mp3');
-            audio.play();
+            audio.play().catch(e => console.log("Audio play blocked by browser"));
+            
             icon.innerHTML = `<img src="cat yamete.gif" style="width: 35px; height: 35px; object-fit: cover; border-radius: 8px;">`;
             audio.onended = () => { icon.innerHTML = "🔔"; };
         }
 
-        /* 3. พื้นหลัง Chiikawa ลอยไปมา */
-        const bgContainer = document.getElementById('bg-chiikawa-container');
-        for (let i = 0; i < 12; i++) {
-            const img = document.createElement('img');
-            img.src = 'chiikawa 3.gif';
-            img.classList.add('bg-chiikawa');
-            const size = Math.random() * 40 + 40; 
-            img.style.width = `${size}px`;
-            img.style.left = `${Math.random() * 100}vw`;
-            img.style.top = `${Math.random() * 100}vh`;
-            
-            const animName = `float-${i}`;
-            const duration = Math.random() * 15 + 15;
-            const style = document.createElement("style");
-            style.innerText = `@keyframes ${animName} {
-                0%, 100% { transform: translate(0, 0) rotate(0deg); }
-                50% { transform: translate(${Math.random()*60}px, ${Math.random()*60}px) rotate(20deg); }
-            }`;
-            document.head.appendChild(style);
-            img.style.animation = `${animName} ${duration}s linear infinite`;
-            bgContainer.appendChild(img);
+        /* --- 3. พื้นหลัง Chiikawa ลอยๆ --- */
+        function createBG() {
+            const bgContainer = document.getElementById('bg-chiikawa-container');
+            for (let i = 0; i < 10; i++) {
+                const img = document.createElement('img');
+                img.src = 'chiikawa 3.gif';
+                img.classList.add('bg-chiikawa');
+                img.style.width = `${Math.random() * 40 + 40}px`;
+                img.style.left = `${Math.random() * 100}vw`;
+                img.style.top = `${Math.random() * 100}vh`;
+                
+                const animName = `float-${i}`;
+                const duration = Math.random() * 10 + 15;
+                const style = document.createElement("style");
+                style.innerText = `@keyframes ${animName} {
+                    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+                    50% { transform: translate(${Math.random()*50}px, ${Math.random()*50}px) rotate(15deg); }
+                }`;
+                document.head.appendChild(style);
+                img.style.animation = `${animName} ${duration}s linear infinite`;
+                bgContainer.appendChild(img);
+            }
         }
 
-        // เริ่มโหลดข้อมูล
-        updateRecentWork();
+        // รันฟังก์ชันทั้งหมดเมื่อโหลดหน้าเว็บ
+        window.onload = () => {
+            createBG();
+            updateRecentWork();
+        };
     </script>
 </body>
 </html>
