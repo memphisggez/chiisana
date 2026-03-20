@@ -43,6 +43,7 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 25px;
+            padding: 0 5px;
         }
         .welcome-text p:first-child { font-size: 13px; opacity: 0.7; }
         .welcome-text p:last-child { font-size: 18px; font-weight: 500; color: var(--accent-pink); }
@@ -67,6 +68,7 @@
             background: linear-gradient(135deg, #ffdae9 0%, #f4eaff 100%);
             border-radius: 30px;
             padding: 25px;
+            color: var(--text-main);
             position: relative;
             overflow: hidden;
             margin-bottom: 25px;
@@ -83,6 +85,7 @@
             font-size: 13px;
             color: var(--accent-pink);
             font-weight: 600;
+            cursor: pointer;
         }
         .promo-img { position: absolute; right: -5px; bottom: -5px; width: 110px; }
 
@@ -103,12 +106,13 @@
         }
         .stat-item b { color: var(--accent-pink); font-size: 16px; display: block; }
 
-        /* --- Section Header --- */
+        /* --- Recent List --- */
         .section-header {
             display: flex; 
             justify-content: space-between; 
             align-items: center;
             margin-bottom: 15px;
+            padding: 0 5px;
         }
         .section-header p { font-weight: 500; font-size: 16px; }
         .section-header a { 
@@ -136,7 +140,15 @@
         }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .list-thumb { width: 50px; height: 50px; border-radius: 12px; object-fit: cover; border: 2px solid white; }
+        /* ปรับขนาดและสไตล์รูปภาพ Character */
+        .list-thumb { 
+            width: 50px; 
+            height: 50px; 
+            border-radius: 12px; 
+            object-fit: contain; /* ปรับเป็น contain เพื่อให้เห็นรูป character เต็มตัว */
+            border: 2px solid white; 
+            background-color: rgba(255, 255, 255, 0.5); /* เพิ่มพื้นหลังอ่อนๆ ให้รูปเด่นขึ้น */
+        }
         .list-info p:first-child { font-size: 14px; font-weight: 500; }
         .list-info p:last-child { font-size: 11px; opacity: 0.5; }
         
@@ -198,105 +210,89 @@
     </div>
 
     <nav class="bottom-nav">
-        <a href="#" class="nav-item"><i>♥</i>Home</a>
-        <a href="#" class="nav-item"><i>♥</i>เค้าดึงเมล</a>
-        <a href="#" class="nav-item"><i>♥</i>กลุ่มอื่น</a>
-        <a href="#" class="nav-item active"><i>♥</i>สั่งป้าย</a>
-        <a href="#" class="nav-item"><i>♥</i>Contact</a>
+        <a href="index.html" class="nav-item"><i>♥</i>Home</a>
+        <a href="group.html" class="nav-item"><i>♥</i>เค้าดึงเมล</a>
+        <a href="anothergroup.html" class="nav-item"><i>♥</i>กลุ่มอื่น</a>
+        <a href="work.html" class="nav-item active"><i>♥</i>สั่งป้าย</a>
+        <a href="contact.html" class="nav-item"><i>♥</i>Contact</a>
     </nav>
 
-        <script>
-    // URL สำหรับดึงไฟล์ CSV จาก Google Sheets
-    const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTJxmzz6K0iG0J2FgxQQg9TAkRzyOm6RLEtfc9AIdT36GuoF5Y9jescVZr6fYGNOe3H8AB_EmTp8lD4/pub?output=csv';
+    <script>
+        const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTJxmzz6K0iG0J2FgxQQg9TAkRzyOm6RLEtfc9AIdT36GuoF5Y9jescVZr6fYGNOe3H8AB_EmTp8lD4/pub?output=csv';
 
-    async function updateRecentWork() {
-        const container = document.getElementById('sheet-data-container');
-        try {
-            const response = await fetch(`${SHEET_CSV_URL}&t=${new Date().getTime()}`);
-            if (!response.ok) throw new Error('Network response was not ok');
-            
-            const rawData = await response.text();
-            
-            // แยกแถวข้อมูล
-            const rows = rawData.split(/\r?\n/).map(row => {
-                return row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
-            });
-
-            container.innerHTML = ''; 
-            let count = 0;
-
-            // เริ่มวนลูปที่แถวที่ 7 (Index คือ 6)
-            for (let i = 6; i < rows.length; i++) {
-                const col = rows[i];
+        async function updateRecentWork() {
+            const container = document.getElementById('sheet-data-container');
+            try {
+                const response = await fetch(`${SHEET_URL}&t=${new Date().getTime()}`);
+                if (!response.ok) throw new Error('Network response was not ok');
                 
-                // ตรวจสอบว่ามีคอลัมน์เพียงพอ (อย่างน้อยถึงคอลัมน์ M หรือ Index 12)
-                if (!col || col.length < 13) continue;
+                const csvText = await response.text();
+                const rows = csvText.trim().split('\n').map(row => row.split(','));
 
-                // ฟังก์ชันล้างเครื่องหมายคำพูดและช่องว่าง
-                const clean = (val) => val ? val.replace(/^"|"$/g, '').trim() : '';
+                container.innerHTML = ''; 
+                let count = 0;
 
-                // ดึงข้อมูลตามตำแหน่งที่คุณระบุ
-                const customer = clean(col[6]);  // คอลัมน์ G (Index 6)
-                const qty = clean(col[7]);       // คอลัมน์ H (Index 7) ** แก้ไขตรงนี้ **
-                const status = clean(col[12]);   // คอลัมน์ M (Index 12)
+                for (let i = 6; i < rows.length; i++) {
+                    const col = rows[i];
+                    if (!col || col.length < 13) continue;
 
-                // ถ้ามีชื่อลูกค้า ให้แสดงผล
-                if (customer && customer !== "" && count < 8) {
-                    let sStyle = 'background: #f0f0f0; color: #888;'; 
-                    const lowStatus = status.toLowerCase();
-                    
-                    // จัดการสี Status
-                    if (lowStatus.includes('สำเร็จ') || lowStatus.includes('เสร็จ') || lowStatus.includes('comp')) {
-                        sStyle = 'background: #e7f9ee; color: #27ae60;';
-                    } else if (lowStatus.includes('กำลัง') || lowStatus.includes('รอ') || lowStatus.includes('proc') || lowStatus.includes('draft')) {
-                        sStyle = 'background: #fff5e6; color: #f39c12;';
-                    }
+                    const clean = (val) => val ? val.replace(/^"|"$/g, '').trim() : '';
+                    const customer = clean(col[6]);  // คอลัมน์ G (Index 6)
+                    const qty = clean(col[7]);       // คอลัมน์ H (Index 7)
+                    const status = clean(col[12]);   // คอลัมน์ M (Index 12)
 
-                    container.innerHTML += `
-                        <div class="list-item">
-                            <img src="ตัวอย่าง 1.jpg" class="list-thumb" onerror="this.src='https://via.placeholder.com/50?text=Job'">
-                            <div class="list-info">
-                                <p>${customer}</p>
-                                <p>Qty: ${qty || '-'}</p> 
+                    if (customer && customer !== "" && count < 8) {
+                        let sStyle = 'background: #f0f0f0; color: #888;'; 
+                        const lowStatus = status.toLowerCase();
+                        
+                        if (lowStatus.includes('สำเร็จ') || lowStatus.includes('เสร็จ') || lowStatus.includes('comp')) {
+                            sStyle = 'background: #e7f9ee; color: #27ae60;';
+                        } else if (lowStatus.includes('กำลัง') || lowStatus.includes('รอ') || lowStatus.includes('proc') || lowStatus.includes('draft')) {
+                            sStyle = 'background: #fff5e6; color: #f39c12;';
+                        }
+
+                        container.innerHTML += `
+                            <div class="list-item">
+                                <img src="character-3.png" class="list-thumb" onerror="this.src='https://via.placeholder.com/50?text=Chii'">
+                                <div class="list-info">
+                                    <p>${customer}</p>
+                                    <p>Qty: ${qty || '-'}</p> 
+                                </div>
+                                <span class="badge-status" style="${sStyle}">${status || 'Pending'}</span>
                             </div>
-                            <span class="badge-status" style="${sStyle}">${status || 'Pending'}</span>
-                        </div>
-                    `;
-                    count++;
+                        `;
+                        count++;
+                    }
                 }
-            }
 
-            if (count === 0) {
-                container.innerHTML = '<p style="text-align:center; font-size:12px; opacity:0.5; padding:20px;">ไม่พบรายชื่อลูกค้าในขณะนี้ ♡</p>';
-            }
+                if (count === 0) container.innerHTML = '<p style="text-align:center; font-size:12px; opacity:0.5; padding:20px;">ไม่พบรายชื่อลูกค้าในขณะนี้ ♡</p>';
 
-        } catch (error) {
-            console.error('Error fetching data:', error);
-            container.innerHTML = '<p style="text-align:center; font-size:12px; color:red; padding:20px;">เชื่อมต่อ Google Sheets ไม่สำเร็จ</p>';
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                container.innerHTML = '<p style="text-align:center; font-size:12px; color:red; padding:20px;">เชื่อมต่อ Google Sheets ไม่สำเร็จ</p>';
+            }
         }
-    }
 
-    // ฟังก์ชันเล่นเสียงและตกแต่งพื้นหลังคงเดิม
-    function playYamete() {
-        const icon = document.getElementById('noti-icon');
-        const audio = new Audio('yamete kudasai sound.mp3');
-        audio.play().catch(() => {});
-        icon.innerHTML = `<img src="cat yamete.gif" style="width:35px; border-radius:8px;">`;
-        audio.onended = () => { icon.innerHTML = "🔔"; };
-    }
+        function playYamete() {
+            const icon = document.getElementById('noti-icon');
+            const audio = new Audio('yamete kudasai sound.mp3');
+            audio.play().catch(() => {});
+            icon.innerHTML = `<img src="cat yamete.gif" style="width:35px; border-radius:8px;">`;
+            audio.onended = () => { icon.innerHTML = "🔔"; };
+        }
 
-    const bgContainer = document.getElementById('bg-chiikawa-container');
-    for (let i = 0; i < 8; i++) {
-        const img = document.createElement('img');
-        img.src = 'chiikawa 3.gif';
-        img.className = 'bg-chiikawa';
-        img.style.width = '50px';
-        img.style.left = Math.random() * 100 + 'vw';
-        img.style.top = Math.random() * 100 + 'vh';
-        bgContainer.appendChild(img);
-    }
+        const bgContainer = document.getElementById('bg-chiikawa-container');
+        for (let i = 0; i < 8; i++) {
+            const img = document.createElement('img');
+            img.src = 'chiikawa 3.gif';
+            img.className = 'bg-chiikawa';
+            img.style.width = '50px';
+            img.style.left = Math.random() * 100 + 'vw';
+            img.style.top = Math.random() * 100 + 'vh';
+            bgContainer.appendChild(img);
+        }
 
-    window.onload = updateRecentWork;
-</script>
+        window.onload = updateRecentWork;
+    </script>
 </body>
 </html>
