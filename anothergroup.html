@@ -30,6 +30,28 @@
             overflow-x: hidden;
         }
 
+        /* --- ✨ Animation สำหรับหัวใจเรืองแสง --- */
+.category-title span {
+    color: var(--accent-pink);
+    display: inline-block;
+    animation: heartGlow 2s ease-in-out infinite;
+    text-shadow: 0 0 5px var(--glow-color);
+}
+
+@keyframes heartGlow {
+    0%, 100% {
+        transform: scale(1);
+        text-shadow: 0 0 5px var(--glow-color), 0 0 10px var(--glow-color);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.2);
+        text-shadow: 0 0 15px var(--accent-pink), 0 0 20px var(--main-pink);
+        opacity: 1;
+        color: #ff5c9d; /* เข้มขึ้นเล็กน้อยตอนกระพริบ */
+    }
+}
+
         .container { 
             width: 100%; 
             max-width: 480px; 
