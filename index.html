@@ -189,10 +189,44 @@
         .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
         .gallery-hint { text-align: center; font-size: 12px; opacity: 0.5; margin-bottom: 30px; }
 
-        .bottom-nav { position: fixed; bottom: 20px; width: 90%; max-width: 420px; background: var(--dark-menu); display: flex; justify-content: space-around; padding: 12px 5px; border-radius: 20px; z-index: 1000; }
-        .nav-item { text-decoration: none; color: white; font-size: 10px; text-align: center; opacity: 0.7; transition: 0.3s; }
-        .nav-item.active { opacity: 1; color: var(--main-pink); }
-        .nav-item i { font-size: 18px; display: block; margin-bottom: 3px; color: var(--main-pink); font-style: normal; }
+       /* --- Nav & Animation (ปรับแก้ให้เท่า Index เป๊ะๆ) --- */
+        .bottom-nav { 
+            position: fixed; 
+            bottom: 20px; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            width: 90%; 
+            max-width: 420px; 
+            background: var(--dark-menu); 
+            display: flex; 
+            justify-content: space-around; 
+            padding: 12px 5px; 
+            border-radius: 20px; 
+            z-index: 1000; 
+        }
+
+        .nav-item { 
+            text-decoration: none; 
+            color: white; 
+            font-size: 10px; 
+            text-align: center; 
+            opacity: 0.7; 
+            transition: 0.3s; 
+            flex: 1; 
+        }
+
+        .nav-item.active { 
+            opacity: 1; 
+            color: var(--main-pink); 
+        }
+
+        .nav-item i { 
+            font-size: 18px; 
+            display: block; 
+            margin-bottom: 3px; 
+            color: var(--main-pink); 
+            font-style: normal; 
+        }
 
         .floating-sticker { position: fixed; bottom: 95px; right: 25px; width: 85px; z-index: 999; pointer-events: none; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15)); }
         .bg-chiikawa { position: fixed; pointer-events: none; z-index: 1; opacity: 0.25; animation: floatRandom linear infinite; }
