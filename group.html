@@ -24,7 +24,7 @@
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            padding-bottom: 120px; /* กันโดนเมนูบัง */
+            padding-bottom: 120px;
             color: var(--text-gray);
             position: relative;
             overflow-x: hidden;
@@ -66,14 +66,14 @@
             background: white;
             padding: 8px 22px;
             border-radius: 50px;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 500;
             color: var(--text-gray);
             margin: 0 15px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 15px rgba(255, 182, 193, 0.2);
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(255, 182, 193, 0.15);
             border: 1px solid var(--main-pink);
         }
         .category-title span { color: var(--accent-pink); animation: heartBeat 1.2s infinite; display: inline-block; }
@@ -104,11 +104,27 @@
         }
         .portfolio-card:hover { transform: translateY(-8px); background: white; box-shadow: 0 10px 25px rgba(255, 133, 179, 0.2); }
         .portfolio-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 18px; margin-bottom: 10px; }
-        .portfolio-card span { font-size: 14px; font-weight: 500; text-align: center; display: block; margin-bottom: 8px; }
+        .portfolio-card span { font-size: 13px; font-weight: 500; text-align: center; display: block; margin-bottom: 8px; height: 1.2em; overflow: hidden; }
 
         /* --- Badges --- */
-        .badges { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; }
+        .badges { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; min-height: 18px; }
         .badge { font-size: 9px; padding: 2px 8px; border-radius: 50px; background: #fff; color: var(--accent-pink); border: 1px solid #ffeef2; white-space: nowrap; }
+
+        /* --- Price Tag --- */
+        .price-tag {
+            margin-top: auto;
+            background: linear-gradient(135deg, #ffdae9 0%, #ffb6c1 100%);
+            color: #d64d7b;
+            font-size: 11px;
+            font-weight: 600;
+            text-align: center;
+            padding: 6px 0;
+            border-radius: 12px;
+            margin-top: 12px;
+            box-shadow: 0 3px 8px rgba(255, 182, 193, 0.3);
+            transition: 0.3s;
+        }
+        .portfolio-card:hover .price-tag { background: var(--accent-pink); color: white; }
 
         /* --- Bottom Nav --- */
         .bottom-nav { position: fixed; bottom: 20px; width: 90%; max-width: 420px; background: var(--dark-menu); display: flex; justify-content: space-around; padding: 12px 5px; border-radius: 20px; z-index: 1000; }
@@ -116,7 +132,7 @@
         .nav-item.active { opacity: 1; color: var(--main-pink); }
         .nav-item i { font-size: 18px; display: block; margin-bottom: 3px; font-style: normal; color: var(--main-pink); }
 
-        /* --- Decoration --- */
+        /* --- Deco --- */
         .floating-sticker { position: fixed; bottom: 95px; right: 25px; width: 85px; z-index: 999; pointer-events: none; }
         .bg-chiikawa { position: fixed; pointer-events: none; z-index: 1; opacity: 0.15; }
     </style>
@@ -129,28 +145,42 @@
     <div class="container">
         <div class="header-section">
             <h2>📁 กลุ่มงานป้ายอื่นๆ ♡</h2>
-            <p>รวม 36 กลุ่มงานพรีเมียมให้เลือกสรรค่า ૮˃ ꒳ ˂า</p>
+            <p>รวมกลุ่มงานพรีเมียมคัดสรรมาให้แล้วค่า ૮˃ ꒳ ˂า</p>
         </div>
 
         <div class="category-divider">
-            <div class="category-title"><span>♡</span> Recommended <span>♡</span></div>
+            <div class="category-title"><span>♡</span> Best & Teaching <span>♡</span></div>
         </div>
         <div class="labels-grid">
             <a href="https://drive.google.com/drive/folders/1MxSRvaq6_E9374QsjuAaKIR7p9jzHLaZ" target="_blank" class="portfolio-card">
                 <img src="Angel glow.jpg"><span>Angel glow</span>
                 <div class="badges"><div class="badge">📝 สอน</div><div class="badge">✅ อัพครบ</div></div>
-            </a>
-            <a href="https://drive.google.com/drive/folders/1qBjFKFTBTZqRGezXdMxKpsLsPC6h4n_Q" target="_blank" class="portfolio-card">
-                <img src="Chimori.jpeg"><span>Chimori</span>
-                <div class="badges"><div class="badge">⭐ ยอดฮิต</div></div>
+                <div class="price-tag">ราคา 129.-</div>
             </a>
             <a href="https://drive.google.com/drive/folders/15KyBKrndGn770bvpvRLSC-6HXGse4lNo" target="_blank" class="portfolio-card">
                 <img src="Baby heading.jpg"><span>Baby heading</span>
                 <div class="badges"><div class="badge">⭐ ยอดฮิต</div><div class="badge">📝 สอน</div></div>
+                <div class="price-tag">ราคา 159.-</div>
             </a>
-            <a href="https://drive.google.com/drive/folders/1EEx9iIpJFX-UTKKku_f_6VIhLGVZ6zDf" target="_blank" class="portfolio-card">
-                <img src="のび太 โนบิตะ.jpg"><span>โนบิตะ</span>
-                <div class="badges"><div class="badge">⭐ ยอดฮิต</div><div class="badge">🤏 แต่งง่าย</div></div>
+            <a href="https://drive.google.com/drive/folders/1Mae6ZQte9ueOIjEyQBrtacd0nWOOP4wK" target="_blank" class="portfolio-card">
+                <img src="Katoi group.jpg"><span>Katoi group</span>
+                <div class="badges"><div class="badge">📝 สอน</div><div class="badge">✅ อัพครบ</div></div>
+                <div class="price-tag">ราคา 89.-</div>
+            </a>
+            <a href="https://drive.google.com/drive/folders/1G4pG_XyD6X0_e3lF6aL6Z5W3q1K5oV7F" target="_blank" class="portfolio-card">
+                <img src="Minoki group.jpg"><span>Minoki group</span>
+                <div class="badges"><div class="badge">📝 สอน</div><div class="badge">✅ อัพครบ</div></div>
+                <div class="price-tag">ราคา 99.-</div>
+            </a>
+            <a href="https://drive.google.com/drive/folders/10kHGkci9GSWygIj08t63mfz6iv5gjX4Q" target="_blank" class="portfolio-card">
+                <img src="Retroblix box.jpg"><span>Retroblix box</span>
+                <div class="badges"><div class="badge">📝 สอน</div><div class="badge">🤠 เรโทร</div></div>
+                <div class="price-tag">ราคา 119.-</div>
+            </a>
+            <a href="https://drive.google.com/drive/folders/1qBjFKFTBTZqRGezXdMxKpsLsPC6h4n_Q" target="_blank" class="portfolio-card">
+                <img src="Chimori.jpeg"><span>Chimori</span>
+                <div class="badges"><div class="badge">⭐ ยอดฮิต</div></div>
+                <div class="price-tag">ราคา 79.-</div>
             </a>
         </div>
 
@@ -158,45 +188,49 @@
             <div class="category-title"><span>♡</span> Decoration <span>♡</span></div>
         </div>
         <div class="labels-grid">
-            <a href="https://drive.google.com/drive/folders/17BNSYKI5a52dwUC7Sre9Jn6Kqo_a0fXq" target="_blank" class="portfolio-card">
-                <img src="Chubby berry.png"><span>Chubby berry</span>
-                <div class="badges"><div class="badge">💮 แนวเฮด</div><div class="badge">✅ อัพครบ</div></div>
-            </a>
             <a href="https://drive.google.com/drive/folders/1kfcugVrAJepP34WpeR1YdJLWYS7BGWC0" target="_blank" class="portfolio-card">
                 <img src="Mochi cookie group.jpg"><span>Mochi cookie</span>
                 <div class="badges"><div class="badge">🧸 ของตกแต่ง</div><div class="badge">🆕 นิว</div></div>
+                <div class="price-tag">ราคา 129.-</div>
+            </a>
+            <a href="https://drive.google.com/drive/folders/1P0WsOd4NMDIIUCpI7Eh-7S7BT8tNEbIy" target="_blank" class="portfolio-card">
+                <img src="Filter cream.jpg"><span>Filter cream</span>
+                <div class="badges"><div class="badge">🎨 เอฟเฟค</div><div class="badge">🧸 ของตกแต่ง</div></div>
+                <div class="price-tag">ราคา 89.-</div>
             </a>
             <a href="https://drive.google.com/drive/folders/1Lw7O5YLnocbu9i8DLVI9VSgJgHfsZ_bQ" target="_blank" class="portfolio-card">
                 <img src="เจ้าก้อนกลม By nannie.jpg"><span>ก้อนกลม By nannie</span>
                 <div class="badges"><div class="badge">🧸 ของตกแต่ง</div><div class="badge">✅ อัพครบ</div></div>
+                <div class="price-tag">ราคา 69.-</div>
             </a>
-            <a href="https://drive.google.com/drive/folders/1P0WsOd4NMDIIUCpI7Eh-7S7BT8tNEbIy" target="_blank" class="portfolio-card">
-                <img src="Filter cream.jpg"><span>Filter cream</span>
-                <div class="badges"><div class="badge">🎨 เอฟเฟค</div><div class="badge">✅ อัพครบ</div></div>
+            <a href="https://drive.google.com/drive/folders/17BNSYKI5a52dwUC7Sre9Jn6Kqo_a0fXq" target="_blank" class="portfolio-card">
+                <img src="Chubby berry.png"><span>Chubby berry</span>
+                <div class="badges"><div class="badge">💮 แนวเฮด</div><div class="badge">✅ อัพครบ</div></div>
+                <div class="price-tag">ราคา 59.-</div>
             </a>
         </div>
 
         <div class="category-divider">
-            <div class="category-title"><span>♡</span> Teaching & ADS <span>♡</span></div>
+            <div class="category-title"><span>♡</span> Gaming & ADS <span>♡</span></div>
         </div>
         <div class="labels-grid">
-            <a href="https://drive.google.com/drive/folders/1Mae6ZQte9ueOIjEyQBrtacd0nWOOP4wK" target="_blank" class="portfolio-card">
-                <img src="Katoi group.jpg"><span>Katoi group</span>
-                <div class="badges"><div class="badge">📝 สอน</div><div class="badge">✅ อัพครบ</div></div>
-            </a>
             <a href="https://drive.google.com/drive/folders/1-E90fTGxxEnvAhkOH6_6JEKeRGzxj87z" target="_blank" class="portfolio-card">
                 <img src="Salee gaming.jpg"><span>Salee gaming</span>
                 <div class="badges"><div class="badge">👾 ADS</div><div class="badge">🎨 เอฟเฟค</div></div>
-            </a>
-            <a href="https://drive.google.com/drive/folders/10kHGkci9GSWygIj08t63mfz6iv5gjX4Q" target="_blank" class="portfolio-card">
-                <img src="Retroblix box.jpg"><span>Retroblix box</span>
-                <div class="badges"><div class="badge">📝 สอน</div><div class="badge">🤠 เรโทร</div></div>
+                <div class="price-tag">ราคา 139.-</div>
             </a>
             <a href="https://drive.google.com/drive/folders/1sL4z-1cojXlktU6YC7vOHH-p3d_0vEK4" target="_blank" class="portfolio-card">
                 <img src="Box store by JDG.jpg"><span>Box store by JDG</span>
-                <div class="badges"><div class="badge">👾 ADS</div><div class="badge">💻 PSD</div><div class="badge">⚠️ ปรับปรุง</div></div>
+                <div class="badges"><div class="badge">👾 ADS</div><div class="badge">⚠️ ปรับปรุง</div></div>
+                <div class="price-tag">ราคา 99.-</div>
             </a>
-        </div>
+            <a href="https://drive.google.com/drive/folders/1EEx9iIpJFX-UTKKku_f_6VIhLGVZ6zDf" target="_blank" class="portfolio-card">
+                <img src="のび太 โนบิตะ.jpg"><span>โนบิตะ</span>
+                <div class="badges"><div class="badge">⭐ ยอดฮิต</div><div class="badge">🤏 แต่งง่าย</div></div>
+                <div class="price-tag">ราคา 89.-</div>
+            </a>
+            </div>
+
     </div>
 
     <nav class="bottom-nav">
@@ -208,7 +242,6 @@
     </nav>
 
     <script>
-        // ระบบพื้นหลังลอย
         const bgContainer = document.getElementById('bg-chiikawa-container');
         for (let i = 0; i < 12; i++) {
             const img = document.createElement('img');
