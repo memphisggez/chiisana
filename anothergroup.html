@@ -24,7 +24,7 @@
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            padding-bottom: 110px; /* เว้นที่ให้ Bottom Nav */
+            padding-bottom: 120px;
             color: var(--text-gray);
             position: relative;
             overflow-x: hidden;
@@ -32,41 +32,63 @@
 
         .container { 
             width: 100%; 
-            max-width: 480px; /* ปรับให้เท่าหน้า Index */
+            max-width: 480px; 
             padding: 20px; 
             position: relative;
             z-index: 10;
         }
 
-        /* --- Header Section --- */
+        /* --- Header --- */
         .header-section {
             background: var(--glass-white);
             backdrop-filter: blur(15px);
             border-radius: 35px;
             padding: 30px 15px;
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
             border: 1px solid rgba(255, 255, 255, 0.4);
             box-shadow: 0 10px 30px rgba(255, 182, 193, 0.2);
         }
-
-        .header-section h2 { 
-            color: var(--accent-pink); 
-            font-size: 24px; 
-            margin-bottom: 8px;
-            text-shadow: 0 0 10px var(--glow-color);
-        }
+        .header-section h2 { color: var(--accent-pink); font-size: 24px; margin-bottom: 8px; text-shadow: 0 0 10px var(--glow-color); }
         .header-section p { font-size: 13px; opacity: 0.8; }
 
-        /* --- Grid Layout --- */
+        /* --- ✨ Divider (ที่คั่นประเภท) --- */
+        .category-divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 40px 0 25px;
+        }
+        .category-divider::before, .category-divider::after {
+            content: ""; flex: 1; border-bottom: 1.5px solid rgba(255, 133, 179, 0.2);
+        }
+        .category-title {
+            background: white;
+            padding: 8px 22px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-gray);
+            margin: 0 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(255, 182, 193, 0.15);
+            border: 1px solid var(--main-pink);
+        }
+        .category-title span { color: var(--accent-pink); animation: heartBeat 1.2s infinite; display: inline-block; }
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+        }
+
+        /* --- Grid & Card --- */
         .labels-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
             margin-bottom: 20px;
         }
-
-        /* --- Portfolio Card --- */
         .portfolio-card {
             background: var(--glass-white);
             backdrop-filter: blur(10px);
@@ -75,124 +97,62 @@
             text-decoration: none;
             color: var(--text-gray);
             border: 1px solid rgba(255, 255, 255, 0.5);
-            transition: all 0.3s ease;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             flex-direction: column;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
-
-        .portfolio-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 8px 20px rgba(255, 182, 193, 0.3);
-        }
-
-        .portfolio-card img {
-            width: 100%;
-            aspect-ratio: 1/1;
-            object-fit: cover;
-            border-radius: 18px;
-            margin-bottom: 10px;
-        }
-
-        .portfolio-card span {
-            font-size: 14px;
-            font-weight: 500;
-            margin-bottom: 8px;
-            display: -webkit-box;
-            -webkit-line-clamp: 1;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-align: center;
-        }
+        .portfolio-card:hover { transform: translateY(-8px); background: white; box-shadow: 0 10px 25px rgba(255, 133, 179, 0.2); }
+        .portfolio-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 18px; margin-bottom: 10px; }
+        .portfolio-card span { font-size: 13px; font-weight: 500; text-align: center; display: block; margin-bottom: 8px; height: 1.2em; overflow: hidden; }
 
         /* --- Badges --- */
-        .badges {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px;
-            justify-content: center;
-        }
+        .badges { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; min-height: 18px; }
+        .badge { font-size: 9px; padding: 2px 8px; border-radius: 50px; background: #fff; color: var(--accent-pink); border: 1px solid #ffeef2; white-space: nowrap; }
 
-        .badge {
-            font-size: 9px;
-            padding: 2px 8px;
-            border-radius: 50px;
-            background: white;
-            color: var(--accent-pink);
-            border: 1px solid #ffeef2;
-            white-space: nowrap;
+        /* --- Price Tag --- */
+        .price-tag {
+            margin-top: auto;
+            background: linear-gradient(135deg, #ffdae9 0%, #ffb6c1 100%);
+            color: #d64d7b;
+            font-size: 11px;
+            font-weight: 600;
+            text-align: center;
+            padding: 6px 0;
+            border-radius: 12px;
+            margin-top: 12px;
+            box-shadow: 0 3px 8px rgba(255, 182, 193, 0.3);
+            transition: 0.3s;
         }
+        .portfolio-card:hover .price-tag { background: var(--accent-pink); color: white; }
 
-        /* --- 🖤 Bottom Nav (Copy from Index) --- */
-        .bottom-nav { 
-            position: fixed; 
-            bottom: 20px; 
-            width: 90%; 
-            max-width: 420px; 
-            background: var(--dark-menu); 
-            display: flex; 
-            justify-content: space-around; 
-            padding: 12px 5px; 
-            border-radius: 20px; 
-            z-index: 1000; 
-        }
+        /* --- Bottom Nav --- */
+        .bottom-nav { position: fixed; bottom: 20px; width: 90%; max-width: 420px; background: var(--dark-menu); display: flex; justify-content: space-around; padding: 12px 5px; border-radius: 20px; z-index: 1000; }
+        .nav-item { text-decoration: none; color: white; font-size: 10px; text-align: center; opacity: 0.6; transition: 0.3s; }
+        .nav-item.active { opacity: 1; color: var(--main-pink); }
+        .nav-item i { font-size: 18px; display: block; margin-bottom: 3px; font-style: normal; color: var(--main-pink); }
 
-        .nav-item { 
-            text-decoration: none; 
-            color: white; 
-            font-size: 10px; 
-            text-align: center; 
-            opacity: 0.7; 
-            transition: 0.3s; 
-        }
-
-        .nav-item.active { 
-            opacity: 1; 
-            color: var(--main-pink); 
-        }
-
-        .nav-item i { 
-            font-size: 18px; 
-            display: block; 
-            margin-bottom: 3px; 
-            color: var(--main-pink); 
-            font-style: normal; 
-        }
-
-        /* --- Decoration --- */
-        .floating-sticker { 
-            position: fixed; 
-            bottom: 95px; 
-            right: 25px; 
-            width: 85px; 
-            z-index: 999; 
-            pointer-events: none; 
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15)); 
-        }
-
-        .bg-chiikawa { 
-            position: fixed; 
-            pointer-events: none; 
-            z-index: 1; 
-            opacity: 0.25; 
-        }
+        /* --- Deco --- */
+        .floating-sticker { position: fixed; bottom: 95px; right: 25px; width: 85px; z-index: 999; pointer-events: none; }
+        .bg-chiikawa { position: fixed; pointer-events: none; z-index: 1; opacity: 0.15; }
     </style>
 </head>
 <body>
 
-    <img src="chiikawa 1.gif" alt="Chiikawa Sticker" class="floating-sticker">
-    
+    <img src="chiikawa 1.gif" alt="Sticker" class="floating-sticker">
     <div id="bg-chiikawa-container"></div>
 
     <div class="container">
         <div class="header-section">
             <h2>📁 กลุ่มงานป้ายอื่นๆ ♡</h2>
-            <p>รวมกลุ่มงานป้ายพรีเมียมให้เลือกสรรค่า ૮˃ ꒳ ˂า</p>
+            <p>รวมกลุ่มงานพรีเมียมคัดสรรมาให้แล้วค่า ૮˃ ꒳ ˂า</p>
         </div>
 
+        <div class="category-divider">
+            <div class="category-title"><span>♡</span> Best & Teaching <span>♡</span></div>
+        </div>
         <div class="labels-grid">
-            <a href="https://drive.google.com/drive/folders/1urrpeidTVnAOAKkkraWRZxInsQ984mBj" target="_blank" class="portfolio-card">
+                        <a href="https://drive.google.com/drive/folders/1urrpeidTVnAOAKkkraWRZxInsQ984mBj" target="_blank" class="portfolio-card">
                 <img src="Trinity.jpg"><span>Trinity</span>
                 <div class="badges">
                     <div class="badge">⭐ ยอดฮิต</div>
@@ -226,46 +186,82 @@
                     <div class="badge">⭐ ยอดฮิต</div>
                 </div>
             </a>
+        </div>
 
+        <div class="category-divider">
+            <div class="category-title"><span>♡</span> Decoration <span>♡</span></div>
+        </div>
+        <div class="labels-grid">
+            <a href="https://drive.google.com/drive/folders/1kfcugVrAJepP34WpeR1YdJLWYS7BGWC0" target="_blank" class="portfolio-card">
+                <img src="Mochi cookie group.jpg"><span>Mochi cookie</span>
+                <div class="badges"><div class="badge">🧸 ของตกแต่ง</div><div class="badge">🆕 นิว</div></div>
+                <div class="price-tag">ราคา 129.-</div>
+            </a>
+            <a href="https://drive.google.com/drive/folders/1P0WsOd4NMDIIUCpI7Eh-7S7BT8tNEbIy" target="_blank" class="portfolio-card">
+                <img src="Filter cream.jpg"><span>Filter cream</span>
+                <div class="badges"><div class="badge">🎨 เอฟเฟค</div><div class="badge">🧸 ของตกแต่ง</div></div>
+                <div class="price-tag">ราคา 89.-</div>
+            </a>
+            <a href="https://drive.google.com/drive/folders/1Lw7O5YLnocbu9i8DLVI9VSgJgHfsZ_bQ" target="_blank" class="portfolio-card">
+                <img src="เจ้าก้อนกลม By nannie.jpg"><span>ก้อนกลม By nannie</span>
+                <div class="badges"><div class="badge">🧸 ของตกแต่ง</div><div class="badge">✅ อัพครบ</div></div>
+                <div class="price-tag">ราคา 69.-</div>
+            </a>
+            <a href="https://drive.google.com/drive/folders/17BNSYKI5a52dwUC7Sre9Jn6Kqo_a0fXq" target="_blank" class="portfolio-card">
+                <img src="Chubby berry.png"><span>Chubby berry</span>
+                <div class="badges"><div class="badge">💮 แนวเฮด</div><div class="badge">✅ อัพครบ</div></div>
+                <div class="price-tag">ราคา 59.-</div>
+            </a>
+        </div>
+
+        <div class="category-divider">
+            <div class="category-title"><span>♡</span> Gaming & ADS <span>♡</span></div>
+        </div>
+        <div class="labels-grid">
+            <a href="https://drive.google.com/drive/folders/1-E90fTGxxEnvAhkOH6_6JEKeRGzxj87z" target="_blank" class="portfolio-card">
+                <img src="Salee gaming.jpg"><span>Salee gaming</span>
+                <div class="badges"><div class="badge">👾 ADS</div><div class="badge">🎨 เอฟเฟค</div></div>
+                <div class="price-tag">ราคา 139.-</div>
+            </a>
+            <a href="https://drive.google.com/drive/folders/1sL4z-1cojXlktU6YC7vOHH-p3d_0vEK4" target="_blank" class="portfolio-card">
+                <img src="Box store by JDG.jpg"><span>Box store by JDG</span>
+                <div class="badges"><div class="badge">👾 ADS</div><div class="badge">⚠️ ปรับปรุง</div></div>
+                <div class="price-tag">ราคา 99.-</div>
+            </a>
+            <a href="https://drive.google.com/drive/folders/1EEx9iIpJFX-UTKKku_f_6VIhLGVZ6zDf" target="_blank" class="portfolio-card">
+                <img src="のび太 โนบิตะ.jpg"><span>โนบิตะ</span>
+                <div class="badges"><div class="badge">⭐ ยอดฮิต</div><div class="badge">🤏 แต่งง่าย</div></div>
+                <div class="price-tag">ราคา 89.-</div>
+            </a>
             </div>
+
     </div>
 
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item"><i>♥</i>Home ♡</a>
-        <a href="group.html" class="nav-item"><i>♥</i>เค้าดึงเมลเอง ♡</a>
-        <a href="anothergroup.html" class="nav-item active"><i>♥</i>กลุ่มอื่นๆ ♡</a>
+        <a href="group.html" class="nav-item active"><i>♥</i>เค้าดึงเมลเอง ♡</a>
+        <a href="anothergroup.html" class="nav-item"><i>♥</i>กลุ่มอื่นๆ ♡</a>
         <a href="work.html" class="nav-item"><i>♥</i>สั่งป้าย ♡</a>
         <a href="contact.html" class="nav-item"><i>♥</i>Contact ♡</a>
     </nav>
 
     <script>
-        // ระบบ Chiikawa ลอยหลังพื้นหลัง (Copy from Index เพื่อความเหมือนกัน)
-        const numberOfBackgroundChiikawas = 12;
         const bgContainer = document.getElementById('bg-chiikawa-container');
-        for (let i = 0; i < numberOfBackgroundChiikawas; i++) {
+        for (let i = 0; i < 12; i++) {
             const img = document.createElement('img');
             img.src = 'chiikawa 3.gif';
             img.classList.add('bg-chiikawa');
-            const size = Math.random() * (90 - 45) + 45; 
+            const size = Math.random() * 40 + 40;
             img.style.width = `${size}px`;
             img.style.left = `${Math.random() * 100}vw`;
             img.style.top = `${Math.random() * 100}vh`;
-            const duration = Math.random() * (30 - 15) + 15;
-            img.style.animationDuration = `${duration}s`;
-            const animName = `float-${i}`;
-            const styleSheet = document.createElement("style");
-            styleSheet.innerText = `@keyframes ${animName} {
-                0% { transform: translate(0, 0) rotate(0deg); }
-                50% { transform: translate(50px, 50px) rotate(30deg); }
-                100% { transform: translate(0, 0) rotate(0deg); }
-            }`;
-            document.head.appendChild(styleSheet);
-            img.style.animationName = animName;
-            img.style.animationTimingFunction = "linear";
-            img.style.animationIterationCount = "infinite";
+            const duration = Math.random() * 10 + 15;
+            img.style.animation = `float-${i} ${duration}s linear infinite`;
+            const style = document.createElement("style");
+            style.innerText = `@keyframes float-${i} { 0% { transform: translate(0,0) rotate(0deg); } 50% { transform: translate(40px,40px) rotate(20deg); } 100% { transform: translate(0,0) rotate(0deg); } }`;
+            document.head.appendChild(style);
             bgContainer.appendChild(img);
         }
     </script>
-
 </body>
 </html>
