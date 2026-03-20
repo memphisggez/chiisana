@@ -210,24 +210,65 @@
 
     
 <div class="container">
-    <h2 class="section-title"><img src="icon-1.png"> ช่องทางการติดต่อ ♡</h2>
-    <div class="service-grid">
-        <a href="FB_URL" class="service-card">
-            <img src="fb-icon.png" style="width:50px;">
-            <div class="service-text">Facebook</div>
+        <div class="contact-header">
+            <img src="เย่.jpg" class="contact-avatar" alt="ChiiSAnA">
+            <h1 class="contact-title">Contact Us</h1>
+            <p style="font-size: 13px; opacity: 0.6;">ติดต่องานหรือสอบถามได้ที่ช่องทางด้านล่างเลยค่ะ ♡</p>
+        </div>
+
+        <a href="https://www.facebook.com/chiisana.xh" target="_blank" class="contact-card">
+            <img src="https://cdn-icons-png.flaticon.com/512/5968/5968764.png" class="contact-icon" alt="Facebook">
+            <div class="contact-info">
+                <h3>Facebook</h3>
+                <p>คลิกเพื่อไปที่หน้าโปรไฟล์ Facebook</p>
+            </div>
         </a>
-        <a href="IG_URL" class="service-card">
-            <img src="ig-icon.png" style="width:50px;">
-            <div class="service-text">Instagram</div>
+
+        <a href="https://line.me/ti/p/YOUR_LINE_ID" target="_blank" class="contact-card">
+            <img src="https://cdn-icons-png.flaticon.com/512/5968/5968841.png" class="contact-icon" alt="Line">
+            <div class="contact-info">
+                <h3>Line Official</h3>
+                <p>สอบถามส่วนตัว หรือสั่งงานผ่าน Line</p>
+            </div>
         </a>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <p style="font-size: 12px; opacity: 0.4;">(˶˃ᆺ˂˶) ขอบคุณที่ไว้วางใจร้านเรานะคะ</p>
+        </div>
     </div>
 
     <nav class="bottom-nav">
-    <a href="index.html" class="nav-item"><i>♥</i>Home ♡</a>
-    <a href="group.html" class="nav-item"><i>♥</i>เค้าดึงเมลเอง ♡</a>
-    <a href="anothergroup.html" class="nav-item"><i>♥</i>กลุ่มอื่นๆ ♡</a>
-    <a href="work.html" class="nav-item"><i>♥</i>สั่งป้าย ♡</a>
-    <a href="contact.html" class="nav-item active"><i>♥</i>Contact ♡</a>
-</nav>
-    
-</div>
+        <a href="index.html" class="nav-item"><i>♥</i>Home ♡</a>
+        <a href="group.html" class="nav-item"><i>♥</i>เค้าดึงเมลเอง ♡</a>
+        <a href="anothergroup.html" class="nav-item"><i>♥</i>กลุ่มอื่นๆ ♡</a>
+        <a href="work.html" class="nav-item"><i>♥</i>สั่งป้าย ♡</a>
+        <a href="contact.html" class="nav-item active"><i>♥</i>Contact ♡</a>
+    </nav>
+
+    <script>
+        const numberOfBackgroundChiikawas = 10;
+        const bgContainer = document.getElementById('bg-chiikawa-container');
+        for (let i = 0; i < numberOfBackgroundChiikawas; i++) {
+            const img = document.createElement('img');
+            img.src = 'chiikawa 3.gif';
+            img.classList.add('bg-chiikawa');
+            const size = Math.random() * (70 - 40) + 40; 
+            img.style.width = `${size}px`;
+            img.style.left = `${Math.random() * 100}vw`;
+            img.style.top = `${Math.random() * 100}vh`;
+            const duration = Math.random() * (25 - 15) + 15;
+            img.style.animationDuration = `${duration}s`;
+            const animName = `float-contact-${i}`;
+            const styleSheet = document.createElement("style");
+            styleSheet.innerText = `@keyframes ${animName} {
+                0% { transform: translate(0, 0) rotate(0deg); }
+                50% { transform: translate(30px, 30px) rotate(20deg); }
+                100% { transform: translate(0, 0) rotate(0deg); }
+            }`;
+            document.head.appendChild(styleSheet);
+            img.style.animationName = animName;
+            bgContainer.appendChild(img);
+        }
+    </script>
+</body>
+</html>
