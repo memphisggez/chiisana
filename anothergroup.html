@@ -52,13 +52,7 @@
         .header-section h2 { color: var(--accent-pink); font-size: 24px; margin-bottom: 8px; text-shadow: 0 0 10px var(--glow-color); }
         .header-section p { font-size: 13px; opacity: 0.8; }
 
-        /* --- ✨ Divider & Glowing Hearts --- */
-        @keyframes heartGlow {
-            0% { text-shadow: 0 0 5px var(--accent-pink); transform: scale(1); }
-            50% { text-shadow: 0 0 15px var(--accent-pink), 0 0 20px var(--main-pink); transform: scale(1.2); }
-            100% { text-shadow: 0 0 5px var(--accent-pink); transform: scale(1); }
-        }
-
+        /* --- ✨ Divider --- */
         .category-divider {
             display: flex;
             align-items: center;
@@ -82,19 +76,15 @@
             box-shadow: 0 4px 15px rgba(255, 182, 193, 0.15);
             border: 1px solid var(--main-pink);
         }
-        .category-title span {
-            color: var(--accent-pink);
-            animation: heartGlow 1.5s ease-in-out infinite;
-            display: inline-block;
-        }
 
-        /* --- 🎀 Grid & Card --- */
+        /* --- 🎀 Grid & Card (แก้ไขเรื่องขนาดแปลกๆ) --- */
         .labels-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
             margin-bottom: 20px;
         }
+
         .portfolio-card {
             background: var(--glass-white);
             backdrop-filter: blur(10px);
@@ -106,18 +96,50 @@
             transition: 0.3s;
             display: flex;
             flex-direction: column;
-            height: 100%;
+            height: 100%; /* ล็อคให้การ์ดสูงเท่ากันในแถวเดียว */
         }
-        .portfolio-card:hover { transform: translateY(-8px); background: white; box-shadow: 0 10px 25px rgba(255, 133, 179, 0.2); }
-        .portfolio-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 18px; margin-bottom: 10px; }
-        .portfolio-card span { font-size: 13px; font-weight: 500; text-align: center; display: block; margin-bottom: 8px; min-height: 1.2em; }
 
+        .portfolio-card img { 
+            width: 100%; 
+            aspect-ratio: 1/1; 
+            object-fit: cover; 
+            border-radius: 18px; 
+            margin-bottom: 12px; 
+        }
+
+        .portfolio-card span { 
+            font-size: 13px; 
+            font-weight: 500; 
+            text-align: center; 
+            display: block; 
+            margin-bottom: 8px;
+            min-height: 40px; /* ล็อคพื้นที่ชื่อกลุ่มให้เท่ากัน */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ล็อคขนาดแท็กไม่ให้ดันการ์ด */
         .badges { 
-            display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; 
-            min-height: 50px; margin-bottom: 10px;
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 4px; 
+            justify-content: center; 
+            height: 45px; /* ล็อคความสูงพื้นที่แท็ก */
+            margin-bottom: 12px;
+            overflow: hidden; /* ถ้าแท็กเยอะเกินให้ซ่อนไว้ ไม่ให้การ์ดเบี้ยว */
         }
-        .badge { font-size: 9px; padding: 2px 8px; border-radius: 50px; background: #fff; color: var(--accent-pink); border: 1px solid #ffeef2; white-space: nowrap; }
 
+        .badge { 
+            font-size: 9px; 
+            padding: 2px 8px; 
+            border-radius: 50px; 
+            background: #fff; 
+            color: var(--accent-pink); 
+            border: 1px solid #ffeef2; 
+            white-space: nowrap;
+            height: fit-content;
+        }
         .price-tag {
             margin-top: auto;
             background: linear-gradient(135deg, #ffdae9 0%, #ffb6c1 100%);
