@@ -52,7 +52,13 @@
         .header-section h2 { color: var(--accent-pink); font-size: 24px; margin-bottom: 8px; text-shadow: 0 0 10px var(--glow-color); }
         .header-section p { font-size: 13px; opacity: 0.8; }
 
-        /* --- ✨ Divider (ที่คั่นประเภท) --- */
+        /* --- ✨ Divider & Glowing Hearts --- */
+        @keyframes heartGlow {
+            0% { text-shadow: 0 0 5px var(--accent-pink); transform: scale(1); }
+            50% { text-shadow: 0 0 15px var(--accent-pink), 0 0 20px var(--main-pink); transform: scale(1.2); }
+            100% { text-shadow: 0 0 5px var(--accent-pink); transform: scale(1); }
+        }
+
         .category-divider {
             display: flex;
             align-items: center;
@@ -76,13 +82,13 @@
             box-shadow: 0 4px 15px rgba(255, 182, 193, 0.15);
             border: 1px solid var(--main-pink);
         }
-        .category-title span { color: var(--accent-pink); animation: heartBeat 1.2s infinite; display: inline-block; }
-        @keyframes heartBeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.3); }
+        .category-title span {
+            color: var(--accent-pink);
+            animation: heartGlow 1.5s ease-in-out infinite;
+            display: inline-block;
         }
 
-        /* --- Grid & Card --- */
+        /* --- 🎀 Grid & Card --- */
         .labels-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -97,20 +103,21 @@
             text-decoration: none;
             color: var(--text-gray);
             border: 1px solid rgba(255, 255, 255, 0.5);
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: 0.3s;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            height: 100%;
         }
         .portfolio-card:hover { transform: translateY(-8px); background: white; box-shadow: 0 10px 25px rgba(255, 133, 179, 0.2); }
         .portfolio-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 18px; margin-bottom: 10px; }
-        .portfolio-card span { font-size: 13px; font-weight: 500; text-align: center; display: block; margin-bottom: 8px; height: 1.2em; overflow: hidden; }
+        .portfolio-card span { font-size: 13px; font-weight: 500; text-align: center; display: block; margin-bottom: 8px; min-height: 1.2em; }
 
-        /* --- Badges --- */
-        .badges { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; min-height: 18px; }
+        .badges { 
+            display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; 
+            min-height: 50px; margin-bottom: 10px;
+        }
         .badge { font-size: 9px; padding: 2px 8px; border-radius: 50px; background: #fff; color: var(--accent-pink); border: 1px solid #ffeef2; white-space: nowrap; }
 
-        /* --- Price Tag --- */
         .price-tag {
             margin-top: auto;
             background: linear-gradient(135deg, #ffdae9 0%, #ffb6c1 100%);
@@ -118,27 +125,21 @@
             font-size: 11px;
             font-weight: 600;
             text-align: center;
-            padding: 6px 0;
+            padding: 8px 0;
             border-radius: 12px;
-            margin-top: 12px;
             box-shadow: 0 3px 8px rgba(255, 182, 193, 0.3);
-            transition: 0.3s;
         }
         .portfolio-card:hover .price-tag { background: var(--accent-pink); color: white; }
 
-        /* --- Bottom Nav --- */
+        /* --- Nav & Animation --- */
         .bottom-nav { position: fixed; bottom: 20px; width: 90%; max-width: 420px; background: var(--dark-menu); display: flex; justify-content: space-around; padding: 12px 5px; border-radius: 20px; z-index: 1000; }
-        .nav-item { text-decoration: none; color: white; font-size: 10px; text-align: center; opacity: 0.6; transition: 0.3s; }
+        .nav-item { text-decoration: none; color: white; font-size: 10px; text-align: center; opacity: 0.6; }
         .nav-item.active { opacity: 1; color: var(--main-pink); }
         .nav-item i { font-size: 18px; display: block; margin-bottom: 3px; font-style: normal; color: var(--main-pink); }
-
-        /* --- Deco --- */
-        .floating-sticker { position: fixed; bottom: 95px; right: 25px; width: 85px; z-index: 999; pointer-events: none; }
         .bg-chiikawa { position: fixed; pointer-events: none; z-index: 1; opacity: 0.15; }
     </style>
 </head>
 <body>
-
     <img src="chiikawa 1.gif" alt="Sticker" class="floating-sticker">
     <div id="bg-chiikawa-container"></div>
 
