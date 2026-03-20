@@ -201,6 +201,27 @@
 
         .floating-sticker { position: fixed; bottom: 95px; right: 25px; width: 85px; z-index: 999; pointer-events: none; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15)); }
         .bg-chiikawa { position: fixed; pointer-events: none; z-index: 1; opacity: 0.25; animation: floatRandom linear infinite; }
+
+        /* --- Rule Section --- */
+        .rule-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 10px;
+            margin-bottom: 25px;
+            border: 1px solid white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        .rule-img {
+            width: 100%;
+            display: block;
+            border-radius: 20px;
+            transition: transform 0.3s ease;
+        }
+        .rule-img:hover {
+            transform: scale(1.02);
+        }
     </style>
 </head>
 <body>
@@ -231,6 +252,10 @@
             <div class="stat-item"><b>30+</b>กลุ่มงาน</div>
             <div class="stat-item"><b>230+</b>รีวิวลูกค้า</div>
             <div class="stat-item"><b>Fast</b>ส่งงานไว</div>
+        </div>
+
+        <div class="rule-card">
+            <img src="รายละเอียด.jpg" class="rule-img" alt="ขั้นตอนการสั่งงาน">
         </div>
 
         <div class="section-header">
