@@ -83,12 +83,6 @@
         }
 
         /* --- Grid & Card --- */
-        .labels-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-bottom: 20px;
-        }
         .portfolio-card {
             background: var(--glass-white);
             backdrop-filter: blur(10px);
@@ -99,28 +93,53 @@
             border: 1px solid rgba(255, 255, 255, 0.5);
             transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
-            flex-direction: column;
+            flex-direction: column; /* จัดเรียงแนวตั้ง */
+            height: 100%; /* ให้การ์ดสูงเท่ากันในแถวเดียวกัน */
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
-        .portfolio-card:hover { transform: translateY(-8px); background: white; box-shadow: 0 10px 25px rgba(255, 133, 179, 0.2); }
-        .portfolio-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 18px; margin-bottom: 10px; }
-        .portfolio-card span { font-size: 13px; font-weight: 500; text-align: center; display: block; margin-bottom: 8px; height: 1.2em; overflow: hidden; }
+
+        .portfolio-card img { 
+            width: 100%; 
+            aspect-ratio: 1/1; 
+            object-fit: cover; 
+            border-radius: 18px; 
+            margin-bottom: 10px; 
+        }
+
+        .portfolio-card span { 
+            font-size: 13px; 
+            font-weight: 500; 
+            text-align: center; 
+            display: block; 
+            margin-bottom: 8px; 
+            height: 2.6em; /* ล็อคความสูงชื่อสินค้าไว้ 2 บรรทัด */
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
 
         /* --- Badges --- */
-        .badges { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; min-height: 18px; }
-        .badge { font-size: 9px; padding: 2px 8px; border-radius: 50px; background: #fff; color: var(--accent-pink); border: 1px solid #ffeef2; white-space: nowrap; }
+        .badges { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 4px; 
+            justify-content: center; 
+            align-content: flex-start;
+            min-height: 45px; /* ล็อคความสูงส่วน Badge ให้เท่ากันทุกการ์ด */
+            margin-bottom: 10px;
+        }
 
         /* --- Price Tag --- */
         .price-tag {
-            margin-top: auto;
+            margin-top: auto; /* ✨ สำคัญ: ตัวนี้จะดันป้ายราคาลงไปล่างสุดเสมอ */
             background: linear-gradient(135deg, #ffdae9 0%, #ffb6c1 100%);
             color: #d64d7b;
             font-size: 11px;
             font-weight: 600;
             text-align: center;
-            padding: 6px 0;
+            padding: 8px 0;
             border-radius: 12px;
-            margin-top: 12px;
             box-shadow: 0 3px 8px rgba(255, 182, 193, 0.3);
             transition: 0.3s;
         }
