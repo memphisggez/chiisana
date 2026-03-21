@@ -255,7 +255,7 @@
     <a href="index.html" class="nav-item"><i>♥</i>Home ♡</a>
     <a href="group.html" class="nav-item"><i>♥</i>เค้าดึงเมลเอง ♡</a>
     <a href="anothergroup.html" class="nav-item"><i>♥</i>กลุ่มอื่นๆ ♡</a>
-    <a href="work.html" class="nav-item  active"><i>♥</i>สั่งป้าย ♡</a>
+    <a href="work.html" class="nav-item"><i>♥</i>สั่งป้าย ♡</a>
     <a href="contact.html" class="nav-item"><i>♥</i>Contact ♡</a>
 </nav>
 
@@ -317,9 +317,9 @@
 
         function playYamete() {
             const icon = document.getElementById('noti-icon');
-            const audio = new Audio('yamete kudasai sound.mp3');
+            const audio = new Audio('huh-cat-meme.mp3');
             audio.play().catch(() => {});
-            icon.innerHTML = `<img src="cat yamete.gif" style="width:35px; border-radius:8px;">`;
+            icon.innerHTML = `<img src="huh.gif" style="width:35px; border-radius:8px;">`;
             audio.onended = () => { icon.innerHTML = "🔔"; };
         }
 
