@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChiiSAnA ♡ Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --main-pink: #ffdae9;
+            --soft-purple: #f4eaff;
+            --text-main: #5d5151;
+            --accent-pink: #ff85b3;
+            --dark-menu: #332d2d;
+            --glass: rgba(255, 255, 255, 0.7); 
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Prompt', sans-serif; }
+
+        body {
+            background: linear-gradient(135deg, #fff5f8 0%, #eae0f5 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding-bottom: 110px; 
+            color: var(--text-main);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .container { 
+            width: 100%; 
+            max-width: 480px; 
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* --- Header --- */
+        .top-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding: 0 5px;
+        }
+        .welcome-text p:first-child { font-size: 13px; opacity: 0.7; }
+        .welcome-text p:last-child { font-size: 18px; font-weight: 500; color: var(--accent-pink); }
+
+        .noti-btn {
+            background: var(--glass);
+            backdrop-filter: blur(5px);
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            border: 1px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* --- Promo Card --- */
+        .main-promo-card {
+            background: linear-gradient(135deg, #ffdae9 0%, #f4eaff 100%);
+            border-radius: 30px;
+            padding: 25px;
+            color: var(--text-main);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 25px;
+            border: 1px solid white;
+            box-shadow: 0 10px 25px rgba(255, 182, 193, 0.3);
+        }
+        .promo-content h2 { font-size: 26px; color: var(--accent-pink); margin-bottom: 5px; }
+        .promo-btn {
+            margin-top: 15px;
+            background: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-size: 13px;
+            color: var(--accent-pink);
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .promo-img { position: absolute; right: -5px; bottom: -5px; width: 110px; }
+
+        /* --- Stats --- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        .stat-item {
+            background: var(--glass);
+            padding: 15px 5px;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 12px;
+            border: 1px solid white;
+        }
+        .stat-item b { color: var(--accent-pink); font-size: 16px; display: block; }
+
+        /* --- Recent List --- */
+        .section-header {
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 0 5px;
+        }
+        .section-header p { font-weight: 500; font-size: 16px; }
+        .section-header a { 
+            font-size: 12px; 
+            color: var(--accent-pink); 
+            text-decoration: none; 
+            background: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            border: 1px solid var(--main-pink);
+        }
+
+        /* --- List Items --- */
+        .list-item {
+            background: var(--glass);
+            backdrop-filter: blur(5px);
+            margin-bottom: 12px;
+            padding: 12px 15px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border: 1px solid rgba(255,255,255,0.6);
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ปรับขนาดและสไตล์รูปภาพ Character */
+        .list-thumb { 
+            width: 50px; 
+            height: 50px; 
+            border-radius: 12px; 
+            object-fit: contain; /* ปรับเป็น contain เพื่อให้เห็นรูป character เต็มตัว */
+            border: 2px solid white; 
+            background-color: rgba(255, 255, 255, 0.5); /* เพิ่มพื้นหลังอ่อนๆ ให้รูปเด่นขึ้น */
+        }
+        .list-info p:first-child { font-size: 14px; font-weight: 500; }
+        .list-info p:last-child { font-size: 11px; opacity: 0.5; }
+        
+        .badge-status {
+            margin-left: auto;
+            font-size: 10px;
+            padding: 5px 10px;
+            border-radius: 50px;
+            font-weight: 500;
+        }
+
+        /* --- Nav & Animation (ปรับแก้ให้เท่า Index เป๊ะๆ) --- */
+        .bottom-nav { 
+            position: fixed; 
+            bottom: 20px; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            width: 90%; 
+            max-width: 420px; 
+            background: var(--dark-menu); 
+            display: flex; 
+            justify-content: space-around; 
+            padding: 12px 5px; 
+            border-radius: 20px; 
+            z-index: 1000; 
+        }
+
+        .nav-item { 
+            text-decoration: none; 
+            color: white; 
+            font-size: 10px; 
+            text-align: center; 
+            opacity: 0.7; 
+            transition: 0.3s; 
+            flex: 1; 
+        }
+
+        .nav-item.active { 
+            opacity: 1; 
+            color: var(--main-pink); 
+        }
+
+        .nav-item i { 
+            font-size: 18px; 
+            display: block; 
+            margin-bottom: 3px; 
+            color: var(--main-pink); 
+            font-style: normal; 
+        }
+
+        .floating-sticker { position: fixed; bottom: 95px; right: 25px; width: 85px; z-index: 999; pointer-events: none; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15)); }
+        .bg-chiikawa { position: fixed; pointer-events: none; z-index: 1; opacity: 0.25; animation: floatRandom linear infinite; }
+
+        /* --- Rule Section --- */
+        .rule-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 10px;
+            margin-bottom: 25px;
+            border: 1px solid white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        .rule-img {
+            width: 100%;
+            display: block;
+            border-radius: 20px;
+            transition: transform 0.3s ease;
+        }
+        .rule-img:hover {
+            transform: scale(1.02);
+        }
+
+        /* --- อื่นๆ --- */
+        .btn-pastel { display: block; background: var(--glass); border: 1px solid rgba(255, 255, 255, 0.5); color: var(--text-main); text-decoration: none; padding: 12px; border-radius: 50px; margin-bottom: 25px; text-align: center; font-weight: 500; transition: 0.3s; }
+        .btn-pastel:hover { background: var(--main-pink); border-color: var(--accent-pink); }
+
+    </style>
+</head>
+<body>
+
+    <div id="bg-chiikawa-container"></div>
+
+    <div class="container">
+        <div class="top-header">
+            <div class="welcome-text">
+                <p>ยินดีต้อนรับ ♡</p>
+                <p>ChiiSAnA Customer</p>
+            </div>
+            <div class="noti-btn" onclick="playYamete()">
+                <span id="noti-icon">🔔</span>
+            </div>
+        </div>
+
+        <div class="rule-card">
+            <img src="ราคาโปร.jpg" class="rule-img" alt="ราคาโโปรโมชั่นตอนนี้">
+        </div>
+      
+        <div class="rule-card">
+            <img src="รายละเอียด.jpg" class="rule-img" alt="ขั้นตอนการสั่งงาน">
+        </div>
+
+        <a href="https://www.facebook.com/chiisana.xh" class="btn-pastel">♡ ติดต่อสั่งงานทาง Facebook ♡</a>
+
+<nav class="bottom-nav">
+    <a href="index.html" class="nav-item"><i>♥</i>Home ♡</a>
+    <a href="group.html" class="nav-item"><i>♥</i>เค้าดึงเมลเอง ♡</a>
+    <a href="anothergroup.html" class="nav-item"><i>♥</i>กลุ่มอื่นๆ ♡</a>
+    <a href="work.html" class="nav-item  active"><i>♥</i>สั่งป้าย ♡</a>
+    <a href="contact.html" class="nav-item"><i>♥</i>Contact ♡</a>
+</nav>
+
+    <script>
+        const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTJxmzz6K0iG0J2FgxQQg9TAkRzyOm6RLEtfc9AIdT36GuoF5Y9jescVZr6fYGNOe3H8AB_EmTp8lD4/pub?output=csv';
+
+        async function updateRecentWork() {
+            const container = document.getElementById('sheet-data-container');
+            try {
+                const response = await fetch(`${SHEET_URL}&t=${new Date().getTime()}`);
+                if (!response.ok) throw new Error('Network response was not ok');
+                
+                const csvText = await response.text();
+                const rows = csvText.trim().split('\n').map(row => row.split(','));
+
+                container.innerHTML = ''; 
+                let count = 0;
+
+                for (let i = 6; i < rows.length; i++) {
+                    const col = rows[i];
+                    if (!col || col.length < 13) continue;
+
+                    const clean = (val) => val ? val.replace(/^"|"$/g, '').trim() : '';
+                    const customer = clean(col[6]);  // คอลัมน์ G (Index 6)
+                    const qty = clean(col[7]);       // คอลัมน์ H (Index 7)
+                    const status = clean(col[12]);   // คอลัมน์ M (Index 12)
+
+                    if (customer && customer !== "" && count < 8) {
+                        let sStyle = 'background: #f0f0f0; color: #888;'; 
+                        const lowStatus = status.toLowerCase();
+                        
+                        if (lowStatus.includes('สำเร็จ') || lowStatus.includes('เสร็จ') || lowStatus.includes('comp')) {
+                            sStyle = 'background: #e7f9ee; color: #27ae60;';
+                        } else if (lowStatus.includes('กำลัง') || lowStatus.includes('รอ') || lowStatus.includes('proc') || lowStatus.includes('draft')) {
+                            sStyle = 'background: #fff5e6; color: #f39c12;';
+                        }
+
+                        container.innerHTML += `
+                            <div class="list-item">
+                                <img src="character-3.png" class="list-thumb" onerror="this.src='https://via.placeholder.com/50?text=Chii'">
+                                <div class="list-info">
+                                    <p>${customer}</p>
+                                    <p>Qty: ${qty || '-'}</p> 
+                                </div>
+                                <span class="badge-status" style="${sStyle}">${status || 'Pending'}</span>
+                            </div>
+                        `;
+                        count++;
+                    }
+                }
+
+                if (count === 0) container.innerHTML = '<p style="text-align:center; font-size:12px; opacity:0.5; padding:20px;">ไม่พบรายชื่อลูกค้าในขณะนี้ ♡</p>';
+
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                container.innerHTML = '<p style="text-align:center; font-size:12px; color:red; padding:20px;">เชื่อมต่อ Google Sheets ไม่สำเร็จ</p>';
+            }
+        }
+
+        function playYamete() {
+            const icon = document.getElementById('noti-icon');
+            const audio = new Audio('yamete kudasai sound.mp3');
+            audio.play().catch(() => {});
+            icon.innerHTML = `<img src="cat yamete.gif" style="width:35px; border-radius:8px;">`;
+            audio.onended = () => { icon.innerHTML = "🔔"; };
+        }
+
+        const bgContainer = document.getElementById('bg-chiikawa-container');
+        for (let i = 0; i < 8; i++) {
+            const img = document.createElement('img');
+            img.src = 'chiikawa 3.gif';
+            img.className = 'bg-chiikawa';
+            img.style.width = '50px';
+            img.style.left = Math.random() * 100 + 'vw';
+            img.style.top = Math.random() * 100 + 'vh';
+            bgContainer.appendChild(img);
+        }
+
+        window.onload = updateRecentWork;
+    </script>
+</body>
+</html>
