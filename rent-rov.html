@@ -227,6 +227,46 @@
         .btn-pastel { display: block; background: var(--glass); border: 1px solid rgba(255, 255, 255, 0.5); color: var(--text-main); text-decoration: none; padding: 12px; border-radius: 50px; margin-bottom: 25px; text-align: center; font-weight: 500; transition: 0.3s; }
         .btn-pastel:hover { background: var(--main-pink); border-color: var(--accent-pink); }
 
+        /* --- Pricing Table --- */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .price-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid white;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .price-card:hover { transform: translateY(-5px); border-color: var(--accent-pink); }
+        
+        .price-card.featured {
+            background: linear-gradient(135deg, #fff 0%, var(--main-pink) 100%);
+            border: 2px solid var(--accent-pink);
+        }
+
+        .price-card h3 { font-size: 16px; margin-bottom: 5px; color: var(--text-main); }
+        .price-card .price-amount { font-size: 28px; font-weight: 600; color: var(--accent-pink); }
+        .price-card .price-unit { font-size: 14px; opacity: 0.7; }
+        
+        .resell-badge {
+            background: var(--accent-pink);
+            color: white;
+            font-size: 10px;
+            padding: 3px 10px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-top: 8px;
+            letter-spacing: 0.5px;
+        }
+
     </style>
 </head>
 <body>
@@ -246,6 +286,31 @@
 
         <div class="rule-card">
             <img src="ไอดีเช่า.jpg" class="rule-img" alt="ราคาโโปรโมชั่นตอนนี้">
+        </div>
+
+        <div class="pricing-grid">
+            <div class="price-card">
+                <h3>เช่ารายวัน</h3>
+                <div class="price-amount">70 <span class="price-unit">บาท</span></div>
+                <p style="font-size: 11px; opacity: 0.6; margin-top: 5px;">* สำหรับใช้งานส่วนตัว</p>
+            </div>
+
+            <div class="price-card featured">
+                <div style="position: absolute; top: 10px; right: -15px; background: var(--accent-pink); color: white; font-size: 9px; padding: 2px 20px; transform: rotate(45deg);">Best!</div>
+                <h3>เช่ารายสัปดาห์</h3>
+                <div class="price-amount">350 <span class="price-unit">บาท</span></div>
+                <div class="resell-badge">✨ สามารถปล่อยเช่าต่อได้</div>
+            </div>
+
+            <div class="price-card">
+                <h3>เช่ารายเดือน</h3>
+                <div class="price-amount">1,200 <span class="price-unit">บาท</span></div>
+                <div class="resell-badge">✨ สามารถปล่อยเช่าต่อได้</div>
+            </div>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.4); padding: 15px; border-radius: 20px; margin-bottom: 25px; font-size: 12px; text-align: center; border: 1px dashed var(--accent-pink);">
+            <p>📝 <b>เงื่อนไขการเช่า:</b> สัปดาห์/เดือน นำไปปล่อยเช่าต่อได้<br>คุ้มสุดๆ สำหรับสายสร้างรายได้ต่อเลยน้า ♡</p>
         </div>
       
 
