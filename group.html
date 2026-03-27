@@ -173,16 +173,24 @@
 
         .price-tag {
             margin-top: auto;
-            background: linear-gradient(135deg, #ffdae9 0%, #ffb6c1 100%);
-            color: #d64d7b;
+            /* ไล่โทนสีจากเข้มไปอ่อนลงเล็กน้อยเพื่อให้ดูมีมิติ */
+            background: linear-gradient(135deg, #232122 0%, #3a3738 100%); 
+            /* สีตัวอักษร: แนะนำสีขาวอมชมพูเพื่อให้เข้ากับธีมหลัก หรือใช้สีขาวสะอาด #ffffff */
+            color: #ffeef2; 
             font-size: 11px;
-            font-weight: 600;
+            font-weight: 500;
             text-align: center;
             padding: 8px 0;
             border-radius: 12px;
-            box-shadow: 0 3px 8px rgba(255, 182, 193, 0.3);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* ปรับเงาให้ดูคมขึ้น */
+            transition: 0.3s ease; /* เพิ่มความนุ่มนวลเวลาเอาเมาส์ไปชี้ */
         }
-        .portfolio-card:hover .price-tag { background: var(--accent-pink); color: white; }
+        /* เอฟเฟกต์ตอนเอาเมาส์ชี้ (Hover) */
+        .portfolio-card:hover .price-tag { 
+            background: #ff85b3; /* เปลี่ยนเป็นสีชมพูเน้นเวลา Hover */
+            color: white; 
+            transform: translateY(-2px); /* ยกปุ่มขึ้นเล็กน้อยให้ดูมีลูกเล่น */
+        }
 
         /* --- Nav & Animation (ปรับแก้ให้เท่า Index เป๊ะๆ) --- */
         .bottom-nav { 
