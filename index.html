@@ -19,8 +19,15 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Prompt', sans-serif; }
 
         body {
-            background: linear-gradient(135deg, #fff5f8 0%, #eae0f5 100%);
-            background-attachment: fixed;
+            /* 1. วางโค้ดลายจุดทับของเดิมตรงนี้ */
+            background-color: #fff; /* สีพื้นหลัง */
+            background-image: 
+              radial-gradient(#d3d3d3 1px, transparent 1px), /* จุดสีเทาอ่อนขนาด 1px */
+              radial-gradient(#d3d3d3 1px, transparent 1px); /* จุดที่สองเพื่อจัดระยะ (ต้องมี 2 อัน) */
+            background-size: 20px 20px; /* ระยะห่างระหว่างจุด (ปรับเลขได้ตามชอบ) */
+            background-position: 0 0, 10px 10px; /* ตแหน่งเริ่มต้นของจุดทั้งสอง (จัดให้เยื้อง) */
+
+            background-attachment: fixed; /* (ของเดิม) */
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -53,7 +60,8 @@
         .banner-area {
             width: 100%;
             height: 150px;
-            background-image: url('your-banner-image.jpg'); 
+            
+            background-image: url('cover.jpg'); 
             background-size: cover;
             background-position: center;
             background-color: var(--main-pink);
@@ -234,7 +242,7 @@
 </head>
 <body>
 
-    <img src="chiikawa 1.gif" alt="Chiikawa Sticker" class="floating-sticker">
+    <img src="จิบิจิ๋ว (27).png" alt="Chiikawa Sticker" class="floating-sticker">
     <div id="bg-chiikawa-container"></div>
 
 <div class="container">
@@ -248,7 +256,7 @@
                 มีกลุ่มงานป้ายมากกว่า 30 กลุ่มให้เลือกเลย<br>
                 สอบถามได้เสมอนะคะ (˶˃ᆺ˂˶)
             </div>
-            <div class="status-badge">ปิดรับคิว</div>
+            <div class="status-badge">เปิดรับคิว</div>
         </div>
     </div>
 
@@ -292,6 +300,7 @@
     </div>
 
     <a href="https://docs.google.com/spreadsheets/d/1JApKZ3mbzG4qEdyYD_CAhoOfNA3R7UD5PvgXo1_ko7I/edit?gid=1963409705#gid=1963409705" class="btn-pastel">♡ check w♡rk q ♡</a>
+    <a href="https://drive.google.com/drive/folders/1_venlW4-gw2ZiJNoIizKFpnwsDuXL0jA" class="btn-pastel">♡ เลือกตูนห้องเอฟ ♡</a>
 
     <h2 class="section-title">
         <img src="icon-2.png" alt="icon">
