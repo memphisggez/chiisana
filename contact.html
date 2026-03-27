@@ -18,8 +18,15 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Prompt', sans-serif; }
 
         body {
-            background: linear-gradient(135deg, #fff5f8 0%, #eae0f5 100%);
-            background-attachment: fixed;
+            /* 1. วางโค้ดลายจุดทับของเดิมตรงนี้ */
+            background-color: #fff; /* สีพื้นหลัง */
+            background-image: 
+              radial-gradient(#d3d3d3 1px, transparent 1px), /* จุดสีเทาอ่อนขนาด 1px */
+              radial-gradient(#d3d3d3 1px, transparent 1px); /* จุดที่สองเพื่อจัดระยะ (ต้องมี 2 อัน) */
+            background-size: 20px 20px; /* ระยะห่างระหว่างจุด (ปรับเลขได้ตามชอบ) */
+            background-position: 0 0, 10px 10px; /* ตแหน่งเริ่มต้นของจุดทั้งสอง (จัดให้เยื้อง) */
+
+            background-attachment: fixed; /* (ของเดิม) */
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -146,8 +153,7 @@
 </head>
 <body>
 
-    <img src="chiikawa 1.gif" alt="Chiikawa Sticker" class="floating-sticker">
-    <div id="bg-chiikawa-container"></div>
+    <img src="จิบิจิ๋ว (27).png" alt="Chiikawa Sticker" class="floating-sticker">
 
     
 <div class="container">
