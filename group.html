@@ -172,23 +172,24 @@
 }
 
         .price-tag {
-            margin-top: auto;
-            background: #998989; /* ใช้สีเทาหัวข้อมาทำเป็นปุ่ม */
-            color: #FEFAF9; 
-            font-size: 11px;
-            font-weight: 500;
-            text-align: center;
-            padding: 8px 0;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: 0.3s ease;
-        }
+    margin-top: auto;
+    background: #DCEEF0; /* เปลี่ยนเป็นสี #dceef0 */
+    color: #958989;      /* เปลี่ยนเป็นสี #958989 */
+    font-size: 11px;
+    font-weight: 500;
+    text-align: center;
+    padding: 8px 0;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* ปรับเงาให้ซอฟต์ลงตามสีที่อ่อนขึ้น */
+    transition: 0.3s ease;
+}
 
-        .portfolio-card:hover .price-tag { 
-            background: var(--accent-pink); /* Hover แล้วเป็นสีชมพูเด่น */
-            color: white; 
-            transform: translateY(-2px);
-        }
+/* --- สถานะเมื่อเอาเมาส์ไปวาง: พื้นหลังสีเทา ตัวอักษรสีขาว --- */
+.portfolio-card:hover .price-tag { 
+    background: #958989; /* เปลี่ยนเป็นสี #958989 */
+    color: #FFFFFF;      /* เปลี่ยนเป็นสีขาว */
+    transform: translateY(-2px);
+}
 
         /* --- Nav --- */
         .bottom-nav { 
