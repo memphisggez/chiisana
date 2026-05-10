@@ -7,60 +7,49 @@
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-pastel: #fdf6ff;
-            --main-pink: #ffdae9;
+            /* --- ✨ ชุดสีใหม่ตามหน้า Index --- */
+            --bg-cream: #FEFAF9;        /* สีครีมพื้นหลัง */
+            --text-header: #998989;     /* สีเทาหัวข้อ/แท็บ */
+            --text-body: #898989;       /* สีเทาเนื้อหา */
+            --mint-accent: #DCEEF0;     /* สีฟ้ามิ้นท์ */
+            
             --dark-menu: #332d2d;
             --glass-white: rgba(255, 255, 255, 0.7);
-            --text-gray: #5d5151;
-            --accent-pink: #ff85b3;
+            --accent-pink: #ff85b3; /* เก็บไว้สำหรับจุดเน้นเล็กน้อยหรือหัวใจ */
             --glow-color: rgba(255, 133, 179, 0.4);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Prompt', sans-serif; }
 
-       body {
-    /* 1. เปลี่ยนสีพื้นหลังเป็น #FFEEF9 */
-    background-color: #FFEEF9; 
-    
-    /* ลายจุด (ใช้สีเทาอ่อนเพื่อให้ดูละมุนเข้ากับสีชมพู) */
-    background-image: 
-        radial-gradient(#d3d3d3 1px, transparent 1px), 
-        radial-gradient(#d3d3d3 1px, transparent 1px); 
-    
-    background-size: 20px 20px; 
-    background-position: 0 0, 10px 10px; 
-
-    background-attachment: fixed; 
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    padding-bottom: 110px; 
-    color: var(--text-main);
-    position: relative;
-    overflow-x: hidden;
-}
+        body {
+            background-color: var(--bg-cream); 
+            /* ลายจุดสีเทาอ่อนละมุน */
+            background-image: 
+                radial-gradient(#e0d8d8 1px, transparent 1px), 
+                radial-gradient(#e0d8d8 1px, transparent 1px); 
+            background-size: 20px 20px; 
+            background-position: 0 0, 10px 10px; 
+            background-attachment: fixed; 
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding-bottom: 110px; 
+            color: var(--text-body);
+            position: relative;
+            overflow-x: hidden;
+        }
 
         /* --- ✨ Animation สำหรับหัวใจเรืองแสง --- */
-.category-title span {
-    color: var(--accent-pink);
-    display: inline-block;
-    animation: heartGlow 2s ease-in-out infinite;
-    text-shadow: 0 0 5px var(--glow-color);
-}
+        .category-title span {
+            color: var(--accent-pink);
+            display: inline-block;
+            animation: heartGlow 2s ease-in-out infinite;
+        }
 
-@keyframes heartGlow {
-    0%, 100% {
-        transform: scale(1);
-        text-shadow: 0 0 5px var(--glow-color), 0 0 10px var(--glow-color);
-        opacity: 0.8;
-    }
-    50% {
-        transform: scale(1.2);
-        text-shadow: 0 0 15px var(--accent-pink), 0 0 20px var(--main-pink);
-        opacity: 1;
-        color: #ff5c9d; /* เข้มขึ้นเล็กน้อยตอนกระพริบ */
-    }
-}
+        @keyframes heartGlow {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.2); opacity: 1; color: #ff5c9d; }
+        }
 
         .container { 
             width: 100%; 
@@ -79,10 +68,10 @@
             text-align: center;
             margin-bottom: 15px;
             border: 1px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.2);
+            box-shadow: 0 10px 30px rgba(153, 137, 137, 0.1);
         }
-        .header-section h2 { color: var(--accent-pink); font-size: 24px; margin-bottom: 8px; text-shadow: 0 0 10px var(--glow-color); }
-        .header-section p { font-size: 13px; opacity: 0.8; }
+        .header-section h2 { color: var(--text-header); font-size: 24px; margin-bottom: 8px; }
+        .header-section p { font-size: 13px; color: var(--text-body); opacity: 0.9; }
 
         /* --- ✨ Divider --- */
         .category-divider {
@@ -92,7 +81,7 @@
             margin: 40px 0 25px;
         }
         .category-divider::before, .category-divider::after {
-            content: ""; flex: 1; border-bottom: 1.5px solid rgba(255, 133, 179, 0.2);
+            content: ""; flex: 1; border-bottom: 1.5px solid var(--mint-accent);
         }
         .category-title {
             background: white;
@@ -100,16 +89,16 @@
             border-radius: 50px;
             font-size: 14px;
             font-weight: 500;
-            color: var(--text-gray);
+            color: var(--text-header);
             margin: 0 15px;
             display: flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 4px 15px rgba(255, 182, 193, 0.15);
-            border: 1px solid var(--main-pink);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--mint-accent);
         }
 
-        /* --- 🎀 Grid & Card (แก้ไขเรื่องขนาดแปลกๆ) --- */
+        /* --- 🎀 Grid & Card --- */
         .labels-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -123,12 +112,18 @@
             border-radius: 25px;
             padding: 12px;
             text-decoration: none;
-            color: var(--text-gray);
+            color: var(--text-body);
             border: 1px solid rgba(255, 255, 255, 0.5);
             transition: 0.3s;
             display: flex;
             flex-direction: column;
-            height: 100%; /* ล็อคให้การ์ดสูงเท่ากันในแถวเดียว */
+            height: 100%;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-5px);
+            background: white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         }
 
         .portfolio-card img { 
@@ -143,49 +138,59 @@
             font-size: 13px; 
             font-weight: 500; 
             text-align: center; 
-            display: block; 
-            margin-bottom: 8px;
-            min-height: 40px; /* ล็อคพื้นที่ชื่อกลุ่มให้เท่ากัน */
             display: flex;
             align-items: center;
             justify-content: center;
+            margin-bottom: 8px;
+            min-height: 40px;
+            color: var(--text-header);
         }
 
-        /* ล็อคขนาดแท็กไม่ให้ดันการ์ด */
-        .badges { 
-            display: flex; 
-            flex-wrap: wrap; 
-            gap: 4px; 
-            justify-content: center; 
-            height: 45px; /* ล็อคความสูงพื้นที่แท็ก */
-            margin-bottom: 12px;
-            overflow: hidden; /* ถ้าแท็กเยอะเกินให้ซ่อนไว้ ไม่ให้การ์ดเบี้ยว */
-        }
+        .badges {  
+    display: flex;  
+    flex-wrap: wrap;  
+    gap: 6px; /* เพิ่มระยะห่างระหว่างแท็กเล็กน้อย */
+    justify-content: center;  
+    min-height: 45px; /* เปลี่ยนจาก height เป็น min-height เพื่อให้ยืดหยุ่น */
+    margin-bottom: 12px;
+    padding: 0 4px;
+}
 
-        .badge { 
-            font-size: 9px; 
-            padding: 2px 8px; 
-            border-radius: 50px; 
-            background: #fff; 
-            color: var(--accent-pink); 
-            border: 1px solid #ffeef2; 
-            white-space: nowrap;
-            height: fit-content;
-        }
+/* ปรับให้ตัวแท็กพอดีกับคำและอ่านง่าย */
+.badge {  
+    font-size: 10px; /* เพิ่มขนาดตัวอักษรเล็กน้อยให้อ่านง่าย */
+    padding: 3px 10px; /* เพิ่ม padding บน-ล่าง และ ซ้าย-ขวา */
+    border-radius: 50px;  
+    background: var(--mint-accent);  
+    color: var(--text-header);  
+    border: 1px solid white;  
+    white-space: nowrap;
+    line-height: 1.2; /* ช่วยให้ข้อความอยู่กึ่งกลางแนวตั้งได้ดีขึ้น */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
         .price-tag {
             margin-top: auto;
-            background: linear-gradient(135deg, #ffdae9 0%, #ffb6c1 100%);
-            color: #d64d7b;
+            background: #998989; /* ใช้สีเทาหัวข้อมาทำเป็นปุ่ม */
+            color: #FEFAF9; 
             font-size: 11px;
-            font-weight: 600;
+            font-weight: 500;
             text-align: center;
             padding: 8px 0;
             border-radius: 12px;
-            box-shadow: 0 3px 8px rgba(255, 182, 193, 0.3);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: 0.3s ease;
         }
-        .portfolio-card:hover .price-tag { background: var(--accent-pink); color: white; }
 
-       /* --- Nav & Animation (ปรับแก้ให้เท่า Index เป๊ะๆ) --- */
+        .portfolio-card:hover .price-tag { 
+            background: var(--accent-pink); /* Hover แล้วเป็นสีชมพูเด่น */
+            color: white; 
+            transform: translateY(-2px);
+        }
+
+        /* --- Nav --- */
         .bottom-nav { 
             position: fixed; 
             bottom: 20px; 
@@ -213,19 +218,19 @@
 
         .nav-item.active { 
             opacity: 1; 
-            color: var(--main-pink); 
+            color: var(--mint-accent); 
         }
 
         .nav-item i { 
             font-size: 18px; 
             display: block; 
             margin-bottom: 3px; 
-            color: var(--main-pink); 
+            color: var(--mint-accent); 
             font-style: normal; 
         }
 
-        .floating-sticker { position: fixed; bottom: 95px; right: 25px; width: 85px; z-index: 999; pointer-events: none; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15)); }
-        .bg-chiikawa { position: fixed; pointer-events: none; z-index: 1; opacity: 0.25; animation: floatRandom linear infinite; }
+        .floating-sticker { position: fixed; bottom: 95px; right: 25px; width: 85px; z-index: 999; pointer-events: none; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1)); }
+        .bg-chiikawa { position: fixed; pointer-events: none; z-index: 1; opacity: 0.15; }
     </style>
 </head>
 <body>
