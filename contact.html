@@ -7,10 +7,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --main-pink: #ffdae9;
-            --soft-purple: #f4eaff;
-            --text-main: #5d5151;
-            --accent-pink: #ff85b3;
+            /* สีใหม่ตามที่คุณกำหนด */
+            --bg-cream: #FEFAF9;
+            --mint-blue: #DCEEF0;
+            --text-header: #998989;
+            --text-content: #898989;
             --dark-menu: #332d2d;
             --glass: rgba(255, 255, 255, 0.7); 
         }
@@ -18,26 +19,25 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Prompt', sans-serif; }
 
         body {
-    /* 1. เปลี่ยนสีพื้นหลังเป็น #FFEEF9 */
-    background-color: #FFEEF9; 
-    
-    /* ลายจุด (ใช้สีเทาอ่อนเพื่อให้ดูละมุนเข้ากับสีชมพู) */
-    background-image: 
-        radial-gradient(#d3d3d3 1px, transparent 1px), 
-        radial-gradient(#d3d3d3 1px, transparent 1px); 
-    
-    background-size: 20px 20px; 
-    background-position: 0 0, 10px 10px; 
+            background-color: var(--bg-cream); 
+            /* ลายจุดสีอ่อนๆ */
+            background-image: 
+                radial-gradient(#e0d7d5 1px, transparent 1px), 
+                radial-gradient(#e0d7d5 1px, transparent 1px); 
+            
+            background-size: 20px 20px; 
+            background-position: 0 0, 10px 10px; 
 
-    background-attachment: fixed; 
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    padding-bottom: 110px; 
-    color: var(--text-main);
-    position: relative;
-    overflow-x: hidden;
-}
+            background-attachment: fixed; 
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding-bottom: 110px; 
+            color: var(--text-content);
+            position: relative;
+            overflow-x: hidden;
+        }
+
         .container { 
             width: 100%; 
             max-width: 480px; 
@@ -58,59 +58,59 @@
             height: 110px;
             border-radius: 50%;
             border: 5px solid white;
-            box-shadow: 0 8px 20px rgba(255, 182, 193, 0.4);
+            box-shadow: 0 8px 20px rgba(220, 238, 240, 0.6); /* เงาสีฟ้ามิ้นต์อ่อนๆ */
             margin-bottom: 15px;
             object-fit: cover;
         }
 
         .contact-title {
             font-size: 26px;
-            color: var(--accent-pink);
+            color: var(--text-header);
             margin-bottom: 5px;
-            text-shadow: 0 0 10px rgba(255, 133, 179, 0.3);
         }
 
-        /* --- Contact Card Style (ส่วนที่ซ่อมแซม) --- */
+        /* --- Contact Card Style --- */
         .contact-card {
             background: var(--glass);
             backdrop-filter: blur(10px);
             border-radius: 25px;
             padding: 20px;
             margin-bottom: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.8);
             display: flex;
             align-items: center;
             gap: 20px;
             text-decoration: none;
-            color: var(--text-main);
+            color: var(--text-content);
             transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.03);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.02);
         }
 
         .contact-card:hover {
             transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.9);
-            border-color: var(--accent-pink);
+            background: white;
+            border-color: var(--mint-blue);
+            box-shadow: 0 10px 20px rgba(220, 238, 240, 0.4);
         }
 
         .contact-icon {
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             object-fit: contain;
         }
 
         .contact-info h3 {
             font-size: 18px;
-            color: var(--accent-pink);
+            color: var(--text-header);
             margin-bottom: 2px;
         }
 
         .contact-info p {
             font-size: 13px;
-            opacity: 0.7;
+            opacity: 0.8;
         }
 
-        /* --- Nav & Animation (ปรับแก้ให้เท่า Index เป๊ะๆ) --- */
+        /* --- Nav & Bottom Menu --- */
         .bottom-nav { 
             position: fixed; 
             bottom: 20px; 
@@ -124,6 +124,7 @@
             padding: 12px 5px; 
             border-radius: 20px; 
             z-index: 1000; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
         .nav-item { 
@@ -131,26 +132,35 @@
             color: white; 
             font-size: 10px; 
             text-align: center; 
-            opacity: 0.7; 
+            opacity: 0.6; 
             transition: 0.3s; 
             flex: 1; 
         }
 
         .nav-item.active { 
             opacity: 1; 
-            color: var(--main-pink); 
+            color: var(--mint-blue); 
         }
 
         .nav-item i { 
             font-size: 18px; 
             display: block; 
             margin-bottom: 3px; 
-            color: var(--main-pink); 
+            color: var(--mint-blue); 
             font-style: normal; 
         }
 
-        .floating-sticker { position: fixed; bottom: 95px; right: 25px; width: 85px; z-index: 999; pointer-events: none; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15)); }
-        .bg-chiikawa { position: fixed; pointer-events: none; z-index: 1; opacity: 0.25; animation: floatRandom linear infinite; }
+        .floating-sticker { 
+            position: fixed; 
+            bottom: 95px; 
+            right: 25px; 
+            width: 85px; 
+            z-index: 999; 
+            pointer-events: none; 
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1)); 
+        }
+
+        .bg-chiikawa { position: fixed; pointer-events: none; z-index: 1; opacity: 0.2; }
     </style>
 </head>
 <body>
