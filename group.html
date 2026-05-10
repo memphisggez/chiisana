@@ -146,25 +146,30 @@
             color: var(--text-header);
         }
 
-        .badges { 
-            display: flex; 
-            flex-wrap: wrap; 
-            gap: 4px; 
-            justify-content: center; 
-            height: 45px; 
-            margin-bottom: 12px;
-            overflow: hidden;
-        }
+        .badges {  
+    display: flex;  
+    flex-wrap: wrap;  
+    gap: 6px; /* เพิ่มระยะห่างระหว่างแท็กเล็กน้อย */
+    justify-content: center;  
+    min-height: 45px; /* เปลี่ยนจาก height เป็น min-height เพื่อให้ยืดหยุ่น */
+    margin-bottom: 12px;
+    padding: 0 4px;
+}
 
-        .badge { 
-            font-size: 9px; 
-            padding: 2px 8px; 
-            border-radius: 50px; 
-            background: var(--mint-accent); 
-            color: var(--text-header); 
-            border: 1px solid white; 
-            white-space: nowrap;
-        }
+/* ปรับให้ตัวแท็กพอดีกับคำและอ่านง่าย */
+.badge {  
+    font-size: 10px; /* เพิ่มขนาดตัวอักษรเล็กน้อยให้อ่านง่าย */
+    padding: 3px 10px; /* เพิ่ม padding บน-ล่าง และ ซ้าย-ขวา */
+    border-radius: 50px;  
+    background: var(--mint-accent);  
+    color: var(--text-header);  
+    border: 1px solid white;  
+    white-space: nowrap;
+    line-height: 1.2; /* ช่วยให้ข้อความอยู่กึ่งกลางแนวตั้งได้ดีขึ้น */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
 
         .price-tag {
             margin-top: auto;
